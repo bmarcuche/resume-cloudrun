@@ -1,0 +1,81 @@
+# Cloud Run Service Monitoring Configuration
+# This file defines monitoring, alerting, and observability for the resume service
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: resume-monitoring-config
+data:
+  # Health check configuration
+  health_check_path: "/api/health"
+  readiness_check_path: "/api/ready"
+  
+  # Performance thresholds
+  response_time_threshold: "2000ms"
+  error_rate_threshold: "5%"
+  cpu_threshold: "80%"
+  memory_threshold: "80%"
+  
+  # Alerting configuration
+  alert_email: "bruno.marcuche@gmail.com"
+  slack_webhook: "${SLACK_WEBHOOK_URL}"
+  
+  # Log levels
+  log_level: "info"
+  structured_logging: "true"
+  
+---
+# Monitoring Dashboard Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: resume-dashboard-config
+data:
+  dashboard.json: |
+    {
+      "displayName": "Resume CloudRun Service",
+      "mosaicLayout": {
+        "tiles": [
+          {
+            "width": 6,
+            "height": 4,
+            "widget": {
+              "title": "Request Count",
+              "xyChart": {
+                "dataSets": [{
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "filter": "resource.type=\"cloud_run_revision\"",
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_RATE"
+                      }
+                    }
+                  }
+                }]
+              }
+            }
+          },
+          {
+            "width": 6,
+            "height": 4,
+            "widget": {
+              "title": "Response Latency",
+              "xyChart": {
+                "dataSets": [{
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "filter": "resource.type=\"cloud_run_revision\"",
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "perSeriesAligner": "ALIGN_MEAN"
+                      }
+                    }
+                  }
+                }]
+              }
+            }
+          }
+        ]
+      }
+    }

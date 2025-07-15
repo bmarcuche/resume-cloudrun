@@ -1,120 +1,112 @@
-name: Deploy to Google Cloud Run
+name: Production CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
 
+env:
+  NODE_VERSION: '18'
+  REGISTRY: gcr.io
+  PROJECT_ID: secret-proton-465722-q0
+  SERVICE_NAME: mindtunnel-resume
+  REGION: us-central1
+  
 jobs:
-  test:
+  # ============================================================================
+  # VALIDATION & TESTING STAGE
+  # ============================================================================
+  validate:
+    name: Code Quality & Security
     runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    outputs:
+      version: ${{ steps.version.outputs.version }}
       
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
         
     - name: Install dependencies
-      run: npm ci
+      run: npm ci --prefer-offline --no-audit
       
-    - name: Run linting
+    - name: Generate version
+      id: version
+      run: |
+        VERSION=$(date +%Y%m%d)-${GITHUB_SHA::8}
+        echo "version=${VERSION}" >> $GITHUB_OUTPUT
+        echo "Generated version: ${VERSION}"
+        
+    - name: Lint code
       run: npm run lint
+      
+    - name: Type checking
+      run: npx tsc --noEmit
+      
+    - name: Security audit
+      run: npm audit --audit-level=moderate
       
     - name: Build application
       run: npm run build
       
-    # Uncomment when tests are implemented
-    # - name: Run tests
-    #   run: npm test
-
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Load environment variables
+    - name: Test build artifacts
       run: |
-        if [ -f .env ]; then
-          export $(cat .env | grep -v '^#' | xargs)
-          echo "PROJECT_ID=${PROJECT_ID}" >> $GITHUB_ENV
-          echo "SERVICE_NAME=${SERVICE_NAME}" >> $GITHUB_ENV
-          echo "REGION=${REGION}" >> $GITHUB_ENV
-          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
-          echo "MEMORY=${MEMORY}" >> $GITHUB_ENV
-          echo "CPU=${CPU}" >> $GITHUB_ENV
-          echo "MAX_INSTANCES=${MAX_INSTANCES}" >> $GITHUB_ENV
-          echo "PORT=${PORT}" >> $GITHUB_ENV
-        else
-          echo "❌ Error: .env file not found"
+        if [ ! -d ".next" ]; then
+          echo "❌ Build failed - .next directory not found"
           exit 1
         fi
+        echo "✅ Build artifacts validated"
         
-    - name: Setup Google Cloud CLI
-      uses: google-github-actions/setup-gcloud@v2
+    # Store build artifacts for deployment
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
       with:
-        project_id: ${{ env.PROJECT_ID }}
-        service_account_key: ${{ secrets.GCP_SA_KEY }}
-        export_default_credentials: true
-        
-    - name: Configure Docker for GCR
-      run: gcloud auth configure-docker
-      
-    - name: Build Docker image
-      run: docker build -t ${{ env.IMAGE_NAME }} .
-      
-    - name: Push Docker image
-      run: docker push ${{ env.IMAGE_NAME }}
-      
-    - name: Deploy to Cloud Run
-      run: |
-        gcloud run deploy ${{ env.SERVICE_NAME }} \
-          --image=${{ env.IMAGE_NAME }} \
-          --platform=managed \
-          --region=${{ env.REGION }} \
-          --allow-unauthenticated \
-          --port=${{ env.PORT }} \
-          --memory=${{ env.MEMORY }} \
-          --cpu=${{ env.CPU }} \
-          --max-instances=${{ env.MAX_INSTANCES }} \
-          --project=${{ env.PROJECT_ID }}
-          
-    - name: Get service URL
-      run: |
-        SERVICE_URL=$(gcloud run services describe ${{ env.SERVICE_NAME }} \
-          --region=${{ env.REGION }} \
-          --format="value(status.url)" \
-          --project=${{ env.PROJECT_ID }})
-        echo "Service deployed at: $SERVICE_URL"
-        
-  security-scan:
+        name: build-artifacts-${{ steps.version.outputs.version }}
+        path: |
+          .next/
+          public/
+          package.json
+          package-lock.json
+        retention-days: 7
+
+  # ============================================================================
+  # SECURITY SCANNING STAGE
+  # ============================================================================
+  security:
+    name: Security Analysis
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
       
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
         
     - name: Install dependencies
-      run: npm ci
-      
-    - name: Run security audit
-      run: npm audit --audit-level=high
+      run: npm ci --prefer-offline --no-audit
       
     - name: Run Snyk security scan
       uses: snyk/actions/node@master
@@ -122,4 +114,235 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        args: --severity-threshold=high
+        args: --severity-threshold=high --json-file-output=snyk-results.json
+        
+    - name: Upload Snyk results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: snyk-security-report
+        path: snyk-results.json
+        retention-days: 30
+
+  # ============================================================================
+  # CONTAINER BUILD STAGE
+  # ============================================================================
+  build:
+    name: Build Container Image
+    runs-on: ubuntu-latest
+    needs: [validate]
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    
+    outputs:
+      image: ${{ steps.image.outputs.image }}
+      digest: ${{ steps.build.outputs.digest }}
+      
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+        
+    - name: Configure Docker for GCR
+      run: gcloud auth configure-docker --quiet
+      
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/resume-app
+        tags: |
+          type=ref,event=branch
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+          type=raw,value=${{ needs.validate.outputs.version }}
+          
+    - name: Build and push image
+      id: build
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        platforms: linux/amd64
+        
+    - name: Set image output
+      id: image
+      run: |
+        IMAGE="${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/resume-app:${{ needs.validate.outputs.version }}"
+        echo "image=${IMAGE}" >> $GITHUB_OUTPUT
+        echo "Built image: ${IMAGE}"
+
+  # ============================================================================
+  # DEPLOYMENT STAGE
+  # ============================================================================
+  deploy:
+    name: Deploy to Cloud Run
+    runs-on: ubuntu-latest
+    needs: [validate, build, security]
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    environment: 
+      name: production
+      url: https://resume.mindtunnel.org
+      
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+        
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      
+    - name: Deploy to Cloud Run
+      id: deploy
+      run: |
+        gcloud run deploy ${{ env.SERVICE_NAME }} \
+          --image=${{ needs.build.outputs.image }} \
+          --platform=managed \
+          --region=${{ env.REGION }} \
+          --allow-unauthenticated \
+          --port=3000 \
+          --memory=512Mi \
+          --cpu=1 \
+          --max-instances=10 \
+          --min-instances=0 \
+          --concurrency=80 \
+          --timeout=300 \
+          --set-env-vars="NODE_ENV=production" \
+          --execution-environment=gen2 \
+          --cpu-boost \
+          --project=${{ env.PROJECT_ID }} \
+          --quiet
+          
+    - name: Get service URL
+      id: url
+      run: |
+        SERVICE_URL=$(gcloud run services describe ${{ env.SERVICE_NAME }} \
+          --region=${{ env.REGION }} \
+          --format="value(status.url)" \
+          --project=${{ env.PROJECT_ID }})
+        echo "url=${SERVICE_URL}" >> $GITHUB_OUTPUT
+        echo "Service URL: ${SERVICE_URL}"
+        
+    - name: Verify domain mapping
+      run: |
+        echo "🔗 Verifying domain mapping for resume.mindtunnel.org..."
+        gcloud beta run domain-mappings describe resume.mindtunnel.org \
+          --region=${{ env.REGION }} \
+          --project=${{ env.PROJECT_ID }} \
+          --format="table(spec.routeName, status.conditions[0].type, status.conditions[0].status)" \
+          || echo "⚠️  Domain mapping may need to be created manually"
+          
+    - name: Health check
+      run: |
+        echo "🏥 Performing health check..."
+        max_attempts=10
+        attempt=1
+        
+        while [ $attempt -le $max_attempts ]; do
+          echo "Attempt $attempt/$max_attempts..."
+          
+          if curl -f -s --max-time 30 "https://resume.mindtunnel.org" > /dev/null; then
+            echo "✅ Health check passed!"
+            break
+          elif [ $attempt -eq $max_attempts ]; then
+            echo "❌ Health check failed after $max_attempts attempts"
+            exit 1
+          else
+            echo "⏳ Waiting 30 seconds before retry..."
+            sleep 30
+            attempt=$((attempt + 1))
+          fi
+        done
+        
+    - name: Performance test
+      run: |
+        echo "⚡ Running basic performance test..."
+        response_time=$(curl -o /dev/null -s -w '%{time_total}' https://resume.mindtunnel.org)
+        echo "Response time: ${response_time}s"
+        
+        # Use awk for floating point comparison since bc might not be available
+        if awk "BEGIN {exit !($response_time > 5.0)}"; then
+          echo "⚠️  Warning: Response time is high (${response_time}s)"
+        else
+          echo "✅ Performance check passed"
+        fi
+
+  # ============================================================================
+  # POST-DEPLOYMENT MONITORING
+  # ============================================================================
+  monitor:
+    name: Post-Deployment Monitoring
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    if: success()
+    
+    steps:
+    - name: Setup monitoring
+      run: |
+        echo "📊 Setting up post-deployment monitoring..."
+        echo "Service: ${{ env.SERVICE_NAME }}"
+        echo "Region: ${{ env.REGION }}"
+        echo "Domain: https://resume.mindtunnel.org"
+        
+    - name: Log deployment success
+      run: |
+        echo "🎉 Deployment completed successfully!"
+        echo "✅ Version: ${{ needs.validate.outputs.version }}"
+        echo "✅ Image: ${{ needs.build.outputs.image }}"
+        echo "✅ Service URL: https://resume.mindtunnel.org"
+        echo "✅ Timestamp: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+
+  # ============================================================================
+  # ROLLBACK CAPABILITY
+  # ============================================================================
+  rollback:
+    name: Emergency Rollback
+    runs-on: ubuntu-latest
+    if: failure() && github.ref == 'refs/heads/main'
+    needs: [deploy]
+    
+    steps:
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+        
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      
+    - name: Get previous revision
+      id: previous
+      run: |
+        PREVIOUS_REVISION=$(gcloud run revisions list \
+          --service=${{ env.SERVICE_NAME }} \
+          --region=${{ env.REGION }} \
+          --project=${{ env.PROJECT_ID }} \
+          --format="value(metadata.name)" \
+          --limit=2 \
+          --sort-by="~metadata.creationTimestamp" | tail -n 1)
+        echo "previous=${PREVIOUS_REVISION}" >> $GITHUB_OUTPUT
+        echo "Previous revision: ${PREVIOUS_REVISION}"
+        
+    - name: Rollback to previous version
+      if: steps.previous.outputs.previous != ''
+      run: |
+        echo "🔄 Rolling back to previous revision..."
+        gcloud run services update-traffic ${{ env.SERVICE_NAME }} \
+          --to-revisions=${{ steps.previous.outputs.previous }}=100 \
+          --region=${{ env.REGION }} \
+          --project=${{ env.PROJECT_ID }}
+        echo "✅ Rollback completed"
