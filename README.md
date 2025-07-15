@@ -44,8 +44,8 @@ This is a production-ready, containerized resume website showcasing professional
 
 ```bash
 # Clone the repository
-git clone git@github.com:bmarcuche/resume-website.git
-cd resume-website
+git clone git@github.com:bmarcuche/resume-cloudrun.git
+cd resume-cloudrun
 
 # Install dependencies
 npm install
