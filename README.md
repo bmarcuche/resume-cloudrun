@@ -401,3 +401,4 @@ For support and questions:
 **Built with ❤️ by Bruno Marcuche**  
 **Deployed on Google Cloud Run**  
 **Powered by Next.js and TypeScript**
+# 🚀 CI/CD Pipeline Activated!
