@@ -63,11 +63,6 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
   },
-  
-  // Environment variables validation
-  env: {
-    NODE_ENV: process.env.NODE_ENV,
-  },
 }
 
 module.exports = nextConfig
