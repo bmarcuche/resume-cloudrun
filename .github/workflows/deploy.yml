@@ -6,12 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  PROJECT_ID: secret-proton-465722-q0
-  SERVICE_NAME: mindtunnel-resume
-  REGION: us-central1
-  IMAGE_NAME: gcr.io/secret-proton-465722-q0/mindtunnel-resume
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -48,6 +42,23 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
+    - name: Load environment variables
+      run: |
+        if [ -f .env ]; then
+          export $(cat .env | grep -v '^#' | xargs)
+          echo "PROJECT_ID=${PROJECT_ID}" >> $GITHUB_ENV
+          echo "SERVICE_NAME=${SERVICE_NAME}" >> $GITHUB_ENV
+          echo "REGION=${REGION}" >> $GITHUB_ENV
+          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
+          echo "MEMORY=${MEMORY}" >> $GITHUB_ENV
+          echo "CPU=${CPU}" >> $GITHUB_ENV
+          echo "MAX_INSTANCES=${MAX_INSTANCES}" >> $GITHUB_ENV
+          echo "PORT=${PORT}" >> $GITHUB_ENV
+        else
+          echo "❌ Error: .env file not found"
+          exit 1
+        fi
+        
     - name: Setup Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v2
       with:
@@ -71,10 +82,10 @@ jobs:
           --platform=managed \
           --region=${{ env.REGION }} \
           --allow-unauthenticated \
-          --port=3000 \
-          --memory=512Mi \
-          --cpu=1 \
-          --max-instances=10 \
+          --port=${{ env.PORT }} \
+          --memory=${{ env.MEMORY }} \
+          --cpu=${{ env.CPU }} \
+          --max-instances=${{ env.MAX_INSTANCES }} \
           --project=${{ env.PROJECT_ID }}
           
     - name: Get service URL

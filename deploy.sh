@@ -1,48 +1,54 @@
 #!/bin/bash
 
-# Deployment script for mindtunnel.org
+# Deployment script for mindtunnel.org (legacy)
 set -e
 
-PROJECT_ID="secret-proton-465722-q0"
-SERVICE_NAME="mindtunnel-site"
-REGION="us-central1"
-IMAGE_NAME="gcr.io/$PROJECT_ID/$SERVICE_NAME"
-GCLOUD_PATH="$HOME/google-cloud-sdk/bin/gcloud"
+# Load environment variables
+if [ -f .env ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+else
+    echo "❌ Error: .env file not found. Please copy .env.example to .env and configure your values."
+    exit 1
+fi
 
-echo "🚀 Deploying mindtunnel.org to Google Cloud Run..."
+# Override for main domain deployment
+MAIN_DOMAIN="mindtunnel.org"
+MAIN_SERVICE="mindtunnel-site"
+
+echo "🚀 Deploying ${MAIN_DOMAIN} to Google Cloud Run..."
 
 # Build and push the Docker image
 echo "📦 Building Docker image..."
-docker build -t $IMAGE_NAME .
+docker build -t gcr.io/${PROJECT_ID}/${MAIN_SERVICE} .
 
 echo "📤 Pushing image to Google Container Registry..."
-docker push $IMAGE_NAME
+docker push gcr.io/${PROJECT_ID}/${MAIN_SERVICE}
 
 # Deploy to Cloud Run
 echo "🌐 Deploying to Cloud Run..."
-$GCLOUD_PATH run deploy $SERVICE_NAME \
-  --image=$IMAGE_NAME \
+${GCLOUD_PATH:-gcloud} run deploy ${MAIN_SERVICE} \
+  --image=gcr.io/${PROJECT_ID}/${MAIN_SERVICE} \
   --platform=managed \
-  --region=$REGION \
+  --region=${REGION} \
   --allow-unauthenticated \
-  --port=3000 \
-  --memory=512Mi \
-  --cpu=1 \
-  --max-instances=10 \
-  --project=$PROJECT_ID
+  --port=${PORT:-3000} \
+  --memory=${MEMORY:-512Mi} \
+  --cpu=${CPU:-1} \
+  --max-instances=${MAX_INSTANCES:-10} \
+  --project=${PROJECT_ID}
 
 # Get the service URL
-SERVICE_URL=$($GCLOUD_PATH run services describe $SERVICE_NAME --region=$REGION --format="value(status.url)" --project=$PROJECT_ID)
+SERVICE_URL=$(${GCLOUD_PATH:-gcloud} run services describe ${MAIN_SERVICE} --region=${REGION} --format="value(status.url)" --project=${PROJECT_ID})
 echo "✅ Service deployed at: $SERVICE_URL"
 
 # Map custom domain
 echo "🔗 Mapping custom domain..."
-$GCLOUD_PATH run domain-mappings create \
-  --service=$SERVICE_NAME \
-  --domain=mindtunnel.org \
-  --region=$REGION \
-  --project=$PROJECT_ID || echo "Domain mapping may already exist"
+${GCLOUD_PATH:-gcloud} beta run domain-mappings create \
+  --service=${MAIN_SERVICE} \
+  --domain=${MAIN_DOMAIN} \
+  --region=${REGION} \
+  --project=${PROJECT_ID} || echo "Domain mapping may already exist"
 
 echo "🎉 Deployment complete!"
-echo "Your site will be available at: https://mindtunnel.org"
+echo "Your site will be available at: https://${MAIN_DOMAIN}"
 echo "Note: DNS propagation may take a few minutes to complete."

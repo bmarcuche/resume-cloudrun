@@ -40,12 +40,29 @@ This is a production-ready, containerized resume website showcasing professional
 
 ## 🔧 Local Development
 
+### Prerequisites Setup
+
+1. **Copy environment configuration**:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Configure your environment variables** in `.env`:
+   ```bash
+   # Edit .env with your specific values
+   nano .env
+   ```
+
 ### Installation
 
 ```bash
 # Clone the repository
 git clone git@github.com:bmarcuche/resume-cloudrun.git
 cd resume-cloudrun
+
+# Copy and configure environment variables
+cp .env.example .env
+# Edit .env with your values
 
 # Install dependencies
 npm install
@@ -77,6 +94,13 @@ docker run -p 3000:3000 resume-website
 
 ## 🚀 Deployment
 
+### Prerequisites
+
+1. **Environment Configuration**: Ensure `.env` file is configured with your values
+2. **Google Cloud Authentication**: `gcloud auth login`
+3. **Docker**: Ensure Docker is running
+4. **Domain**: DNS configured to point to Google Cloud
+
 ### Automated Deployment
 
 Use the provided deployment script:
@@ -89,20 +113,24 @@ Use the provided deployment script:
 ### Manual Deployment
 
 ```bash
+# Load environment variables
+source .env
+
 # Build and push Docker image
-docker build -t gcr.io/secret-proton-465722-q0/mindtunnel-resume .
-docker push gcr.io/secret-proton-465722-q0/mindtunnel-resume
+docker build -t ${IMAGE_NAME} .
+docker push ${IMAGE_NAME}
 
 # Deploy to Cloud Run
-gcloud run deploy mindtunnel-resume \
-  --image=gcr.io/secret-proton-465722-q0/mindtunnel-resume \
+gcloud run deploy ${SERVICE_NAME} \
+  --image=${IMAGE_NAME} \
   --platform=managed \
-  --region=us-central1 \
+  --region=${REGION} \
   --allow-unauthenticated \
-  --port=3000 \
-  --memory=512Mi \
-  --cpu=1 \
-  --max-instances=10
+  --port=${PORT} \
+  --memory=${MEMORY} \
+  --cpu=${CPU} \
+  --max-instances=${MAX_INSTANCES} \
+  --project=${PROJECT_ID}
 ```
 
 ## 🏗 Architecture
@@ -184,10 +212,24 @@ TTL: 300
 
 ## 📝 Environment Variables
 
-| Variable | Description | Default |
+Copy `.env.example` to `.env` and configure the following variables:
+
+| Variable | Description | Example |
 |----------|-------------|---------|
-| `PORT` | Server port | `3000` |
-| `NODE_ENV` | Environment | `production` |
+| `PROJECT_ID` | Google Cloud Project ID | `your-gcp-project-id` |
+| `REGION` | Google Cloud Region | `us-central1` |
+| `SERVICE_NAME` | Cloud Run service name | `your-service-name` |
+| `MEMORY` | Container memory limit | `512Mi` |
+| `CPU` | Container CPU allocation | `1` |
+| `MAX_INSTANCES` | Maximum service instances | `10` |
+| `PORT` | Application port | `3000` |
+| `IMAGE_NAME` | Container image name | `gcr.io/${PROJECT_ID}/${SERVICE_NAME}` |
+| `CUSTOM_DOMAIN` | Your custom domain | `your-domain.com` |
+| `DNS_ZONE` | Google Cloud DNS zone | `your-dns-zone-name` |
+| `GCLOUD_PATH` | Path to gcloud CLI | `${HOME}/google-cloud-sdk/bin/gcloud` |
+| `NODE_ENV` | Node environment | `production` |
+
+**Important**: Never commit the `.env` file to version control. It's included in `.gitignore`.
 
 ## 🤝 Contributing
 

@@ -51,13 +51,20 @@
 ## 🚀 Next Steps
 
 ### Immediate (Today)
-1. **Create GitHub Repository**:
+1. **Configure Environment Variables**:
    ```bash
    cd /home/bruno/mindtunnel-website
+   cp .env.example .env
+   # Edit .env with your specific values
+   nano .env
+   ```
+
+2. **Create GitHub Repository** (if not done):
+   ```bash
    ./setup-github.sh
    ```
 
-2. **Verify Site Functionality**:
+3. **Verify Site Functionality**:
    - Visit https://resume.mindtunnel.org
    - Test responsive design on mobile/tablet
    - Verify PDF loading and navigation
@@ -134,6 +141,10 @@ resume-website/
 ## 🔧 Available Commands
 
 ```bash
+# Setup and Configuration
+./setup.sh              # Interactive setup wizard
+cp .env.example .env     # Copy environment template
+
 # Development
 npm run dev              # Start development server
 npm run build           # Build for production
@@ -141,7 +152,7 @@ npm run start           # Start production server
 npm run lint            # Run ESLint
 
 # Deployment
-./deploy-resume.sh      # Deploy to Cloud Run
+./deploy-resume.sh      # Deploy to Cloud Run with environment variables
 ./setup-github.sh       # Set up GitHub repository
 
 # Docker
