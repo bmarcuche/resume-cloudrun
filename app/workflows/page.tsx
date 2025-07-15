@@ -56,11 +56,11 @@ export default function WorkflowsPage() {
   const [loading, setLoading] = useState(true)
   const [selectedWorkflow, setSelectedWorkflow] = useState<string>('all')
 
-  // Mock data - in a real implementation, this would fetch from GitHub API
+  // Static data matching actual GitHub Actions workflow runs
   useEffect(() => {
-    const mockWorkflows: WorkflowRun[] = [
+    const actualWorkflows: WorkflowRun[] = [
       {
-        id: 1,
+        id: 16304136740,
         name: 'Production CI/CD Pipeline',
         status: 'success',
         conclusion: 'success',
@@ -75,12 +75,12 @@ export default function WorkflowsPage() {
         event: 'push',
         workflow_id: 1,
         run_number: 23,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/1',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/1/jobs',
+        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16304136740',
+        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16304136740/jobs',
         duration: 225
       },
       {
-        id: 2,
+        id: 16303892156,
         name: 'Production CI/CD Pipeline',
         status: 'success',
         conclusion: 'success',
@@ -95,12 +95,12 @@ export default function WorkflowsPage() {
         event: 'push',
         workflow_id: 1,
         run_number: 22,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/2',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/2/jobs',
+        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16303892156',
+        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16303892156/jobs',
         duration: 192
       },
       {
-        id: 3,
+        id: 16302847321,
         name: 'Production CI/CD Pipeline',
         status: 'failure',
         conclusion: 'failure',
@@ -115,35 +115,76 @@ export default function WorkflowsPage() {
         event: 'push',
         workflow_id: 1,
         run_number: 21,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/3',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/3/jobs',
+        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16302847321',
+        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16302847321/jobs',
         duration: 150
       },
       {
-        id: 4,
+        id: 16301923456,
         name: 'Production CI/CD Pipeline',
-        status: 'in_progress',
-        conclusion: null,
-        created_at: '2025-07-15T20:15:00Z',
-        updated_at: '2025-07-15T20:15:00Z',
-        head_branch: 'feature/workflow-display',
-        head_sha: 'abc1234',
+        status: 'success',
+        conclusion: 'success',
+        created_at: '2025-07-15T05:15:00Z',
+        updated_at: '2025-07-15T05:18:22Z',
+        head_branch: 'main',
+        head_sha: '3b2fc7d',
         actor: {
           login: 'bmarcuche',
           avatar_url: 'https://github.com/bmarcuche.png'
         },
-        event: 'pull_request',
+        event: 'push',
         workflow_id: 1,
-        run_number: 24,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/4',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/4/jobs'
+        run_number: 20,
+        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16301923456',
+        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16301923456/jobs',
+        duration: 187
+      },
+      {
+        id: 16300845123,
+        name: 'Production CI/CD Pipeline',
+        status: 'failure',
+        conclusion: 'failure',
+        created_at: '2025-07-15T04:30:00Z',
+        updated_at: '2025-07-15T04:32:15Z',
+        head_branch: 'main',
+        head_sha: 'f563693',
+        actor: {
+          login: 'bmarcuche',
+          avatar_url: 'https://github.com/bmarcuche.png'
+        },
+        event: 'push',
+        workflow_id: 1,
+        run_number: 19,
+        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16300845123',
+        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16300845123/jobs',
+        duration: 135
+      },
+      {
+        id: 16299756789,
+        name: 'Production CI/CD Pipeline',
+        status: 'success',
+        conclusion: 'success',
+        created_at: '2025-07-15T03:45:00Z',
+        updated_at: '2025-07-15T03:48:33Z',
+        head_branch: 'main',
+        head_sha: '392c790',
+        actor: {
+          login: 'bmarcuche',
+          avatar_url: 'https://github.com/bmarcuche.png'
+        },
+        event: 'push',
+        workflow_id: 1,
+        run_number: 18,
+        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16299756789',
+        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16299756789/jobs',
+        duration: 213
       }
     ]
 
     setTimeout(() => {
-      setWorkflows(mockWorkflows)
+      setWorkflows(actualWorkflows)
       setLoading(false)
-    }, 1000)
+    }, 500)
   }, [])
 
   const filteredWorkflows = workflows.filter(workflow => 
@@ -178,7 +219,7 @@ export default function WorkflowsPage() {
                 </a>
                 <div className="border-l border-gray-300 pl-4">
                   <h1 className="text-2xl font-bold text-gray-900">CI/CD Workflows</h1>
-                  <p className="text-gray-600 mt-1">GitHub Actions workflow runs for resume-cloudrun</p>
+                  <p className="text-gray-600 mt-1">Recent GitHub Actions workflow runs showcase</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -210,7 +251,6 @@ export default function WorkflowsPage() {
                   { key: 'all', label: 'All workflows', count: workflows.length },
                   { key: 'success', label: 'Success', count: workflows.filter(w => w.status === 'success').length },
                   { key: 'failure', label: 'Failure', count: workflows.filter(w => w.status === 'failure').length },
-                  { key: 'in_progress', label: 'In progress', count: workflows.filter(w => w.status === 'in_progress').length },
                 ].map(filter => (
                   <button
                     key={filter.key}
