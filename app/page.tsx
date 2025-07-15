@@ -33,6 +33,12 @@ export default function Home() {
               About Me
             </a>
             <a 
+              href="/workflows" 
+              className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+            >
+              CI/CD Workflows
+            </a>
+            <a 
               href="/resume/bruno_marcuche_resume.pdf" 
               download
               className="flex items-center space-x-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
