@@ -30,7 +30,7 @@ export default function Home() {
               href="#resume" 
               className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
             >
-              Resume
+              About Me
             </a>
             <a 
               href="/resume/bruno_marcuche_resume.pdf" 
@@ -44,15 +44,13 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Resume Section */}
+      {/* About Me Section */}
       <section id="resume" className="py-12">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Resume</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">About Me</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Experienced DevOps Engineer and Cloud Architect with expertise in GCP, automation, 
-              and modern infrastructure. Passionate about leveraging AI and cutting-edge technologies 
-              to streamline operations and drive innovation.
+              I've been fortunate to work with companies around the world — from lean startups in Costa Rica to enterprises in Brazil and the U.S. Along the way, I've built reliable systems, led teams, and scaled infrastructure. I enjoy solving real-world problems and working with people who care about doing things right. Always up for the next challenge.
             </p>
           </div>
 
