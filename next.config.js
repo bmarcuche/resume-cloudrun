@@ -3,11 +3,6 @@ const nextConfig = {
   // Enable standalone output for Docker optimization
   output: 'standalone',
   
-  experimental: {
-    outputFileTracingRoot: undefined,
-    optimizeCss: true,
-  },
-  
   // Preserve existing webpack config for PDF handling
   webpack: (config) => {
     config.resolve.alias.canvas = false;
