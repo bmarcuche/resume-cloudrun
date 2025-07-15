@@ -56,135 +56,31 @@ export default function WorkflowsPage() {
   const [loading, setLoading] = useState(true)
   const [selectedWorkflow, setSelectedWorkflow] = useState<string>('all')
 
-  // Static data matching actual GitHub Actions workflow runs
+  // Fetch actual workflow runs from GitHub API
   useEffect(() => {
-    const actualWorkflows: WorkflowRun[] = [
-      {
-        id: 16304136740,
-        name: 'Production CI/CD Pipeline',
-        status: 'success',
-        conclusion: 'success',
-        created_at: '2025-07-15T19:30:00Z',
-        updated_at: '2025-07-15T19:33:45Z',
-        head_branch: 'main',
-        head_sha: '5f0c3a5',
-        actor: {
-          login: 'bmarcuche',
-          avatar_url: 'https://github.com/bmarcuche.png'
-        },
-        event: 'push',
-        workflow_id: 1,
-        run_number: 23,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16304136740',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16304136740/jobs',
-        duration: 225
-      },
-      {
-        id: 16303892156,
-        name: 'Production CI/CD Pipeline',
-        status: 'success',
-        conclusion: 'success',
-        created_at: '2025-07-15T18:45:00Z',
-        updated_at: '2025-07-15T18:48:12Z',
-        head_branch: 'main',
-        head_sha: '1fef67d',
-        actor: {
-          login: 'bmarcuche',
-          avatar_url: 'https://github.com/bmarcuche.png'
-        },
-        event: 'push',
-        workflow_id: 1,
-        run_number: 22,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16303892156',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16303892156/jobs',
-        duration: 192
-      },
-      {
-        id: 16302847321,
-        name: 'Production CI/CD Pipeline',
-        status: 'failure',
-        conclusion: 'failure',
-        created_at: '2025-07-15T06:21:00Z',
-        updated_at: '2025-07-15T06:23:30Z',
-        head_branch: 'main',
-        head_sha: '4a30166',
-        actor: {
-          login: 'bmarcuche',
-          avatar_url: 'https://github.com/bmarcuche.png'
-        },
-        event: 'push',
-        workflow_id: 1,
-        run_number: 21,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16302847321',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16302847321/jobs',
-        duration: 150
-      },
-      {
-        id: 16301923456,
-        name: 'Production CI/CD Pipeline',
-        status: 'success',
-        conclusion: 'success',
-        created_at: '2025-07-15T05:15:00Z',
-        updated_at: '2025-07-15T05:18:22Z',
-        head_branch: 'main',
-        head_sha: '3b2fc7d',
-        actor: {
-          login: 'bmarcuche',
-          avatar_url: 'https://github.com/bmarcuche.png'
-        },
-        event: 'push',
-        workflow_id: 1,
-        run_number: 20,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16301923456',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16301923456/jobs',
-        duration: 187
-      },
-      {
-        id: 16300845123,
-        name: 'Production CI/CD Pipeline',
-        status: 'failure',
-        conclusion: 'failure',
-        created_at: '2025-07-15T04:30:00Z',
-        updated_at: '2025-07-15T04:32:15Z',
-        head_branch: 'main',
-        head_sha: 'f563693',
-        actor: {
-          login: 'bmarcuche',
-          avatar_url: 'https://github.com/bmarcuche.png'
-        },
-        event: 'push',
-        workflow_id: 1,
-        run_number: 19,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16300845123',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16300845123/jobs',
-        duration: 135
-      },
-      {
-        id: 16299756789,
-        name: 'Production CI/CD Pipeline',
-        status: 'success',
-        conclusion: 'success',
-        created_at: '2025-07-15T03:45:00Z',
-        updated_at: '2025-07-15T03:48:33Z',
-        head_branch: 'main',
-        head_sha: '392c790',
-        actor: {
-          login: 'bmarcuche',
-          avatar_url: 'https://github.com/bmarcuche.png'
-        },
-        event: 'push',
-        workflow_id: 1,
-        run_number: 18,
-        html_url: 'https://github.com/bmarcuche/resume-cloudrun/actions/runs/16299756789',
-        jobs_url: 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs/16299756789/jobs',
-        duration: 213
+    const fetchWorkflows = async () => {
+      try {
+        const response = await fetch('/api/workflows')
+        const data = await response.json()
+        
+        // Transform status to match our component expectations
+        const transformedWorkflows = data.workflow_runs.map((run: any) => ({
+          ...run,
+          status: run.conclusion === 'success' ? 'success' : 
+                  run.conclusion === 'failure' ? 'failure' :
+                  run.status === 'in_progress' ? 'in_progress' :
+                  run.status === 'queued' ? 'queued' : 'cancelled'
+        }))
+        
+        setWorkflows(transformedWorkflows)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error fetching workflows:', error)
+        setLoading(false)
       }
-    ]
+    }
 
-    setTimeout(() => {
-      setWorkflows(actualWorkflows)
-      setLoading(false)
-    }, 500)
+    fetchWorkflows()
   }, [])
 
   const filteredWorkflows = workflows.filter(workflow => 
