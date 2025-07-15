@@ -1,4 +1,4 @@
-# Bruno Marcuche - Professional Resume Website
+# Bruno Marcuche - Resume on CloudRun
 
 A modern, responsive resume website built with Next.js and deployed on Google Cloud Run.
 
@@ -245,4 +245,4 @@ For issues or questions, please create an issue in this repository.
 
 **Last Updated**: July 2025  
 **Version**: 1.0.0  
-**Maintainer**: Bruno Marcuche (bruno@theneoft.io)
+**Maintainer**: Bruno Marcuche (bruno.marcuche@gmail.com)

@@ -178,6 +178,6 @@ docker run -p 3000:3000 resume-website  # Run container
 
 ## 🏆 Project Status: COMPLETE ✅
 
-Your professional resume website is now live, secure, and ready for the world to see!
+Your resume website is now live, secure, and ready for the world to see!
 
 **Live URL**: https://resume.mindtunnel.org

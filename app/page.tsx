@@ -48,7 +48,7 @@ export default function Home() {
       <section id="resume" className="py-12">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Professional Resume</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Resume</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Experienced DevOps Engineer and Cloud Architect with expertise in GCP, automation, 
               and modern infrastructure. Passionate about leveraging AI and cutting-edge technologies 

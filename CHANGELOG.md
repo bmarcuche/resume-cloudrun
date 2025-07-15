@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-07-15
 
 ### Added
-- Initial release of Bruno Marcuche's professional resume website
+- Initial release of Bruno Marcuche's resume on CloudRun
 - Next.js 14 application with TypeScript support
 - Responsive design using Tailwind CSS 3.3.0
 - PDF resume viewer with react-pdf integration
@@ -91,7 +91,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Version 1.0.0 - Initial Production Release
 
-This marks the first production-ready release of Bruno Marcuche's professional resume website. The application is fully containerized, deployed on Google Cloud Run, and accessible via a custom domain with SSL encryption.
+This marks the first production-ready release of Bruno Marcuche's resume on CloudRun. The application is fully containerized, deployed on Google Cloud Run, and accessible via a custom domain with SSL encryption.
 
 **Key Achievements:**
 - ✅ Production deployment completed
