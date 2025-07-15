@@ -207,3 +207,9 @@ coverage/
 .env.test.local
 .env.production.local
 resume-cicd-key.json
+.secrets/
+
+# Secrets and sensitive files
+.secrets/
+*.key
+*.pem
