@@ -88,11 +88,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Current Setup */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">Current Setup</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            {[
+              'Alacritty',
+              'tmux (custom keybinds)',
+              'WSL2 (Ubuntu)',
+              'Neovim + LSP',
+              'Amazon Q CLI',
+              'Claude via Terminal',
+              'Starship Prompt',
+              'Powerline fonts',
+              'Azure CLI'
+            ].map((tool) => (
+              <div 
+                key={tool}
+                className="bg-white rounded-lg px-3 py-2 text-center text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors shadow-sm border border-gray-100"
+              >
+                {tool}
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-gray-600 mt-6 text-sm">
+            My daily development environment and tools
+          </p>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-400">
-            © 2024 Bruno Marcuche. Built with Next.js and deployed on Google Cloud Platform.
+            © 2025 Bruno Marcuche. Built with Next.js and deployed on Google Cloud Platform.
           </p>
           <div className="mt-4 space-x-4">
             <a 
@@ -107,6 +137,14 @@ export default function Home() {
               className="text-gray-400 hover:text-white transition-colors"
             >
               Download Resume
+            </a>
+            <a 
+              href="https://github.com/bmarcuche/resume-cloudrun"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              View Source Code
             </a>
           </div>
         </div>
