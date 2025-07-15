@@ -472,3 +472,22 @@ Expected results after deployment:
 - Zero-downtime deployment completed
 
 Pipeline test initiated with fixed authentication!
+
+
+## 🔧 Container Registry Permissions Fixed
+
+**Permission Issue Resolved**: ✅ Added Artifact Registry Writer role  
+**Additional Permission**: ✅ Added Storage Object Admin role  
+**Service Account**: resume-cicd@secret-proton-465722-q0.iam.gserviceaccount.com  
+**Fix Timestamp**: Tue Jul 15 12:29:06 AM MDT 2025
+
+The Docker build completed successfully, but push to GCR failed due to missing permissions.
+Now fixed with proper Artifact Registry and Storage permissions.
+
+Expected results:
+- ✅ Docker build (already successful)
+- ✅ Docker push to GCR (now has permissions)
+- ✅ Cloud Run deployment with health endpoints
+- ✅ Health endpoint: https://resume.mindtunnel.org/api/health
+
+Pipeline should complete successfully with fixed permissions!
