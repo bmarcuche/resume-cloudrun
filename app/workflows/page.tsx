@@ -104,7 +104,7 @@ export default function WorkflowsPage() {
       <ThemeToggle />
       
       {/* Header */}
-      <div className="bg-white border-b border-secondary-bg">
+      <div className="workflow-header bg-white border-b border-secondary-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-6">
             <div className="flex items-center justify-between">

@@ -245,6 +245,35 @@ body {
   background-color: var(--secondary-bg);
 }
 
+/* Workflow page header banner styling */
+.workflow-header {
+  background-color: var(--card-bg);
+  border-color: var(--secondary-bg);
+}
+
+/* Dark mode styling for workflow page header banner */
+[data-theme="dark"] .workflow-header {
+  background-color: var(--card-bg);
+  border-color: var(--secondary-bg);
+}
+
+/* Dark mode text styling for workflow header elements */
+[data-theme="dark"] .workflow-header .text-headline {
+  color: #9CA3AF !important; /* Gray for main heading */
+}
+
+[data-theme="dark"] .workflow-header .text-body {
+  color: #6B7280 !important; /* Darker gray for subtitle */
+}
+
+[data-theme="dark"] .workflow-header .nav-link {
+  color: #6B7280 !important; /* Darker gray for back link */
+}
+
+[data-theme="dark"] .workflow-header .contact-info {
+  color: #6B7280 !important; /* Darker gray for back link */
+}
+
 /* Dark mode styling for workflow details button */
 [data-theme="dark"] .workflow-details-btn {
   background-color: var(--card-bg);
