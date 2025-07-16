@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-primary">
       {/* Header Section */}
-      <header className="gradient-bg py-16">
+      <header className="gradient-bg py-11">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4 text-white">Bruno Marcuche</h1>
           <p className="text-xl mb-2 text-white font-medium">Site Reliability Engineer | Linux | Cloud</p>
