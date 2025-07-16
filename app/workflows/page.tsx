@@ -126,7 +126,7 @@ export default function WorkflowsPage() {
                   href="https://github.com/bmarcuche/resume-cloudrun/actions"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-4 py-2 border border-secondary-bg rounded-md shadow-sm text-sm font-medium nav-link bg-white hover:bg-secondary transition-colors"
+                  className="workflow-details-btn inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium transition-colors"
                 >
                   View on GitHub
                   <ChevronRightIcon className="h-4 w-4 ml-2" />
@@ -183,7 +183,7 @@ export default function WorkflowsPage() {
 
               <div className="divide-y divide-secondary-bg">
                 {filteredWorkflows.map((workflow) => (
-                  <div key={workflow.id} className="p-4 hover:bg-secondary transition-colors cursor-pointer border-l-4 border-transparent hover:border-accent-teal">
+                  <div key={workflow.id} className="workflow-row p-4 hover:bg-secondary transition-colors cursor-pointer border-l-4 border-transparent hover:border-accent-teal">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4 flex-1">
                         <WorkflowStatusIcon status={workflow.status} />
@@ -234,7 +234,7 @@ export default function WorkflowsPage() {
                           href={workflow.html_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center px-3 py-1.5 border border-secondary-bg rounded-md text-xs font-medium nav-link bg-white hover:bg-secondary transition-colors"
+                          className="workflow-details-btn inline-flex items-center px-3 py-1.5 border rounded-md text-xs font-medium transition-colors"
                         >
                           View details
                           <ChevronRightIcon className="h-3 w-3 ml-1" />
