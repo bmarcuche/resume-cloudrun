@@ -93,6 +93,25 @@ body {
   color: #D1D5DB !important;
 }
 
+/* Download button styling to override nav-link */
+.download-button {
+  background-color: #0D9488 !important;
+  color: #FFFFFF !important;
+  font-weight: 500 !important;
+}
+
+.download-button:hover {
+  background-color: #14B8A6 !important;
+}
+
+.download-button span {
+  color: #FFFFFF !important;
+}
+
+.download-button svg {
+  color: #FFFFFF !important;
+}
+
 /* Utility classes */
 .bg-primary {
   background-color: var(--primary-bg);
