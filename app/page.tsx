@@ -1,6 +1,7 @@
 import { ArrowDownTrayIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline'
 import PDFViewer from '../components/PDFViewer'
 import ThemeToggle from '../components/ThemeToggle'
+import DeploymentFlow from '../components/DeploymentFlow'
 
 export default function Home() {
   return (
@@ -71,6 +72,8 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          <DeploymentFlow />
 
           {/* PDF Viewer */}
           <div className="flex justify-center">
