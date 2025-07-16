@@ -57,12 +57,6 @@ export default function Home() {
       {/* Introduction Section */}
       <section id="resume" className="py-12 bg-primary">
         <div className="container mx-auto px-4">
-          {/* Deployment Flow */}
-          <div className="flex justify-center mb-6">
-            <div className="w-full max-w-4xl mx-auto">
-              <DeploymentFlow />
-            </div>
-          </div>
 
           {/* Welcome Header */}
           <div className="flex justify-center mb-6">
@@ -87,9 +81,23 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Resume Header */}
+          <div className="flex justify-center mb-6">
+            <div className="w-full max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold text-headline text-center">Resume</h3>
+            </div>
+          </div>
+
           {/* PDF Viewer */}
           <div className="flex justify-center">
             <PDFViewer file="/resume/bruno_marcuche_resume.pdf" />
+          </div>
+
+          {/* Deployment Flow */}
+          <div className="flex justify-center my-8">
+            <div className="w-full max-w-4xl mx-auto">
+              <DeploymentFlow />
+            </div>
           </div>
         </div>
       </section>
@@ -123,7 +131,7 @@ export default function Home() {
             {[
               'Alacritty',
               'tmux (custom keybinds)',
-              'WSL2 (Ubuntu)',
+              'Pop! OS',
               'NeoVIM',
               'Amazon Q CLI',
               'Claude via Terminal',

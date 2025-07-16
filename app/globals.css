@@ -224,7 +224,7 @@ body {
 
 [data-theme="dark"] .card-white {
   background-color: var(--card-bg);
-  border-color: var(--secondary-bg);
+  border-color: #334155;
 }
 
 [data-theme="dark"] .card-white .text-headline {
