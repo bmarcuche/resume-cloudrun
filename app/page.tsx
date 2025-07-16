@@ -55,13 +55,13 @@ export default function Home() {
       </nav>
 
       {/* Introduction Section */}
-      <section id="resume" className="py-12 bg-primary">
+      <section id="resume" className="py-8 bg-primary">
         <div className="container mx-auto px-4">
 
           {/* Introduction Text in Paper Container */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-6">
             <div className="w-full max-w-4xl mx-auto" style={{ maxWidth: Math.min(800, typeof window !== 'undefined' ? window.innerWidth - 40 : 800) }}>
-              <div className="paper-container p-8 mb-6">
+              <div className="paper-container p-8">
                 <div className="text-left relative z-10">
                   <p className="text-body text-base leading-relaxed mb-6">
                     Welcome! I build and run systems people rely on - leading SRE teams, scaling infrastructure, and keeping environments secure and resilient.
@@ -74,16 +74,18 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Deployment Flow */}
-          <div className="flex justify-center mb-6">
-            <div className="w-full max-w-4xl mx-auto">
-              <DeploymentFlow />
-            </div>
-          </div>
-
           {/* PDF Viewer */}
           <div className="flex justify-center">
             <PDFViewer file="/resume/bruno_marcuche_resume.pdf" />
+          </div>
+        </div>
+      </section>
+
+      {/* How this site is deployed */}
+      <section className="card-white py-6">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <DeploymentFlow />
           </div>
         </div>
       </section>
