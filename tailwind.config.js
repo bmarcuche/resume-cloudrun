@@ -8,15 +8,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#eff6ff',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-        },
+        'primary': '#F5F5F5',        // White Smoke
+        'secondary': '#E5E7EB',      // Light Gray
+        'accent-dark': '#1E293B',    // Dark Charcoal
+        'accent-teal': '#0D9488',    // Teal
+        'headline': '#111827',       // Charcoal
+        'body': '#475569',           // Slate-600
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        'roboto': ['Roboto', 'sans-serif'],
+        'roboto-condensed': ['Roboto Condensed', 'sans-serif'],
+        sans: ['Roboto', 'system-ui', 'sans-serif'],
       },
     },
   },

@@ -89,33 +89,33 @@ export default function WorkflowsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-primary flex items-center justify-center">
         <div className="text-center">
-          <ArrowPathIcon className="h-8 w-8 text-blue-500 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Loading workflow runs...</p>
+          <ArrowPathIcon className="h-8 w-8 text-accent-teal animate-spin mx-auto mb-4" />
+          <p className="text-body">Loading workflow runs...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-primary">
       {/* Header */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b border-secondary-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <a 
                   href="/"
-                  className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                  className="nav-link inline-flex items-center text-sm hover:text-accent-teal transition-colors"
                 >
                   <ArrowLeftIcon className="h-4 w-4 mr-1" />
                   Back to Resume
                 </a>
-                <div className="border-l border-gray-300 pl-4">
-                  <h1 className="text-2xl font-bold text-gray-900">CI/CD Workflows</h1>
-                  <p className="text-gray-600 mt-1">Recent GitHub Actions workflow runs showcase</p>
+                <div className="border-l border-secondary-bg pl-4">
+                  <h1 className="text-2xl font-bold text-headline">CI/CD Workflows</h1>
+                  <p className="text-body mt-1">Recent GitHub Actions workflow runs showcase</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -123,7 +123,7 @@ export default function WorkflowsPage() {
                   href="https://github.com/bmarcuche/resume-cloudrun/actions"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                  className="inline-flex items-center px-4 py-2 border border-secondary-bg rounded-md shadow-sm text-sm font-medium nav-link bg-white hover:bg-secondary transition-colors"
                 >
                   View on GitHub
                   <ChevronRightIcon className="h-4 w-4 ml-2" />
@@ -138,9 +138,9 @@ export default function WorkflowsPage() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="lg:w-64 flex-shrink-0">
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-4 border-b">
-                <h3 className="text-sm font-medium text-gray-900">Filter workflow runs</h3>
+            <div className="card-white rounded-lg shadow">
+              <div className="p-4 border-b border-secondary-bg">
+                <h3 className="text-sm font-medium text-headline">Filter workflow runs</h3>
               </div>
               <div className="p-4 space-y-2">
                 {[
@@ -153,13 +153,13 @@ export default function WorkflowsPage() {
                     onClick={() => setSelectedWorkflow(filter.key)}
                     className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
                       selectedWorkflow === filter.key
-                        ? 'bg-blue-50 text-blue-700 font-medium'
-                        : 'text-gray-700 hover:bg-gray-50'
+                        ? 'bg-secondary text-accent-teal font-medium'
+                        : 'text-accent-dark hover:bg-secondary'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <span>{filter.label}</span>
-                      <span className="text-xs text-gray-500">{filter.count}</span>
+                      <span className="text-xs text-body">{filter.count}</span>
                     </div>
                   </button>
                 ))}
@@ -169,40 +169,40 @@ export default function WorkflowsPage() {
 
           {/* Main Content */}
           <div className="flex-1">
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-4 border-b">
+            <div className="card-white rounded-lg shadow">
+              <div className="p-4 border-b border-secondary-bg">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-lg font-medium text-gray-900">
+                  <h2 className="text-lg font-medium text-headline">
                     Workflow runs ({filteredWorkflows.length})
                   </h2>
                 </div>
               </div>
 
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y divide-secondary-bg">
                 {filteredWorkflows.map((workflow) => (
-                  <div key={workflow.id} className="p-4 hover:bg-gray-50 transition-colors cursor-pointer border-l-4 border-transparent hover:border-blue-200">
+                  <div key={workflow.id} className="p-4 hover:bg-secondary transition-colors cursor-pointer border-l-4 border-transparent hover:border-accent-teal">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4 flex-1">
                         <WorkflowStatusIcon status={workflow.status} />
                         
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center space-x-3 mb-2">
-                            <h3 className="text-sm font-semibold text-gray-900 truncate">
+                            <h3 className="text-sm font-semibold text-headline truncate">
                               {workflow.name}
                             </h3>
                             <WorkflowStatusBadge status={workflow.status} />
                           </div>
                           
-                          <div className="flex items-center space-x-4 text-xs text-gray-500">
+                          <div className="flex items-center space-x-4 text-xs text-body">
                             <div className="flex items-center space-x-1">
                               <CodeBracketIcon className="h-3 w-3" />
                               <span className="font-mono">{workflow.head_branch}</span>
                             </div>
                             <div className="flex items-center space-x-1">
-                              <span className="text-blue-600 font-medium">#{workflow.run_number}</span>
+                              <span className="text-accent-teal font-medium">#{workflow.run_number}</span>
                             </div>
                             <div className="flex items-center space-x-1">
-                              <span className="font-mono text-gray-600">{workflow.head_sha}</span>
+                              <span className="font-mono text-accent-dark">{workflow.head_sha}</span>
                             </div>
                             <div className="flex items-center space-x-1">
                               <img 
@@ -231,7 +231,7 @@ export default function WorkflowsPage() {
                           href={workflow.html_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                          className="inline-flex items-center px-3 py-1.5 border border-secondary-bg rounded-md text-xs font-medium nav-link bg-white hover:bg-secondary transition-colors"
                         >
                           View details
                           <ChevronRightIcon className="h-3 w-3 ml-1" />
@@ -244,9 +244,9 @@ export default function WorkflowsPage() {
 
               {filteredWorkflows.length === 0 && (
                 <div className="p-8 text-center">
-                  <PlayIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No workflow runs found</h3>
-                  <p className="text-gray-600">
+                  <PlayIcon className="h-12 w-12 text-body mx-auto mb-4" />
+                  <h3 className="text-lg font-medium text-headline mb-2">No workflow runs found</h3>
+                  <p className="text-body">
                     {selectedWorkflow === 'all' 
                       ? 'No workflow runs have been triggered yet.'
                       : `No ${selectedWorkflow} workflow runs found.`

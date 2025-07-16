@@ -3,11 +3,11 @@ import PDFViewer from '../components/PDFViewer'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <main className="min-h-screen bg-primary">
       {/* Header Section */}
       <header className="gradient-bg text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-4">Bruno Marcuche</h1>
+          <h1 className="text-5xl font-bold mb-4 text-white">Bruno Marcuche</h1>
           <p className="text-xl mb-2 opacity-90">Site Reliability Engineer | Linux | Cloud</p>
           <div className="flex justify-center items-center space-x-6 text-sm opacity-80">
             <div className="flex items-center space-x-1">
@@ -23,25 +23,25 @@ export default function Home() {
       </header>
 
       {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
+      <nav className="bg-white shadow-sm border-b border-secondary-bg">
         <div className="container mx-auto px-4">
           <div className="flex justify-center space-x-8 py-4">
             <a 
               href="#resume" 
-              className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+              className="nav-link hover:text-accent-teal font-medium transition-colors"
             >
               Introduction
             </a>
             <a 
               href="/workflows" 
-              className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+              className="nav-link hover:text-accent-teal font-medium transition-colors"
             >
               CI/CD Workflows
             </a>
             <a 
               href="/resume/bruno_marcuche_resume.pdf" 
               download
-              className="flex items-center space-x-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+              className="button-teal flex items-center space-x-2 px-4 py-2 rounded-lg hover-teal-light transition-colors"
             >
               <ArrowDownTrayIcon className="h-4 w-4" />
               <span>Download PDF</span>
@@ -51,11 +51,11 @@ export default function Home() {
       </nav>
 
       {/* Introduction Section */}
-      <section id="resume" className="py-12">
+      <section id="resume" className="py-12 bg-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Introduction</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-headline mb-4">Introduction</h2>
+            <p className="text-body max-w-2xl mx-auto">
               I've spent my career making systems more reliable, scalable, and secure. Whether leading SRE teams or building hands-on, I enjoy solving complex problems and improving systems through automation and thoughtful design.
             </p>
           </div>
@@ -70,7 +70,7 @@ export default function Home() {
       {/* Skills Highlight */}
       <section className="bg-white py-16">
         <div className="container mx-auto px-4">
-          <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">Core Technologies</h3>
+          <h3 className="text-2xl font-bold text-center text-headline mb-8">Core Technologies</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
             {[
               'GCP', 'Terraform', 'Ansible', 'Puppet', 'Docker', 'LaunchDarkly',
@@ -79,7 +79,7 @@ export default function Home() {
             ].map((tech) => (
               <div 
                 key={tech}
-                className="bg-gray-50 rounded-lg px-3 py-2 text-center text-sm font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
+                className="bg-secondary rounded-lg px-3 py-2 text-center text-sm font-medium text-accent-dark hover-teal transition-colors"
               >
                 {tech}
               </div>
@@ -89,9 +89,9 @@ export default function Home() {
       </section>
 
       {/* Current Setup */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-secondary py-16">
         <div className="container mx-auto px-4">
-          <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">Current Setup</h3>
+          <h3 className="text-2xl font-bold text-center text-headline mb-8">Current Setup</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
               'Alacritty',
@@ -106,35 +106,35 @@ export default function Home() {
             ].map((tool) => (
               <div 
                 key={tool}
-                className="bg-white rounded-lg px-3 py-2 text-center text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors shadow-sm border border-gray-100"
+                className="card-white rounded-lg px-3 py-2 text-center text-sm font-medium text-accent-dark hover-teal transition-colors"
               >
                 {tool}
               </div>
             ))}
           </div>
-          <p className="text-center text-gray-600 mt-6 text-sm">
+          <p className="text-center text-body mt-6 text-sm">
             My daily development environment and tools
           </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-accent-dark text-white py-8">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400">
+          <p className="text-gray-300">
             © 2025 Bruno Marcuche. Built with Next.js and deployed on Google Cloud Platform.
           </p>
           <div className="mt-4 space-x-4">
             <a 
               href="mailto:bruno.marcuche@gmail.com"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-300 hover:text-accent-teal transition-colors"
             >
               Contact
             </a>
             <a 
               href="/resume/bruno_marcuche_resume.pdf"
               download
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-300 hover:text-accent-teal transition-colors"
             >
               Download Resume
             </a>
@@ -142,7 +142,7 @@ export default function Home() {
               href="https://github.com/bmarcuche/resume-cloudrun"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-300 hover:text-accent-teal transition-colors"
             >
               View Source Code
             </a>

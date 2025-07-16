@@ -1,38 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  /* Color Palette */
+  --primary-bg: #F5F5F5;        /* White Smoke */
+  --secondary-bg: #E5E7EB;      /* Light Gray */
+  --accent-dark: #1E293B;       /* Dark Charcoal */
+  --accent-teal: #0D9488;       /* Teal */
+  --text-headline: #111827;     /* Charcoal */
+  --text-body: #475569;         /* Slate-600 */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Typography */
+h1, h2, h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: var(--text-headline);
 }
 
+p, li, span {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: var(--text-body);
+}
+
+.nav-link, label {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 500;
+  color: var(--accent-dark);
+}
+
+.button-teal {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  background-color: var(--accent-teal);
+  color: #FFFFFF;
+}
+
+/* Base styles */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--text-body);
 }
 
+/* Custom gradient for header */
+.gradient-bg {
+  background: linear-gradient(135deg, var(--accent-dark) 0%, #334155 100%);
+}
+
+/* PDF container styling */
 .pdf-container {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.gradient-bg {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* Utility classes */
+.bg-primary {
+  background-color: var(--primary-bg);
+}
+
+.bg-secondary {
+  background-color: var(--secondary-bg);
+}
+
+.text-accent-dark {
+  color: var(--accent-dark);
+}
+
+.text-accent-teal {
+  color: var(--accent-teal);
+}
+
+.border-accent-teal {
+  border-color: var(--accent-teal);
+}
+
+/* Hover states */
+.hover-teal:hover {
+  background-color: var(--accent-teal);
+  color: white;
+}
+
+.hover-teal-light:hover {
+  background-color: #14B8A6;
+}
+
+/* Card styles */
+.card-white {
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-secondary {
+  background-color: var(--secondary-bg);
+  border: 1px solid #D1D5DB;
 }
