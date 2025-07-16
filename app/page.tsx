@@ -8,8 +8,8 @@ export default function Home() {
       <header className="gradient-bg text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4 text-white">Bruno Marcuche</h1>
-          <p className="text-xl mb-2 opacity-90">Site Reliability Engineer | Linux | Cloud</p>
-          <div className="flex justify-center items-center space-x-6 text-sm opacity-80">
+          <p className="text-xl mb-2 text-white font-medium">Site Reliability Engineer | Linux | Cloud</p>
+          <div className="flex justify-center items-center space-x-6 text-sm text-gray-200">
             <div className="flex items-center space-x-1">
               <EnvelopeIcon className="h-4 w-4" />
               <span>bruno.marcuche@gmail.com</span>
@@ -25,16 +25,16 @@ export default function Home() {
       {/* Navigation */}
       <nav className="bg-white shadow-sm border-b border-secondary-bg">
         <div className="container mx-auto px-4">
-          <div className="flex justify-center space-x-8 py-4">
+          <div className="flex justify-center items-center space-x-8 py-4">
             <a 
               href="#resume" 
-              className="nav-link hover:text-accent-teal font-medium transition-colors"
+              className="nav-link hover:text-accent-teal font-medium transition-colors py-2 px-3"
             >
               Introduction
             </a>
             <a 
               href="/workflows" 
-              className="nav-link hover:text-accent-teal font-medium transition-colors"
+              className="nav-link hover:text-accent-teal font-medium transition-colors py-2 px-3"
             >
               CI/CD Workflows
             </a>
