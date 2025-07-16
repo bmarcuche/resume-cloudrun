@@ -31,7 +31,7 @@ export default function PDFViewer({ file }: PDFViewerProps) {
     <div className="w-full max-w-4xl mx-auto">
       {loading && (
         <div className="flex justify-center items-center h-96">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-teal"></div>
         </div>
       )}
       
@@ -56,19 +56,19 @@ export default function PDFViewer({ file }: PDFViewerProps) {
           <button
             onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
             disabled={pageNumber <= 1}
-            className="px-4 py-2 bg-primary-600 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-primary-700 transition-colors"
+            className="px-4 py-2 bg-accent-teal text-white rounded-lg disabled:bg-secondary disabled:text-body disabled:cursor-not-allowed hover:bg-teal-600 transition-colors font-medium shadow-sm"
           >
             Previous
           </button>
           
-          <span className="text-gray-700 font-medium">
+          <span className="text-accent-dark font-medium px-3 py-2 bg-white rounded-lg shadow-sm border border-secondary">
             Page {pageNumber} of {numPages}
           </span>
           
           <button
             onClick={() => setPageNumber(Math.min(numPages, pageNumber + 1))}
             disabled={pageNumber >= numPages}
-            className="px-4 py-2 bg-primary-600 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-primary-700 transition-colors"
+            className="px-4 py-2 bg-accent-teal text-white rounded-lg disabled:bg-secondary disabled:text-body disabled:cursor-not-allowed hover:bg-teal-600 transition-colors font-medium shadow-sm"
           >
             Next
           </button>

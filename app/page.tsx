@@ -54,9 +54,11 @@ export default function Home() {
       <section id="resume" className="py-12 bg-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-headline mb-4">Introduction</h2>
-            <p className="text-body max-w-2xl mx-auto">
-              I've spent my career making systems more reliable, scalable, and secure. Whether leading SRE teams or building hands-on, I enjoy solving complex problems and improving systems through automation and thoughtful design.
+            <p className="text-body max-w-3xl mx-auto text-lg leading-relaxed mb-6">
+              I build and run systems that people rely on — leading SRE teams, scaling infrastructure, and keeping environments secure and resilient (with zero incidents on my watch).
+            </p>
+            <p className="text-body max-w-3xl mx-auto text-lg leading-relaxed">
+              I'm passionate about Linux, open source, and using automation and AI to streamline operations and solve real-world problems. I enjoy mentoring engineers, improving systems through thoughtful design, and continuously learning to stay sharp for the next technical challenge.
             </p>
           </div>
 
@@ -75,7 +77,7 @@ export default function Home() {
             {[
               'GCP', 'Terraform', 'Ansible', 'Puppet', 'Docker', 'LaunchDarkly',
               'App Engine', 'IAM', 'Amazon Q', 'ChatGPT', 'Claude', 'MCP',
-              'Kubernetes', 'Prometheus', 'OpenTelemetry', 'RHEL', 'Ubuntu', 'Python'
+              'GitHub Actions', 'Prometheus', 'OpenTelemetry', 'RHEL', 'Ubuntu', 'Python'
             ].map((tech) => (
               <div 
                 key={tech}
