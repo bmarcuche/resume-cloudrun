@@ -40,6 +40,19 @@ p, li, span {
   color: var(--text-body);
 }
 
+/* Dark mode text overrides for better readability */
+[data-theme="dark"] .paper-container p {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .paper-container span {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] h3 {
+  color: #FFFFFF !important;
+}
+
 .nav-link, label {
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 500;
