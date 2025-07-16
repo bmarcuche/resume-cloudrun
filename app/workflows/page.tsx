@@ -108,7 +108,7 @@ export default function WorkflowsPage() {
               <div className="flex items-center space-x-4">
                 <a 
                   href="/"
-                  className="nav-link inline-flex items-center text-sm hover:text-accent-teal transition-colors"
+                  className="nav-link contact-info inline-flex items-center text-sm hover:text-accent-teal transition-colors"
                 >
                   <ArrowLeftIcon className="h-4 w-4 mr-1" />
                   Back to Resume

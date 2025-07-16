@@ -77,7 +77,7 @@ export default function Home() {
       </section>
 
       {/* Skills Highlight */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-12">
         <div className="container mx-auto px-4">
           <h3 className="text-2xl font-bold text-center text-headline mb-8">Core Technologies</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* Current Setup */}
-      <section className="bg-secondary py-16">
+      <section className="bg-secondary py-12">
         <div className="container mx-auto px-4">
           <h3 className="text-2xl font-bold text-center text-headline mb-8">Current Setup</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
@@ -106,11 +106,10 @@ export default function Home() {
               'Alacritty',
               'tmux (custom keybinds)',
               'WSL2 (Ubuntu)',
-              'Neovim + LSP',
+              'NeoVIM',
               'Amazon Q CLI',
               'Claude via Terminal',
               'Starship Prompt',
-              'Powerline fonts',
               'Azure CLI'
             ].map((tool) => (
               <div 

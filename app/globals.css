@@ -83,15 +83,15 @@ body {
 
 /* Contact info styling with high specificity */
 .contact-info {
-  color: #F3F4F6 !important;
+  color: #D1D5DB !important;
 }
 
 .contact-info span {
-  color: #F3F4F6 !important;
+  color: #D1D5DB !important;
 }
 
 .contact-info svg {
-  color: #F3F4F6 !important;
+  color: #D1D5DB !important;
 }
 
 /* Utility classes */
