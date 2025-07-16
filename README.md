@@ -23,6 +23,8 @@ graph TD;
 
 The pipeline runs on every push to `main` and on manual dispatches. GitHub Actions handles testing, building the Docker image, pushing it to Google Container Registry, and deploying to Cloud Run.
 
+On the homepage, a compact diagram illustrates this flow so visitors can quickly see how a commit becomes the running site.
+
 ---
 
 ## Features

@@ -13,6 +13,11 @@ describe('Home Page', () => {
     // Example: expect(screen.getByText('Bruno Marcuche')).toBeInTheDocument()
   })
 
+  it('shows deployment flow', () => {
+    render(<Home />)
+    expect(screen.getByText(/how this site is deployed/i)).toBeInTheDocument()
+  })
+
   it('has proper meta tags', () => {
     render(<Home />)
     // Test for SEO and meta information

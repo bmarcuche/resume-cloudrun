@@ -346,3 +346,20 @@ body {
   color: white;
   transform: scale(1.1);
 }
+
+/* Deployment flow styling */
+.deployment-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deployment-arrow {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .deployment-arrow {
+    display: block;
+  }
+}
