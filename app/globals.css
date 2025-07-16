@@ -81,6 +81,19 @@ body {
   pointer-events: none;
 }
 
+/* Contact info styling with high specificity */
+.contact-info {
+  color: #F3F4F6 !important;
+}
+
+.contact-info span {
+  color: #F3F4F6 !important;
+}
+
+.contact-info svg {
+  color: #F3F4F6 !important;
+}
+
 /* Utility classes */
 .bg-primary {
   background-color: var(--primary-bg);

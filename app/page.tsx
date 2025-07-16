@@ -9,7 +9,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4 text-white">Bruno Marcuche</h1>
           <p className="text-xl mb-2 text-white font-medium">Site Reliability Engineer | Linux | Cloud</p>
-          <div className="flex justify-center items-center space-x-6 text-sm" style={{ color: '#D1D5DB' }}>
+          <div className="flex justify-center items-center space-x-6 text-sm contact-info">
             <div className="flex items-center space-x-1">
               <EnvelopeIcon className="h-4 w-4" />
               <span>bruno.marcuche@gmail.com</span>
