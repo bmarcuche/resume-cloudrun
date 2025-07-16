@@ -242,6 +242,10 @@ body {
   background-color: var(--secondary-bg);
 }
 
+.workflow-details-btn:active {
+  background-color: var(--secondary-bg);
+}
+
 /* Workflow page header banner styling */
 .workflow-header {
   background-color: var(--card-bg);
@@ -283,35 +287,46 @@ body {
   color: #D1D5DB !important; /* Lighter gray on hover */
 }
 
+[data-theme="dark"] .workflow-details-btn:active {
+  background-color: var(--secondary-bg);
+  color: #D1D5DB !important;
+}
+
 /* Workflow row hover states */
 .workflow-row {
   transition: all 0.2s ease;
 }
 
-.workflow-row:hover {
+.workflow-row:hover,
+.workflow-row:active {
   background-color: var(--secondary-bg);
 }
 
 /* Dark mode workflow row hover - when hovered, text should be dark for contrast */
-[data-theme="dark"] .workflow-row:hover .text-headline {
+[data-theme="dark"] .workflow-row:hover .text-headline,
+[data-theme="dark"] .workflow-row:active .text-headline {
   color: #1F2937 !important; /* Dark text on light hover background */
 }
 
-[data-theme="dark"] .workflow-row:hover .text-body {
+[data-theme="dark"] .workflow-row:hover .text-body,
+[data-theme="dark"] .workflow-row:active .text-body {
   color: #374151 !important; /* Dark gray text on light hover background */
 }
 
-[data-theme="dark"] .workflow-row:hover .text-accent-dark {
+[data-theme="dark"] .workflow-row:hover .text-accent-dark,
+[data-theme="dark"] .workflow-row:active .text-accent-dark {
   color: #1F2937 !important; /* Dark text on light hover background */
 }
 
 /* Keep teal accent visible on hover */
-[data-theme="dark"] .workflow-row:hover .text-accent-teal {
+[data-theme="dark"] .workflow-row:hover .text-accent-teal,
+[data-theme="dark"] .workflow-row:active .text-accent-teal {
   color: #0D9488 !important; /* Keep teal visible */
 }
 
 /* Workflow details button on hovered row */
-[data-theme="dark"] .workflow-row:hover .workflow-details-btn {
+[data-theme="dark"] .workflow-row:hover .workflow-details-btn,
+[data-theme="dark"] .workflow-row:active .workflow-details-btn {
   background-color: #FFFFFF;
   color: #374151 !important;
   border-color: #D1D5DB;
@@ -352,11 +367,5 @@ body {
 }
 
 .deployment-arrow {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .deployment-arrow {
-    display: block;
-  }
+  display: block;
 }
