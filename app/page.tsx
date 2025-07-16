@@ -9,7 +9,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4 text-white">Bruno Marcuche</h1>
           <p className="text-xl mb-2 text-white font-medium">Site Reliability Engineer | Linux | Cloud</p>
-          <div className="flex justify-center items-center space-x-6 text-sm text-gray-200">
+          <div className="flex justify-center items-center space-x-6 text-sm text-gray-100">
             <div className="flex items-center space-x-1">
               <EnvelopeIcon className="h-4 w-4" />
               <span>bruno.marcuche@gmail.com</span>
@@ -53,13 +53,20 @@ export default function Home() {
       {/* Introduction Section */}
       <section id="resume" className="py-12 bg-primary">
         <div className="container mx-auto px-4">
-          <div className="text-left mb-8 max-w-4xl mx-auto">
-            <p className="text-body text-base leading-relaxed mb-6">
-              Welcome, I build and run systems that people rely on — leading SRE teams, scaling infrastructure, and keeping environments secure and resilient.
-            </p>
-            <p className="text-body text-base leading-relaxed">
-              I'm passionate about Linux, open source, and using automation and AI to streamline operations and solve real-world problems. I enjoy mentoring engineers, improving systems through thoughtful design, and continuously learning to stay sharp for the next technical challenge.
-            </p>
+          {/* Introduction Text in Paper Container */}
+          <div className="flex justify-center mb-8">
+            <div className="w-full max-w-4xl mx-auto" style={{ maxWidth: Math.min(800, typeof window !== 'undefined' ? window.innerWidth - 40 : 800) }}>
+              <div className="paper-container p-8 mb-8">
+                <div className="text-left relative z-10">
+                  <p className="text-body text-base leading-relaxed mb-6">
+                    Welcome, I build and run systems that people rely on — leading SRE teams, scaling infrastructure, and keeping environments secure and resilient.
+                  </p>
+                  <p className="text-body text-base leading-relaxed">
+                    I'm passionate about Linux, open source, and using automation and AI to streamline operations and solve real-world problems. I enjoy mentoring engineers, improving systems through thoughtful design, and continuously learning to stay sharp for the next technical challenge.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* PDF Viewer */}
