@@ -12,6 +12,7 @@ import {
   ArrowLeftIcon
 } from '@heroicons/react/24/outline'
 import { WorkflowStatusIcon, WorkflowStatusBadge } from '../../components/WorkflowStatus'
+import ThemeToggle from '../../components/ThemeToggle'
 
 interface WorkflowRun {
   id: number
@@ -100,6 +101,8 @@ export default function WorkflowsPage() {
 
   return (
     <div className="min-h-screen bg-primary">
+      <ThemeToggle />
+      
       {/* Header */}
       <div className="bg-white border-b border-secondary-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

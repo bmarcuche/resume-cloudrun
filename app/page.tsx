@@ -1,9 +1,12 @@
 import { ArrowDownTrayIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline'
 import PDFViewer from '../components/PDFViewer'
+import ThemeToggle from '../components/ThemeToggle'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-primary">
+      <ThemeToggle />
+      
       {/* Header Section */}
       <header className="gradient-bg py-11">
         <div className="container mx-auto px-4 text-center">
@@ -23,7 +26,7 @@ export default function Home() {
       </header>
 
       {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b border-secondary-bg">
+      <nav className="card-white shadow-sm border-b" style={{ backgroundColor: 'var(--nav-bg)' }}>
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center space-x-8 py-4">
             <a 
@@ -77,7 +80,7 @@ export default function Home() {
       </section>
 
       {/* Skills Highlight */}
-      <section className="bg-white py-12">
+      <section className="card-white py-12">
         <div className="container mx-auto px-4">
           <h3 className="text-2xl font-bold text-center text-headline mb-8">Core Technologies</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
@@ -88,7 +91,7 @@ export default function Home() {
             ].map((tech) => (
               <div 
                 key={tech}
-                className="bg-secondary rounded-lg px-3 py-2 text-center text-sm font-medium text-accent-dark hover-teal transition-colors"
+                className="card-secondary rounded-lg px-3 py-2 text-center text-sm font-medium text-accent-dark hover-teal transition-colors"
               >
                 {tech}
               </div>
