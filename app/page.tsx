@@ -57,6 +57,13 @@ export default function Home() {
       {/* Introduction Section */}
       <section id="resume" className="py-12 bg-primary">
         <div className="container mx-auto px-4">
+          {/* Deployment Flow */}
+          <div className="flex justify-center mb-6">
+            <div className="w-full max-w-4xl mx-auto">
+              <DeploymentFlow />
+            </div>
+          </div>
+
           {/* Introduction Text in Paper Container */}
           <div className="flex justify-center mb-6">
             <div className="w-full max-w-4xl mx-auto" style={{ maxWidth: Math.min(800, typeof window !== 'undefined' ? window.innerWidth - 40 : 800) }}>
@@ -72,8 +79,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          <DeploymentFlow />
 
           {/* PDF Viewer */}
           <div className="flex justify-center">

@@ -11,7 +11,7 @@ import {
 
 export default function DeploymentFlow() {
   return (
-    <div className="deployment-flow my-8 text-center">
+    <div className="deployment-flow mb-4 text-center">
       <h3 className="text-2xl font-bold text-headline mb-6">How this site is deployed</h3>
       <div className="flex flex-wrap items-center justify-center gap-4">
         <div className="deployment-step flex flex-col items-center">
