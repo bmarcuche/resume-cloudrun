@@ -30,22 +30,22 @@ export default function Home() {
       <nav className="card-white shadow-sm border-b" style={{ backgroundColor: 'var(--nav-bg)' }}>
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center space-x-8 py-4">
-            <a 
-              href="#resume" 
-              className="nav-link hover:text-accent-teal font-medium transition-colors py-2 px-3"
+            <a
+              href="#resume"
+              className="nav-item"
             >
               Introduction
             </a>
-            <a 
-              href="/workflows" 
-              className="nav-link hover:text-accent-teal font-medium transition-colors py-2 px-3"
+            <a
+              href="/workflows"
+              className="nav-item"
             >
               CI/CD Workflows
             </a>
-            <a 
-              href="/resume/bruno_marcuche_resume.pdf" 
+            <a
+              href="/resume/bruno_marcuche_resume.pdf"
               download
-              className="download-button px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors font-medium shadow-sm flex items-center space-x-2"
+              className="button-teal rounded-lg px-4 py-2 font-medium shadow-sm flex items-center space-x-2"
             >
               <ArrowDownTrayIcon className="h-4 w-4" />
               <span>Download PDF</span>
