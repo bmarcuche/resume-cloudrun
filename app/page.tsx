@@ -53,11 +53,11 @@ export default function Home() {
       {/* Introduction Section */}
       <section id="resume" className="py-12 bg-primary">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <p className="text-body max-w-3xl mx-auto text-lg leading-relaxed mb-6">
-              I build and run systems that people rely on — leading SRE teams, scaling infrastructure, and keeping environments secure and resilient (with zero incidents on my watch).
+          <div className="text-left mb-8 max-w-4xl mx-auto">
+            <p className="text-body text-base leading-relaxed mb-6">
+              Welcome, I build and run systems that people rely on — leading SRE teams, scaling infrastructure, and keeping environments secure and resilient.
             </p>
-            <p className="text-body max-w-3xl mx-auto text-lg leading-relaxed">
+            <p className="text-body text-base leading-relaxed">
               I'm passionate about Linux, open source, and using automation and AI to streamline operations and solve real-world problems. I enjoy mentoring engineers, improving systems through thoughtful design, and continuously learning to stay sharp for the next technical challenge.
             </p>
           </div>
