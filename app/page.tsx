@@ -5,11 +5,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-primary">
       {/* Header Section */}
-      <header className="gradient-bg text-white py-16">
+      <header className="gradient-bg py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-4 text-white">Bruno Marcuche</h1>
           <p className="text-xl mb-2 text-white font-medium">Site Reliability Engineer | Linux | Cloud</p>
-          <div className="flex justify-center items-center space-x-6 text-sm text-gray-300">
+          <div className="flex justify-center items-center space-x-6 text-sm" style={{ color: '#D1D5DB' }}>
             <div className="flex items-center space-x-1">
               <EnvelopeIcon className="h-4 w-4" />
               <span>bruno.marcuche@gmail.com</span>
