@@ -61,7 +61,7 @@ export default function PDFViewer({ file }: PDFViewerProps) {
             Previous
           </button>
           
-          <span className="text-accent-dark font-medium px-3 py-2 bg-white rounded-lg shadow-sm border border-secondary">
+          <span className="pdf-page-indicator font-medium px-3 py-2 rounded-lg shadow-sm border">
             Page {pageNumber} of {numPages}
           </span>
           

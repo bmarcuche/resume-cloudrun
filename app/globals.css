@@ -169,6 +169,14 @@ body {
   color: var(--accent-teal);
 }
 
+.text-headline {
+  color: var(--text-headline);
+}
+
+.text-body {
+  color: var(--text-body);
+}
+
 .border-accent-teal {
   border-color: var(--accent-teal);
 }
@@ -195,6 +203,35 @@ body {
   background-color: var(--secondary-bg);
   border: 1px solid #D1D5DB;
   transition: background-color 0.3s ease;
+}
+
+/* PDF page indicator styling */
+.pdf-page-indicator {
+  background-color: var(--card-bg);
+  color: var(--text-headline);
+  border-color: var(--secondary-bg);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark mode specific styling for PDF page indicator */
+[data-theme="dark"] .pdf-page-indicator {
+  background-color: var(--card-bg);
+  color: #9CA3AF !important; /* Gray-400 for better readability in dark mode */
+  border-color: var(--secondary-bg);
+}
+
+/* Dark mode styling for workflow page text elements */
+[data-theme="dark"] .text-headline {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .card-white {
+  background-color: var(--card-bg);
+  border-color: var(--secondary-bg);
+}
+
+[data-theme="dark"] .card-white .text-headline {
+  color: #FFFFFF !important;
 }
 
 /* Theme toggle button */
