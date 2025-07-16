@@ -41,7 +41,7 @@ export default function Home() {
             <a 
               href="/resume/bruno_marcuche_resume.pdf" 
               download
-              className="button-teal flex items-center space-x-2 px-4 py-2 rounded-lg hover-teal-light transition-colors text-white"
+              className="px-4 py-2 bg-accent-teal text-white rounded-lg hover:bg-teal-600 transition-colors font-medium shadow-sm flex items-center space-x-2"
             >
               <ArrowDownTrayIcon className="h-4 w-4" />
               <span>Download PDF</span>
