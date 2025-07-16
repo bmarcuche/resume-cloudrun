@@ -190,7 +190,7 @@ export default function WorkflowsPage() {
                         
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center space-x-3 mb-2">
-                            <h3 className="text-sm font-semibold text-headline truncate">
+                            <h3 className="text-sm font-semibold text-headline truncate max-w-[10rem] sm:max-w-none">
                               {workflow.name}
                             </h3>
                             <WorkflowStatusBadge status={workflow.status} />
