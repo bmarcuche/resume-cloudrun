@@ -58,46 +58,32 @@ export default function Home() {
       <section id="resume" className="py-12 bg-primary">
         <div className="container mx-auto px-4">
 
-          {/* Welcome Header */}
-          <div className="flex justify-center mb-6">
-            <div className="w-full max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold text-headline text-center">Welcome</h3>
-            </div>
-          </div>
-
           {/* Introduction Text in Paper Container */}
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-8">
             <div className="w-full max-w-4xl mx-auto" style={{ maxWidth: Math.min(800, typeof window !== 'undefined' ? window.innerWidth - 40 : 800) }}>
               <div className="paper-container p-8 mb-6">
                 <div className="text-left relative z-10">
                   <p className="text-body text-base leading-relaxed mb-6">
-                    I build and run systems that people rely on — leading SRE teams, scaling infrastructure, and keeping environments secure and resilient.
+                    Welcome! I build and run systems people rely on - leading SRE teams, scaling infrastructure, and keeping environments secure and resilient.
                   </p>
                   <p className="text-body text-base leading-relaxed">
-                    I'm passionate about Linux, open source, and using automation and AI to streamline operations and solve real-world problems. I enjoy mentoring engineers, improving systems through thoughtful design, and continuously learning to stay sharp for the next technical challenge.
+                    I'm passionate about Linux, open source, and using automation and AI to streamline operations and solve real-world problems. I enjoy mentoring engineers, improving infrastructure through thoughtful design, and always learning to stay sharp for the next technical challenge.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Resume Header */}
+          {/* Deployment Flow */}
           <div className="flex justify-center mb-6">
             <div className="w-full max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold text-headline text-center">Resume</h3>
+              <DeploymentFlow />
             </div>
           </div>
 
           {/* PDF Viewer */}
           <div className="flex justify-center">
             <PDFViewer file="/resume/bruno_marcuche_resume.pdf" />
-          </div>
-
-          {/* Deployment Flow */}
-          <div className="flex justify-center my-8">
-            <div className="w-full max-w-4xl mx-auto">
-              <DeploymentFlow />
-            </div>
           </div>
         </div>
       </section>
