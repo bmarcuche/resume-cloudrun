@@ -139,6 +139,11 @@ export default function WorkflowsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Deployment Flow Section - appears under header on mobile, aligned with main content on desktop */}
+        <div className="mb-8 lg:hidden">
+          <DeploymentFlow />
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="lg:w-64 flex-shrink-0">
@@ -173,8 +178,8 @@ export default function WorkflowsPage() {
 
           {/* Main Content */}
           <div className="flex-1">
-            {/* Deployment Flow Section - aligned with workflow panel */}
-            <div className="mb-8">
+            {/* Deployment Flow Section - aligned with workflow panel on desktop only */}
+            <div className="mb-8 hidden lg:block">
               <DeploymentFlow />
             </div>
 
@@ -189,7 +194,7 @@ export default function WorkflowsPage() {
 
               <div className="divide-y divide-secondary-bg">
                 {filteredWorkflows.map((workflow) => (
-                  <div key={workflow.id} className="workflow-row p-4 hover:bg-secondary transition-colors cursor-pointer border-l-4 border-transparent hover:border-accent-teal">
+                  <div key={workflow.id} className="workflow-row p-4 transition-colors cursor-pointer border-l-4 border-transparent hover:border-accent-teal">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4 flex-1">
                         <WorkflowStatusIcon status={workflow.status} />

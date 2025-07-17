@@ -92,7 +92,7 @@ export default function Home() {
             ].map((tech) => (
               <div 
                 key={tech}
-                className="card-secondary rounded-lg px-3 py-2 text-center text-sm font-medium text-accent-dark hover-teal transition-colors"
+                className="card-secondary rounded-lg px-3 py-2 text-center text-sm font-medium text-accent-dark transition-colors"
               >
                 {tech}
               </div>

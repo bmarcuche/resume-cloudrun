@@ -292,30 +292,31 @@ body {
   color: #D1D5DB !important;
 }
 
-/* Workflow row hover states */
+/* Workflow row hover states - removed background hover */
 .workflow-row {
   transition: all 0.2s ease;
 }
 
+/* Remove background hover effect */
 .workflow-row:hover,
 .workflow-row:active {
-  background-color: var(--secondary-bg);
+  /* No background color change */
 }
 
-/* Dark mode workflow row hover - when hovered, text should be dark for contrast */
+/* Remove dark mode workflow row hover background effects */
 [data-theme="dark"] .workflow-row:hover .text-headline,
 [data-theme="dark"] .workflow-row:active .text-headline {
-  color: #1F2937 !important; /* Dark text on light hover background */
+  /* Keep original colors - no change */
 }
 
 [data-theme="dark"] .workflow-row:hover .text-body,
 [data-theme="dark"] .workflow-row:active .text-body {
-  color: #374151 !important; /* Dark gray text on light hover background */
+  /* Keep original colors - no change */
 }
 
 [data-theme="dark"] .workflow-row:hover .text-accent-dark,
 [data-theme="dark"] .workflow-row:active .text-accent-dark {
-  color: #1F2937 !important; /* Dark text on light hover background */
+  /* Keep original colors - no change */
 }
 
 /* Keep teal accent visible on hover */
@@ -324,17 +325,14 @@ body {
   color: #0D9488 !important; /* Keep teal visible */
 }
 
-/* Workflow details button on hovered row */
+/* Workflow details button on hovered row - keep original styling */
 [data-theme="dark"] .workflow-row:hover .workflow-details-btn,
 [data-theme="dark"] .workflow-row:active .workflow-details-btn {
-  background-color: #FFFFFF;
-  color: #374151 !important;
-  border-color: #D1D5DB;
+  /* Keep original button styling */
 }
 
 [data-theme="dark"] .workflow-row:hover .workflow-details-btn:hover {
-  background-color: #F3F4F6;
-  color: #1F2937 !important;
+  /* Keep original button hover styling */
 }
 
 /* Theme toggle button */
