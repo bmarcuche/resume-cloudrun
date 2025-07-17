@@ -63,6 +63,8 @@ export default function WorkflowsPage() {
   const [loading, setLoading] = useState(true)
   const [selectedWorkflow, setSelectedWorkflow] = useState<string>('all')
 
+  const repoName = process.env.NEXT_PUBLIC_REPO_NAME || 'this repository'
+
   // Fetch actual workflow runs from GitHub API
   useEffect(() => {
     const fetchWorkflows = async () => {
@@ -267,7 +269,7 @@ export default function WorkflowsPage() {
               <div className="p-4 border-b border-secondary-bg">
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-medium text-headline">
-                    Recent Commits That Triggered Workflows ({filteredWorkflows.length})
+                    Recent Commits on {repoName} ({filteredWorkflows.length})
                   </h2>
                 </div>
               </div>
