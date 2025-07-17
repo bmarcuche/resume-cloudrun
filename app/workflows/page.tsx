@@ -13,6 +13,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { WorkflowStatusIcon, WorkflowStatusBadge } from '../../components/WorkflowStatus'
 import ThemeToggle from '../../components/ThemeToggle'
+import DeploymentFlow from '../../components/DeploymentFlow'
 
 interface WorkflowRun {
   id: number
@@ -138,6 +139,15 @@ export default function WorkflowsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Deployment Flow Section */}
+        <div className="mb-8">
+          <div className="flex justify-center">
+            <div className="w-full max-w-4xl mx-auto">
+              <DeploymentFlow />
+            </div>
+          </div>
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="lg:w-64 flex-shrink-0">
@@ -176,7 +186,7 @@ export default function WorkflowsPage() {
               <div className="p-4 border-b border-secondary-bg">
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-medium text-headline">
-                    Workflow runs ({filteredWorkflows.length})
+                    Recent Commits That Triggered Workflows ({filteredWorkflows.length})
                   </h2>
                 </div>
               </div>

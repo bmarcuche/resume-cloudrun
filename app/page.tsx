@@ -1,7 +1,6 @@
 import { ArrowDownTrayIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline'
 import PDFViewer from '../components/PDFViewer'
 import ThemeToggle from '../components/ThemeToggle'
-import DeploymentFlow from '../components/DeploymentFlow'
 
 export default function Home() {
   return (
@@ -40,7 +39,7 @@ export default function Home() {
               href="/workflows"
               className="nav-item"
             >
-              CI/CD Workflows
+              Site Details
             </a>
             <a
               href="/resume/bruno_marcuche_resume.pdf"
@@ -77,15 +76,6 @@ export default function Home() {
           {/* PDF Viewer */}
           <div className="flex justify-center">
             <PDFViewer file="/resume/bruno_marcuche_resume.pdf" />
-          </div>
-        </div>
-      </section>
-
-      {/* How this site is deployed */}
-      <section className="card-white py-6">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <DeploymentFlow />
           </div>
         </div>
       </section>
