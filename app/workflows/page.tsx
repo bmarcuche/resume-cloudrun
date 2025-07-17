@@ -118,7 +118,7 @@ export default function WorkflowsPage() {
                   Back to Resume
                 </a>
                 <div className="border-l border-secondary-bg pl-4">
-                  <h1 className="text-2xl font-bold text-headline">CI/CD Workflows</h1>
+                  <h1 className="text-2xl font-bold text-headline">GitHub Action Workflows</h1>
                   <p className="text-body mt-1">Recent GitHub Actions workflow runs showcase</p>
                 </div>
               </div>
@@ -139,15 +139,6 @@ export default function WorkflowsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Deployment Flow Section */}
-        <div className="mb-8">
-          <div className="flex justify-center">
-            <div className="w-full max-w-4xl mx-auto">
-              <DeploymentFlow />
-            </div>
-          </div>
-        </div>
-
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="lg:w-64 flex-shrink-0">
@@ -182,6 +173,11 @@ export default function WorkflowsPage() {
 
           {/* Main Content */}
           <div className="flex-1">
+            {/* Deployment Flow Section - aligned with workflow panel */}
+            <div className="mb-8">
+              <DeploymentFlow />
+            </div>
+
             <div className="card-white rounded-lg shadow">
               <div className="p-4 border-b border-secondary-bg">
                 <div className="flex items-center justify-between">
