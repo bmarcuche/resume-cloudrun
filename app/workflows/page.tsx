@@ -144,6 +144,48 @@ export default function WorkflowsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Deployment Flow Section - appears first on mobile, before sidebar */}
+        <div className="mb-8 lg:hidden">
+          <div className="card-white rounded-lg shadow">
+            <div className="p-4 border-b border-secondary-bg">
+              <h2 className="text-lg font-medium text-headline">How this site is deployed</h2>
+            </div>
+            <div className="p-6">
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <div className="deployment-step flex flex-col items-center">
+                  <CodeBracketIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">Git Commit</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <PlayCircleIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">GitHub Actions</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <RocketLaunchIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">Build &amp; Test</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <ArrowUpTrayIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">Push Image</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <CloudIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">Cloud Run</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <GlobeAltIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">resume.mindtunnel.org</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="lg:w-64 flex-shrink-0">
@@ -227,7 +269,7 @@ export default function WorkflowsPage() {
                   <h2 className="text-lg font-medium text-headline">How this site is deployed</h2>
                 </div>
                 <div className="p-6">
-                  <div className="flex flex-wrap items-center justify-start gap-4">
+                  <div className="flex flex-wrap items-center justify-center gap-4">
                     <div className="deployment-step flex flex-col items-center">
                       <CodeBracketIcon className="h-6 w-6 text-accent-teal" />
                       <span className="mt-1 text-sm">Git Commit</span>
