@@ -110,21 +110,21 @@ export default function WorkflowsPage() {
       <ThemeToggle />
       
       {/* Header */}
-      <div className="workflow-header bg-white border-b border-secondary-bg">
+      <div className="workflow-header gradient-bg text-white border-b border-secondary-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <a 
+                <a
                   href="/"
-                  className="nav-link contact-info inline-flex items-center text-sm hover:text-accent-teal transition-colors"
+                  className="nav-link contact-info inline-flex items-center text-sm hover:text-accent-teal transition-colors text-white"
                 >
                   <ArrowLeftIcon className="h-4 w-4 mr-1" />
                   Back to Resume
                 </a>
                 <div className="border-l border-secondary-bg pl-4">
-                  <h1 className="text-2xl font-bold text-headline">GitHub Action Workflows</h1>
-                  <p className="text-body mt-1">Recent GitHub Actions workflow runs showcase</p>
+                  <h1 className="text-2xl font-bold text-white">GitHub Action Workflows</h1>
+                  <p className="text-white mt-1">Recent GitHub Actions workflow runs showcase</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -132,7 +132,7 @@ export default function WorkflowsPage() {
                   href="https://github.com/bmarcuche/resume-cloudrun/actions"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="workflow-details-btn inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium transition-colors"
+                  className="workflow-details-btn button-teal inline-flex items-center px-4 py-2 rounded-md shadow-sm text-sm font-medium transition-colors"
                 >
                   View on GitHub
                   <ChevronRightIcon className="h-4 w-4 ml-2" />
@@ -221,6 +221,48 @@ export default function WorkflowsPage() {
           {/* Main Content */}
           <div className="flex-1">
 
+            {/* Deployment Flow Section for desktop */}
+            <div className="hidden lg:block mb-8">
+              <div className="card-white rounded-lg shadow">
+                <div className="p-4 border-b border-secondary-bg">
+                  <h2 className="text-lg font-medium text-headline">How this site is deployed</h2>
+                </div>
+                <div className="p-6">
+                  <div className="flex flex-wrap items-center justify-center gap-4">
+                    <div className="deployment-step flex flex-col items-center">
+                      <CodeBracketIcon className="h-6 w-6 text-accent-teal" />
+                      <span className="mt-1 text-sm">Git Commit</span>
+                    </div>
+                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                    <div className="deployment-step flex flex-col items-center">
+                      <PlayCircleIcon className="h-6 w-6 text-accent-teal" />
+                      <span className="mt-1 text-sm">GitHub Actions</span>
+                    </div>
+                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                    <div className="deployment-step flex flex-col items-center">
+                      <RocketLaunchIcon className="h-6 w-6 text-accent-teal" />
+                      <span className="mt-1 text-sm">Build &amp; Test</span>
+                    </div>
+                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                    <div className="deployment-step flex flex-col items-center">
+                      <ArrowUpTrayIcon className="h-6 w-6 text-accent-teal" />
+                      <span className="mt-1 text-sm">Push Image</span>
+                    </div>
+                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                    <div className="deployment-step flex flex-col items-center">
+                      <CloudIcon className="h-6 w-6 text-accent-teal" />
+                      <span className="mt-1 text-sm">Cloud Run</span>
+                    </div>
+                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                    <div className="deployment-step flex flex-col items-center">
+                      <GlobeAltIcon className="h-6 w-6 text-accent-teal" />
+                      <span className="mt-1 text-sm">resume.mindtunnel.org</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="card-white rounded-lg shadow">
               <div className="p-4 border-b border-secondary-bg">
                 <div className="flex items-center justify-between">
@@ -283,7 +325,7 @@ export default function WorkflowsPage() {
                           href={workflow.html_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="workflow-details-btn inline-flex items-center justify-center px-3 py-1.5 border rounded-md text-xs font-medium transition-colors w-24"
+                          className="workflow-details-btn button-teal inline-flex items-center justify-center px-3 py-1.5 rounded-md text-xs font-medium transition-colors w-28"
                         >
                           <span className="truncate">View details</span>
                           <ChevronRightIcon className="h-3 w-3 ml-1 flex-shrink-0" />
@@ -310,6 +352,37 @@ export default function WorkflowsPage() {
           </div>
         </div>
       </div>
+
+      <footer className="bg-accent-dark text-white py-8">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-gray-300">
+            © 2025 Bruno Marcuche. Built with Next.js and deployed on Google Cloud Platform.
+          </p>
+          <div className="mt-4 space-x-4">
+            <a
+              href="mailto:bruno.marcuche@gmail.com"
+              className="text-gray-300 hover:text-accent-teal transition-colors"
+            >
+              Contact
+            </a>
+            <a
+              href="/resume/bruno_marcuche_resume.pdf"
+              download
+              className="text-gray-300 hover:text-accent-teal transition-colors"
+            >
+              Download Resume
+            </a>
+            <a
+              href="https://github.com/bmarcuche/resume-cloudrun"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-accent-teal transition-colors"
+            >
+              View Source Code
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
