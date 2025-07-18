@@ -234,16 +234,18 @@ body {
 /* Workflow page specific styling */
 .workflow-details-btn {
   background-color: var(--accent-teal);
-  color: #FFFFFF;
+  color: var(--accent-dark);
   border-color: var(--accent-teal);
 }
 
 .workflow-details-btn:hover {
   background-color: #14B8A6;
+  color: var(--accent-dark);
 }
 
 .workflow-details-btn:active {
   background-color: #0F766E;
+  color: var(--accent-dark);
 }
 
 /* Workflow page header banner styling */
