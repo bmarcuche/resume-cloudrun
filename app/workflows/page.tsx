@@ -63,7 +63,7 @@ export default function WorkflowsPage() {
   const [loading, setLoading] = useState(true)
   const [selectedWorkflow, setSelectedWorkflow] = useState<string>('all')
 
-  const repoName = process.env.NEXT_PUBLIC_REPO_NAME || 'this repository'
+  const repoName = process.env.NEXT_PUBLIC_REPO_NAME || 'resume-cloudrun'
 
   // Fetch actual workflow runs from GitHub API
   useEffect(() => {
@@ -125,8 +125,8 @@ export default function WorkflowsPage() {
                   Back to Resume
                 </a>
                 <div className="border-l border-secondary-bg pl-4">
-                  <h1 className="text-2xl font-bold text-white">GitHub Action Workflows</h1>
-                  <p className="text-white mt-1">Recent GitHub Actions workflow runs showcase</p>
+                  <h1 className="text-2xl font-bold text-white">GitHub Actions for resume-cloudrun</h1>
+                  <p className="text-white mt-1">Recent Workflow Runs from Resume Commits</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -150,7 +150,7 @@ export default function WorkflowsPage() {
         <div className="mb-8 lg:hidden">
           <div className="card-white rounded-lg shadow">
             <div className="p-4 border-b border-secondary-bg">
-              <h2 className="text-lg font-medium text-headline">How this site is deployed</h2>
+              <h2 className="text-lg font-medium text-headline">How This Site Is Deployed via CI/CD</h2>
             </div>
             <div className="p-6">
               <div className="flex flex-wrap items-center justify-center gap-4">
@@ -200,6 +200,7 @@ export default function WorkflowsPage() {
                   { key: 'all', label: 'All workflows', count: workflows.length },
                   { key: 'success', label: 'Success', count: workflows.filter(w => w.status === 'success').length },
                   { key: 'failure', label: 'Failure', count: workflows.filter(w => w.status === 'failure').length },
+                  { key: 'in_progress', label: 'In Progress', count: workflows.filter(w => w.status === 'in_progress').length },
                 ].map(filter => (
                   <button
                     key={filter.key}
@@ -227,7 +228,7 @@ export default function WorkflowsPage() {
             <div className="hidden lg:block mb-8">
               <div className="card-white rounded-lg shadow">
                 <div className="p-4 border-b border-secondary-bg">
-                  <h2 className="text-lg font-medium text-headline">How this site is deployed</h2>
+                  <h2 className="text-lg font-medium text-headline">How This Site Is Deployed via CI/CD</h2>
                 </div>
                 <div className="p-6">
                   <div className="flex flex-wrap items-center justify-center gap-4">
@@ -269,7 +270,7 @@ export default function WorkflowsPage() {
               <div className="p-4 border-b border-secondary-bg">
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-medium text-headline">
-                    Recent Commits on {repoName} ({filteredWorkflows.length})
+                    Commits to {repoName} ({filteredWorkflows.length})
                   </h2>
                 </div>
               </div>
