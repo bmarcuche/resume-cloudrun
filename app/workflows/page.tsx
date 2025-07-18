@@ -126,7 +126,7 @@ export default function WorkflowsPage() {
                 </a>
                 <div className="border-l border-secondary-bg pl-4">
                   <h1 className="text-2xl font-bold text-white">GitHub Actions for resume-cloudrun</h1>
-                  <p className="text-white mt-1">Recent Workflow Runs from Resume Commits</p>
+                  <p className="text-white mt-1 hidden md:block">Recent Workflow Runs from Resume Commits</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -188,14 +188,56 @@ export default function WorkflowsPage() {
           </div>
         </div>
 
+        {/* Deployment Flow Section for desktop */}
+        <div className="hidden lg:block mb-8">
+          <div className="card-white rounded-lg shadow">
+            <div className="p-4 border-b border-secondary-bg">
+              <h2 className="text-lg font-medium text-headline">How This Site Is Deployed via CI/CD</h2>
+            </div>
+            <div className="p-6">
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <div className="deployment-step flex flex-col items-center">
+                  <CodeBracketIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">Git Commit</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <PlayCircleIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">GitHub Actions</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <RocketLaunchIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">Build &amp; Test</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <ArrowUpTrayIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">Push Image</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <CloudIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">Cloud Run</span>
+                </div>
+                <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
+                <div className="deployment-step flex flex-col items-center">
+                  <GlobeAltIcon className="h-6 w-6 text-accent-teal" />
+                  <span className="mt-1 text-sm">resume.mindtunnel.org</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="lg:w-64 flex-shrink-0">
             <div className="card-white rounded-lg shadow">
               <div className="p-4 border-b border-secondary-bg">
-                <h3 className="text-lg font-medium text-headline">Filter workflow runs</h3>
+                <h3 className="text-lg font-medium text-headline hidden lg:block">Filter workflow runs</h3>
               </div>
-              <div className="p-4 space-y-2">
+              <div className="p-4 flex flex-wrap gap-2 lg:block lg:space-y-2">
                 {[
                   { key: 'all', label: 'All workflows', count: workflows.length },
                   { key: 'success', label: 'Success', count: workflows.filter(w => w.status === 'success').length },
@@ -205,7 +247,7 @@ export default function WorkflowsPage() {
                   <button
                     key={filter.key}
                     onClick={() => setSelectedWorkflow(filter.key)}
-                    className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
+                    className={`px-3 py-2 rounded-md text-sm transition-colors lg:w-full ${
                       selectedWorkflow === filter.key
                         ? 'bg-secondary text-accent-teal font-medium'
                         : 'text-accent-dark hover:bg-secondary'
@@ -224,47 +266,6 @@ export default function WorkflowsPage() {
           {/* Main Content */}
           <div className="flex-1">
 
-            {/* Deployment Flow Section for desktop */}
-            <div className="hidden lg:block mb-8">
-              <div className="card-white rounded-lg shadow">
-                <div className="p-4 border-b border-secondary-bg">
-                  <h2 className="text-lg font-medium text-headline">How This Site Is Deployed via CI/CD</h2>
-                </div>
-                <div className="p-6">
-                  <div className="flex flex-wrap items-center justify-center gap-4">
-                    <div className="deployment-step flex flex-col items-center">
-                      <CodeBracketIcon className="h-6 w-6 text-accent-teal" />
-                      <span className="mt-1 text-sm">Git Commit</span>
-                    </div>
-                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
-                    <div className="deployment-step flex flex-col items-center">
-                      <PlayCircleIcon className="h-6 w-6 text-accent-teal" />
-                      <span className="mt-1 text-sm">GitHub Actions</span>
-                    </div>
-                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
-                    <div className="deployment-step flex flex-col items-center">
-                      <RocketLaunchIcon className="h-6 w-6 text-accent-teal" />
-                      <span className="mt-1 text-sm">Build &amp; Test</span>
-                    </div>
-                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
-                    <div className="deployment-step flex flex-col items-center">
-                      <ArrowUpTrayIcon className="h-6 w-6 text-accent-teal" />
-                      <span className="mt-1 text-sm">Push Image</span>
-                    </div>
-                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
-                    <div className="deployment-step flex flex-col items-center">
-                      <CloudIcon className="h-6 w-6 text-accent-teal" />
-                      <span className="mt-1 text-sm">Cloud Run</span>
-                    </div>
-                    <ArrowLongRightIcon className="deployment-arrow h-6 w-6 text-accent-dark" />
-                    <div className="deployment-step flex flex-col items-center">
-                      <GlobeAltIcon className="h-6 w-6 text-accent-teal" />
-                      <span className="mt-1 text-sm">resume.mindtunnel.org</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div className="card-white rounded-lg shadow">
               <div className="p-4 border-b border-secondary-bg">
