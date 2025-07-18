@@ -193,7 +193,7 @@ export default function WorkflowsPage() {
           <div className="lg:w-64 flex-shrink-0">
             <div className="card-white rounded-lg shadow">
               <div className="p-4 border-b border-secondary-bg">
-                <h3 className="text-sm font-medium text-headline">Filter workflow runs</h3>
+                <h3 className="text-lg font-medium text-headline">Filter workflow runs</h3>
               </div>
               <div className="p-4 space-y-2">
                 {[
