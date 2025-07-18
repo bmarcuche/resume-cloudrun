@@ -28,23 +28,23 @@ export default function Home() {
       {/* Navigation */}
       <nav className="card-white shadow-sm border-b" style={{ backgroundColor: 'var(--nav-bg)' }}>
         <div className="container mx-auto px-4">
-          <div className="flex justify-center items-center space-x-8 py-4">
+          <div className="flex justify-center items-center flex-wrap gap-4 py-4 text-sm sm:text-base">
             <a href="#resume" className="nav-item">
               Introduction
             </a>
             <a href="/workflows" className="nav-item">
               Site Architecture
             </a>
-            <a href="#technologies" className="nav-item">
+            <a href="#technologies" className="nav-item hidden md:inline-block">
               Technologies
             </a>
-            <a href="#setup" className="nav-item">
+            <a href="#setup" className="nav-item hidden md:inline-block">
               My Setup
             </a>
             <a
               href="/resume/bruno_marcuche_resume.pdf"
               download
-              className="button-teal rounded-lg px-4 py-2 font-medium shadow-sm flex items-center space-x-2"
+              className="button-download flex items-center space-x-2"
             >
               <ArrowDownTrayIcon className="h-4 w-4" />
               <span>Download PDF</span>
