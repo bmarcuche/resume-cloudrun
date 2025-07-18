@@ -80,17 +80,13 @@ p, li, span {
 .button-download {
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
-  background-color: var(--accent-teal);
+  background-color: #0F766E;
   color: var(--accent-dark);
-  border: 1px solid var(--accent-teal);
+  border: 1px solid #0F766E;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   transition: background-color 0.2s ease, color 0.2s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.button-download:hover {
-  background-color: #0F766E;
 }
 
 [data-theme="dark"] .button-download {

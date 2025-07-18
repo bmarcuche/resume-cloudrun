@@ -38,9 +38,6 @@ export default function Home() {
             <a href="#technologies" className="nav-item hidden md:inline-block">
               Technologies
             </a>
-            <a href="#setup" className="nav-item hidden md:inline-block">
-              My Setup
-            </a>
             <a
               href="/resume/bruno_marcuche_resume.pdf"
               download
