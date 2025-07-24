@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
+const child_process = require('child_process')
+
+let repoName = 'repository'
+try {
+  const originUrl = child_process
+    .execSync('git config --get remote.origin.url')
+    .toString()
+    .trim()
+  repoName = originUrl.split('/').pop().replace(/\.git$/, '')
+} catch (e) {
+  console.warn('Could not determine repository name:', e)
+}
+
 const nextConfig = {
   // Enable standalone output for Docker optimization
   output: 'standalone',
+
+  env: {
+    NEXT_PUBLIC_REPO_NAME: repoName,
+  },
   
   // Preserve existing webpack config for PDF handling
   webpack: (config) => {

@@ -28,23 +28,20 @@ export default function Home() {
       {/* Navigation */}
       <nav className="card-white shadow-sm border-b" style={{ backgroundColor: 'var(--nav-bg)' }}>
         <div className="container mx-auto px-4">
-          <div className="flex justify-center items-center space-x-8 py-4">
-            <a
-              href="#resume"
-              className="nav-item"
-            >
+          <div className="flex justify-center items-center flex-wrap gap-4 py-4 text-sm sm:text-base">
+            <a href="#resume" className="nav-item">
               Introduction
             </a>
-            <a
-              href="/workflows"
-              className="nav-item"
-            >
-              Site Details
+            <a href="/workflows" className="nav-item">
+              Site Architecture
+            </a>
+            <a href="#technologies" className="nav-item hidden md:inline-block">
+              Technologies
             </a>
             <a
               href="/resume/bruno_marcuche_resume.pdf"
               download
-              className="button-teal rounded-lg px-4 py-2 font-medium shadow-sm flex items-center space-x-2"
+              className="button-download flex items-center space-x-2"
             >
               <ArrowDownTrayIcon className="h-4 w-4" />
               <span>Download PDF</span>
@@ -81,7 +78,7 @@ export default function Home() {
       </section>
 
       {/* Skills Highlight */}
-      <section className="card-white py-6">
+      <section id="technologies" className="card-white py-6">
         <div className="container mx-auto px-4">
           <h3 className="text-2xl font-bold text-center text-headline mb-8">Core Technologies</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
@@ -102,7 +99,7 @@ export default function Home() {
       </section>
 
       {/* Current Setup */}
-      <section className="bg-secondary py-6">
+      <section id="setup" className="bg-secondary py-6">
         <div className="container mx-auto px-4">
           <h3 className="text-2xl font-bold text-center text-headline mb-8">Current Setup</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
@@ -112,7 +109,7 @@ export default function Home() {
               'Pop! OS',
               'NeoVIM',
               'Amazon Q CLI',
-              'Claude via Terminal',
+              'Claude CLI Access',
               'Starship Prompt',
               'Azure CLI'
             ].map((tool) => (

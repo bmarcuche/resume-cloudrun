@@ -13,9 +13,9 @@ describe('Home Page', () => {
     // Example: expect(screen.getByText('Bruno Marcuche')).toBeInTheDocument()
   })
 
-  it('shows deployment flow', () => {
+  it('shows site architecture link', () => {
     render(<Home />)
-    expect(screen.getByText(/how this site is deployed/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /site architecture/i })).toBeInTheDocument()
   })
 
   it('has proper meta tags', () => {

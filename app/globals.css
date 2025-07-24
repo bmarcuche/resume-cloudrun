@@ -65,11 +65,6 @@ p, li, span {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.nav-item:hover {
-  background-color: var(--accent-teal);
-  color: #FFFFFF;
-}
-
 .button-teal {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
@@ -79,6 +74,23 @@ p, li, span {
 
 .button-teal:hover {
   background-color: #14B8A6;
+}
+
+/* Emphasized download button */
+.button-download {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  background-color: #0F766E;
+  color: var(--accent-dark);
+  border: 1px solid #0F766E;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .button-download {
+  color: #FFFFFF;
 }
 
 /* Base styles */
@@ -233,28 +245,29 @@ body {
 
 /* Workflow page specific styling */
 .workflow-details-btn {
-  background-color: var(--card-bg);
-  color: var(--text-body);
-  border-color: var(--secondary-bg);
+  background-color: var(--accent-teal);
+  color: var(--accent-dark);
+  border-color: var(--accent-teal);
 }
 
 .workflow-details-btn:hover {
-  background-color: var(--secondary-bg);
+  background-color: #14B8A6;
+  color: var(--accent-dark);
 }
 
 .workflow-details-btn:active {
-  background-color: var(--secondary-bg);
+  background-color: #0F766E;
+  color: var(--accent-dark);
 }
 
 /* Workflow page header banner styling */
+
 .workflow-header {
-  background-color: var(--card-bg);
   border-color: var(--secondary-bg);
 }
 
 /* Dark mode styling for workflow page header banner */
 [data-theme="dark"] .workflow-header {
-  background-color: var(--card-bg);
   border-color: var(--secondary-bg);
 }
 
@@ -277,19 +290,19 @@ body {
 
 /* Dark mode styling for workflow details button */
 [data-theme="dark"] .workflow-details-btn {
-  background-color: var(--card-bg);
-  color: #9CA3AF !important; /* Gray text in dark mode */
-  border-color: var(--secondary-bg);
+  background-color: var(--accent-teal);
+  color: #FFFFFF !important;
+  border-color: var(--accent-teal);
 }
 
 [data-theme="dark"] .workflow-details-btn:hover {
-  background-color: var(--secondary-bg);
-  color: #D1D5DB !important; /* Lighter gray on hover */
+  background-color: #14B8A6;
+  color: #FFFFFF !important;
 }
 
 [data-theme="dark"] .workflow-details-btn:active {
-  background-color: var(--secondary-bg);
-  color: #D1D5DB !important;
+  background-color: #0F766E;
+  color: #FFFFFF !important;
 }
 
 /* Workflow row hover states - removed background hover */
