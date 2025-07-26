@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: '22'
   REGISTRY: gcr.io
   PROJECT_ID: secret-proton-465722-q0
   SERVICE_NAME: mindtunnel-resume
