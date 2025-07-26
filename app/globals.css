@@ -276,6 +276,113 @@
   .hover-teal-light:hover {
     background-color: #14B8A6;
   }
+
+  /* Icon sizing fixes to ensure proper dimensions with CSS layers */
+  svg.h-3,
+  .h-3.w-3 svg {
+    height: 0.75rem !important;
+    width: 0.75rem !important;
+  }
+
+  svg.h-4,
+  .h-4.w-4 svg {
+    height: 1rem !important;
+    width: 1rem !important;
+  }
+
+  svg.h-6,
+  .h-6.w-6 svg {
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+  }
+
+  svg.h-8,
+  .h-8.w-8 svg {
+    height: 2rem !important;
+    width: 2rem !important;
+  }
+
+  svg.h-12,
+  .h-12.w-12 svg {
+    height: 3rem !important;
+    width: 3rem !important;
+  }
+
+  /* Ensure Tailwind sizing classes work properly */
+  .h-3.w-3 {
+    height: 0.75rem !important;
+    width: 0.75rem !important;
+  }
+
+  .h-4.w-4 {
+    height: 1rem !important;
+    width: 1rem !important;
+  }
+
+  .h-6.w-6 {
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+  }
+
+  .h-8.w-8 {
+    height: 2rem !important;
+    width: 2rem !important;
+  }
+
+  .h-12.w-12 {
+    height: 3rem !important;
+    width: 3rem !important;
+  }
+  svg.h-3 {
+    height: 0.75rem !important;
+    width: 0.75rem !important;
+  }
+
+  svg.h-4 {
+    height: 1rem !important;
+    width: 1rem !important;
+  }
+
+  svg.h-6 {
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+  }
+
+  svg.h-8 {
+    height: 2rem !important;
+    width: 2rem !important;
+  }
+
+  svg.h-12 {
+    height: 3rem !important;
+    width: 3rem !important;
+  }
+
+  /* Ensure Tailwind sizing classes work properly with CSS layers */
+  .h-3.w-3 {
+    height: 0.75rem !important;
+    width: 0.75rem !important;
+  }
+
+  .h-4.w-4 {
+    height: 1rem !important;
+    width: 1rem !important;
+  }
+
+  .h-6.w-6 {
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+  }
+
+  .h-8.w-8 {
+    height: 2rem !important;
+    width: 2rem !important;
+  }
+
+  .h-12.w-12 {
+    height: 3rem !important;
+    width: 3rem !important;
+  }
 }
 
 /* Dark mode overrides */
