@@ -8,27 +8,39 @@
 
 /* CSS Variables */
 :root {
+  /* New Color Palette */
+  --primary-color: #093e8f;        /* Primary Blue */
+  --complementary-color: #8f5909;  /* Complementary Orange */
+  --analogous-blue: #09818f;       /* Analogous Teal-Blue */
+  --analogous-purple: #16098f;     /* Analogous Purple-Blue */
+  --triadic-purple: #59098f;       /* Triadic Purple */
+  --triadic-red: #8f093e;          /* Triadic Red */
+  
   /* Light Mode Colors */
-  --primary-bg: #F5F5F5;        /* White Smoke */
-  --secondary-bg: #E5E7EB;      /* Light Gray */
-  --accent-dark: #1E293B;       /* Dark Charcoal */
-  --accent-teal: #0D9488;       /* Teal */
-  --text-headline: #111827;     /* Charcoal */
-  --text-body: #475569;         /* Slate-600 */
-  --nav-bg: #FFFFFF;            /* White */
-  --card-bg: #FFFFFF;           /* White */
+  --primary-bg: #F8FAFC;           /* Slate-50 - Light background */
+  --secondary-bg: #E2E8F0;         /* Slate-200 - Secondary background */
+  --accent-dark: #1E293B;          /* Slate-800 - Dark text */
+  --accent-teal: var(--analogous-blue);  /* Use analogous blue as accent */
+  --text-headline: var(--primary-color); /* Primary blue for headlines */
+  --text-body: #475569;            /* Slate-600 - Body text */
+  --nav-bg: #FFFFFF;               /* White navigation */
+  --card-bg: #FFFFFF;              /* White cards */
+  --button-primary: var(--primary-color);     /* Primary button color */
+  --button-secondary: var(--complementary-color); /* Secondary button color */
 }
 
 /* Dark Mode Colors */
 [data-theme="dark"] {
-  --primary-bg: #0F172A;        /* Slate-900 */
-  --secondary-bg: #1E293B;      /* Slate-800 */
-  --accent-dark: #F1F5F9;       /* Slate-100 */
-  --accent-teal: #14B8A6;       /* Teal-500 */
-  --text-headline: #F8FAFC;     /* Slate-50 */
-  --text-body: #CBD5E1;         /* Slate-300 */
-  --nav-bg: #1E293B;            /* Slate-800 */
-  --card-bg: #334155;           /* Slate-700 */
+  --primary-bg: #0F172A;           /* Slate-900 - Dark background */
+  --secondary-bg: #1E293B;         /* Slate-800 - Secondary background */
+  --accent-dark: #F1F5F9;          /* Slate-100 - Light text */
+  --accent-teal: var(--analogous-blue);  /* Keep analogous blue */
+  --text-headline: #F8FAFC;        /* Slate-50 - Light headlines */
+  --text-body: #CBD5E1;            /* Slate-300 - Light body text */
+  --nav-bg: #1E293B;               /* Slate-800 navigation */
+  --card-bg: #334155;              /* Slate-700 cards */
+  --button-primary: var(--analogous-blue);    /* Lighter primary for dark mode */
+  --button-secondary: var(--complementary-color); /* Keep complementary */
 }
 
 /* Base Styles */
@@ -74,17 +86,33 @@ body {
 }
 
 .hover-teal-light:hover {
-  background-color: #14B8A6;
+  background-color: var(--analogous-blue);
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-complementary {
+  color: var(--complementary-color);
+}
+
+.bg-primary-color {
+  background-color: var(--primary-color);
+}
+
+.bg-complementary {
+  background-color: var(--complementary-color);
 }
 
 /* Component Styles */
 .gradient-bg {
-  background: linear-gradient(135deg, #0D9488, #14B8A6);
+  background: linear-gradient(135deg, var(--primary-color), var(--analogous-blue));
 }
 
 .card-white {
   background-color: var(--card-bg);
-  border: 1px solid #E5E7EB;
+  border: 1px solid var(--secondary-bg);
 }
 
 .card-secondary {
@@ -93,10 +121,11 @@ body {
 }
 
 .paper-container {
-  background: white;
+  background: var(--card-bg);
   border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(9, 62, 143, 0.1), 0 2px 4px -1px rgba(9, 62, 143, 0.06);
   position: relative;
+  border: 1px solid rgba(9, 62, 143, 0.1);
 }
 
 .paper-container::before {
@@ -106,7 +135,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  background: linear-gradient(145deg, rgba(9, 62, 143, 0.05), rgba(9, 129, 143, 0.03));
   border-radius: 8px;
   pointer-events: none;
 }
@@ -121,24 +150,25 @@ body {
 }
 
 .nav-item:hover {
-  background-color: var(--secondary-bg);
-  color: var(--accent-teal);
+  background-color: rgba(9, 62, 143, 0.1);
+  color: var(--primary-color);
 }
 
 .button-download {
-  background-color: var(--accent-teal);
+  background-color: var(--button-primary);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   text-decoration: none;
   transition: all 0.2s ease;
   font-weight: 500;
+  box-shadow: 0 2px 4px rgba(9, 62, 143, 0.2);
 }
 
 .button-download:hover {
-  background-color: #0F766E;
+  background-color: var(--analogous-purple);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(13, 148, 136, 0.3);
+  box-shadow: 0 4px 8px rgba(9, 62, 143, 0.3);
 }
 
 /* Theme Toggle */
@@ -153,13 +183,14 @@ body {
   padding: 0.75rem;
   color: var(--text-body);
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(9, 62, 143, 0.1);
 }
 
 .theme-toggle:hover {
-  background-color: var(--accent-teal);
+  background-color: var(--button-primary);
   color: white;
   transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(9, 62, 143, 0.2);
 }
 
 /* Contact Info */
@@ -191,6 +222,7 @@ body {
 [data-theme="dark"] .paper-container {
   background-color: var(--card-bg);
   border: 1px solid #475569;
+  box-shadow: 0 4px 6px -1px rgba(9, 129, 143, 0.2), 0 2px 4px -1px rgba(9, 129, 143, 0.1);
 }
 
 [data-theme="dark"] .paper-container p,
@@ -201,14 +233,19 @@ body {
 
 [data-theme="dark"] .button-download {
   color: #FFFFFF;
+  background-color: var(--analogous-blue);
+}
+
+[data-theme="dark"] .button-download:hover {
+  background-color: var(--primary-color);
 }
 
 [data-theme="dark"] .paper-container::before {
-  background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  background: linear-gradient(145deg, rgba(9, 129, 143, 0.1), rgba(9, 62, 143, 0.05));
 }
 
 [data-theme="dark"] .gradient-bg {
-  background: linear-gradient(135deg, #0F172A, #1E293B);
+  background: linear-gradient(135deg, var(--primary-color), var(--triadic-purple));
 }
 
 [data-theme="dark"] .pdf-page-indicator {
@@ -230,29 +267,40 @@ body {
   color: #FFFFFF !important;
 }
 
+[data-theme="dark"] .nav-item:hover {
+  background-color: rgba(9, 129, 143, 0.2);
+  color: var(--analogous-blue);
+}
+
 /* Workflow Page Styles */
 .workflow-header {
   border-color: var(--secondary-bg);
 }
 
 .workflow-details-btn {
-  background-color: var(--accent-teal);
-  color: var(--accent-dark);
-  border-color: var(--accent-teal);
+  background-color: var(--button-primary);
+  color: white;
+  border-color: var(--button-primary);
+  transition: all 0.2s ease;
 }
 
 .workflow-details-btn:hover {
-  background-color: #14B8A6;
-  color: var(--accent-dark);
+  background-color: var(--analogous-purple);
+  border-color: var(--analogous-purple);
 }
 
 .workflow-details-btn:active {
-  background-color: #0F766E;
-  color: var(--accent-dark);
+  background-color: var(--triadic-purple);
+  border-color: var(--triadic-purple);
 }
 
 .workflow-row {
   transition: all 0.2s ease;
+}
+
+.workflow-row:hover {
+  background-color: rgba(9, 62, 143, 0.05);
+  border-color: var(--primary-color);
 }
 
 [data-theme="dark"] .workflow-header {
@@ -270,24 +318,30 @@ body {
 }
 
 [data-theme="dark"] .workflow-details-btn {
-  background-color: var(--accent-teal);
+  background-color: var(--analogous-blue);
   color: #FFFFFF !important;
-  border-color: var(--accent-teal);
+  border-color: var(--analogous-blue);
 }
 
 [data-theme="dark"] .workflow-details-btn:hover {
-  background-color: #14B8A6;
+  background-color: var(--primary-color);
   color: #FFFFFF !important;
+  border-color: var(--primary-color);
 }
 
 [data-theme="dark"] .workflow-details-btn:active {
-  background-color: #0F766E;
+  background-color: var(--triadic-purple);
   color: #FFFFFF !important;
+  border-color: var(--triadic-purple);
 }
 
 [data-theme="dark"] .workflow-row:hover .text-accent-teal,
 [data-theme="dark"] .workflow-row:active .text-accent-teal {
-  color: #0D9488 !important;
+  color: var(--analogous-blue) !important;
+}
+
+[data-theme="dark"] .workflow-row:hover {
+  background-color: rgba(9, 129, 143, 0.1);
 }
 
 /* CRITICAL ICON FIXES - Must override all other styles */
