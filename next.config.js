@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const child_process = require('child_process')
+const webpack = require('webpack')
 
 let repoName = 'repository'
 try {
@@ -35,10 +36,24 @@ const nextConfig = {
     // },
   },
   
-  // Preserve existing webpack config for PDF handling
+  // Webpack configuration for CSS layers and PDF handling
   webpack: (config) => {
+    // Preserve existing webpack config for PDF handling
     config.resolve.alias.canvas = false;
     config.resolve.alias.encoding = false;
+    
+    // Add BannerPlugin to ensure consistent CSS layer definitions
+    // This fixes Next.js CSS load order inconsistency issues
+    config.plugins = [
+      ...(config.plugins ?? []),
+      new webpack.BannerPlugin({
+        banner: '@layer reset, base, components, pages, utilities, overrides;',
+        test: /\.s?css$/,
+        raw: true,
+        entryOnly: false,
+      }),
+    ];
+
     return config;
   },
   
