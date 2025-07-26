@@ -20,6 +20,21 @@ const nextConfig = {
     NEXT_PUBLIC_REPO_NAME: repoName,
   },
   
+  // Next.js 15 experimental features (disabled for stability)
+  experimental: {
+    // Enable React 19 features when ready
+    reactCompiler: false,
+    // Turbo mode for faster builds (can cause issues, disabled for now)
+    // turbo: {
+    //   rules: {
+    //     '*.svg': {
+    //       loaders: ['@svgr/webpack'],
+    //       as: '*.js',
+    //     },
+    //   },
+    // },
+  },
+  
   // Preserve existing webpack config for PDF handling
   webpack: (config) => {
     config.resolve.alias.canvas = false;
@@ -70,11 +85,17 @@ const nextConfig = {
   // Compression
   compress: true,
   
-  // Image optimization
+  // Image optimization with Next.js 15 improvements
   images: {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
+    // Next.js 15 image optimization improvements
+    dangerouslyAllowSVG: false,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+
+  // Enhanced bundling for better performance
+  bundlePagesRouterDependencies: true,
 }
 
 module.exports = nextConfig
