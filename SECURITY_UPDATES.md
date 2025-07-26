@@ -54,13 +54,13 @@ These are transitive dependencies that will be updated by their maintainers:
 
 ### Requirement Change
 **Previous**: Node.js 18.x  
-**Updated**: Node.js 20.x  
-**Reason**: Required for secure react-pdf version compatibility
+**Updated**: Node.js 22.x  
+**Reason**: Required for secure react-pdf version compatibility (Promise.withResolvers support)
 
 ### Infrastructure Updates
-1. **GitHub Actions**: Updated to use Node.js 20
-2. **Dockerfile**: Updated base image to `node:20-alpine`
-3. **package.json**: Updated engines requirement to `>=20.0.0`
+1. **GitHub Actions**: Updated to use Node.js 22
+2. **Dockerfile**: Updated base image to `node:22-alpine`
+3. **package.json**: Updated engines requirement to `>=22.0.0`
 
 ## Security Validation
 
@@ -88,7 +88,7 @@ npm audit
 - No changes needed to Cloud Run configuration
 
 ### Rollback Plan
-If issues arise with Node.js 20:
+If issues arise with Node.js 22:
 1. Revert Dockerfile to `node:18-alpine`
 2. Revert GitHub Actions to `NODE_VERSION: '18'`
 3. Downgrade react-pdf to `7.7.3`
