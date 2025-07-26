@@ -245,7 +245,8 @@ body {
 }
 
 [data-theme="dark"] .gradient-bg {
-  background: linear-gradient(135deg, var(--primary-color), var(--triadic-purple));
+  background: var(--secondary-bg);
+  border-bottom: 1px solid #475569;
 }
 
 [data-theme="dark"] .pdf-page-indicator {
@@ -305,6 +306,11 @@ body {
 
 [data-theme="dark"] .workflow-header {
   border-color: var(--secondary-bg);
+}
+
+[data-theme="dark"] .workflow-header.gradient-bg {
+  background: var(--secondary-bg);
+  border-bottom: 1px solid #475569;
 }
 
 [data-theme="dark"] .workflow-header .text-headline {
