@@ -63,7 +63,7 @@ export default function Home() {
                     Welcome! I build and run systems people rely on - leading SRE teams, scaling infrastructure, and keeping environments secure and resilient.
                   </p>
                   <p className="text-body text-base leading-relaxed">
-                    I'm passionate about Linux, open source, and using automation and AI to streamline operations and solve real-world problems. I enjoy mentoring engineers, improving infrastructure through thoughtful design, and always learning to stay sharp for the next technical challenge.
+                    I&apos;m passionate about Linux, open source, and using automation and AI to streamline operations and solve real-world problems. I enjoy mentoring engineers, improving infrastructure through thoughtful design, and always learning to stay sharp for the next technical challenge.
                   </p>
                 </div>
               </div>
