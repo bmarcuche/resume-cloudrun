@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { 
   PlayIcon,
   ArrowPathIcon,
   CalendarIcon,
-  UserIcon,
   CodeBracketIcon,
   ChevronRightIcon,
   ClockIcon,
@@ -73,7 +73,11 @@ export default function WorkflowsPage() {
         const data = await response.json()
         
         // Transform status to match our component expectations
-        const transformedWorkflows = data.workflow_runs.map((run: any) => ({
+        const transformedWorkflows = data.workflow_runs.map((run: {
+          conclusion: string;
+          status: string;
+          [key: string]: unknown;
+        }) => ({
           ...run,
           status: run.conclusion === 'success' ? 'success' : 
                   run.conclusion === 'failure' ? 'failure' :
@@ -117,13 +121,13 @@ export default function WorkflowsPage() {
           <div className="py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <a
+                <Link
                   href="/"
                   className="nav-link contact-info inline-flex items-center text-sm hover:text-accent-teal transition-colors text-white"
                 >
                   <ArrowLeftIcon className="h-4 w-4 mr-1" />
                   Back to Resume
-                </a>
+                </Link>
                 <div className="border-l border-secondary-bg pl-4">
                   <h1 className="text-2xl font-bold text-white">GitHub Actions for resume-cloudrun</h1>
                   <p className="text-white mt-1 hidden md:block">Recent Workflow Runs from Resume Commits</p>

@@ -4,7 +4,6 @@ import {
   RocketLaunchIcon,
   ArrowUpTrayIcon,
   CloudIcon,
-  CircleStackIcon,
   GlobeAltIcon,
   PlayCircleIcon
 } from '@heroicons/react/24/outline'
