@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import './globals.css'
 
@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   description: 'Resume and portfolio of Bruno Marcuche, experienced Site Reliability Engineer specializing in Linux systems, cloud infrastructure, and automation.',
   keywords: 'Site Reliability Engineer, SRE, Linux, Cloud, DevOps, Bruno Marcuche, Infrastructure, Automation',
   authors: [{ name: 'Bruno Marcuche' }],
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
   openGraph: {
     title: 'Bruno Marcuche - Site Reliability Engineer | Linux | Cloud',
@@ -16,6 +15,11 @@ export const metadata: Metadata = {
     siteName: 'MindTunnel',
     type: 'website',
   },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
