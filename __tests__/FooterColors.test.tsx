@@ -72,6 +72,24 @@ describe('Footer Color Consistency', () => {
       expect(footer).toHaveClass('text-white')
     })
 
+    it('footer text should be readable in dark mode', () => {
+      // Check that copyright text is present and should be readable
+      const copyrightText = screen.getByText(/© 2025 Bruno Marcuche/)
+      expect(copyrightText).toBeInTheDocument()
+      expect(copyrightText).toHaveClass('text-gray-300')
+    })
+
+    it('footer links should be readable in dark mode', () => {
+      const contactLink = screen.getByText('Contact')
+      const downloadLink = screen.getByText('Download Resume')
+      const sourceLink = screen.getByText('View Source Code')
+      
+      // Links should be present and styled for readability
+      expect(contactLink).toBeInTheDocument()
+      expect(downloadLink).toBeInTheDocument()
+      expect(sourceLink).toBeInTheDocument()
+    })
+
     it('header and footer should have consistent dark appearance', () => {
       const header = screen.getByRole('banner')
       const footer = screen.getByRole('contentinfo')

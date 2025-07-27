@@ -61,7 +61,7 @@ body {
 }
 
 .bg-accent-dark {
-  background: linear-gradient(135deg, var(--primary-color), var(--analogous-purple));
+  background: linear-gradient(135deg, #072f6b, var(--triadic-purple));
   color: white;
 }
 
@@ -279,8 +279,20 @@ body {
 }
 
 [data-theme="dark"] .bg-accent-dark {
-  background: var(--accent-dark);
+  background: linear-gradient(135deg, #0F172A, #1E293B);
   color: white;
+}
+
+[data-theme="dark"] .bg-accent-dark .text-gray-300 {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="dark"] .bg-accent-dark a {
+  color: #F1F5F9 !important;
+}
+
+[data-theme="dark"] .bg-accent-dark a:hover {
+  color: var(--analogous-blue) !important;
 }
 
 /* Workflow Page Styles */
