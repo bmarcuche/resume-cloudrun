@@ -61,7 +61,7 @@ body {
 }
 
 .bg-accent-dark {
-  background: linear-gradient(135deg, #072f6b, var(--triadic-purple));
+  background: linear-gradient(135deg, #072f6b, var(--analogous-blue));
   color: white;
 }
 
