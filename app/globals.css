@@ -60,6 +60,11 @@ body {
   background-color: var(--secondary-bg);
 }
 
+.bg-accent-dark {
+  background: linear-gradient(135deg, var(--primary-color), var(--analogous-purple));
+  color: white;
+}
+
 .text-accent-dark {
   color: var(--accent-dark);
 }
@@ -271,6 +276,11 @@ body {
 [data-theme="dark"] .nav-item:hover {
   background-color: rgba(9, 129, 143, 0.2);
   color: var(--analogous-blue);
+}
+
+[data-theme="dark"] .bg-accent-dark {
+  background: var(--accent-dark);
+  color: white;
 }
 
 /* Workflow Page Styles */
