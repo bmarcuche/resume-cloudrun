@@ -1,5 +1,5 @@
 /* Font imports */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;500;600;700&display=swap');
 
 /* Tailwind CSS */
 @tailwind base;
@@ -8,39 +8,63 @@
 
 /* CSS Variables */
 :root {
-  /* New Color Palette */
-  --primary-color: #093e8f;        /* Primary Blue */
-  --complementary-color: #8f5909;  /* Complementary Orange */
-  --analogous-blue: #09818f;       /* Analogous Teal-Blue */
-  --analogous-purple: #16098f;     /* Analogous Purple-Blue */
-  --triadic-purple: #59098f;       /* Triadic Purple */
-  --triadic-red: #8f093e;          /* Triadic Red */
-  
-  /* Light Mode Colors */
-  --primary-bg: #F8FAFC;           /* Slate-50 - Light background */
-  --secondary-bg: #E2E8F0;         /* Slate-200 - Secondary background */
-  --accent-dark: #1E293B;          /* Slate-800 - Dark text */
-  --accent-teal: var(--analogous-blue);  /* Use analogous blue as accent */
-  --text-headline: var(--primary-color); /* Primary blue for headlines */
-  --text-body: #475569;            /* Slate-600 - Body text */
-  --nav-bg: #FFFFFF;               /* White navigation */
-  --card-bg: #FFFFFF;              /* White cards */
-  --button-primary: var(--primary-color);     /* Primary button color */
-  --button-secondary: var(--complementary-color); /* Secondary button color */
+  /* Accent: single confident blue */
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+  --accent-ring: rgba(37, 99, 235, 0.30);
+
+  /* Surfaces & text (slate) */
+  --primary-bg: #ffffff;
+  --surface: #f8fafc;
+  --secondary-bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.80);
+  --border-color: #e2e8f0;
+  --text-headline: #0f172a;
+  --text-body: #475569;
+  --text-muted: #64748b;
+
+  /* Legacy aliases mapped onto the new palette */
+  --primary-color: #2563eb;
+  --analogous-blue: #3b82f6;
+  --analogous-purple: #1d4ed8;
+  --triadic-purple: #1d4ed8;
+  --triadic-red: #2563eb;
+  --complementary-color: #2563eb;
+  --accent-teal: #2563eb;
+  --accent-dark: #0f172a;
+  --button-primary: #2563eb;
+  --button-secondary: #2563eb;
 }
 
 /* Dark Mode Colors */
 [data-theme="dark"] {
-  --primary-bg: #0F172A;           /* Slate-900 - Dark background */
-  --secondary-bg: #1E293B;         /* Slate-800 - Secondary background */
-  --accent-dark: #F1F5F9;          /* Slate-100 - Light text */
-  --accent-teal: var(--analogous-blue);  /* Keep analogous blue */
-  --text-headline: #F8FAFC;        /* Slate-50 - Light headlines */
-  --text-body: #CBD5E1;            /* Slate-300 - Light body text */
-  --nav-bg: #1E293B;               /* Slate-800 navigation */
-  --card-bg: #334155;              /* Slate-700 cards */
-  --button-primary: var(--analogous-blue);    /* Lighter primary for dark mode */
-  --button-secondary: var(--complementary-color); /* Keep complementary */
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-soft: rgba(59, 130, 246, 0.14);
+  --accent-ring: rgba(59, 130, 246, 0.40);
+
+  --primary-bg: #0b0f17;
+  --surface: #111827;
+  --secondary-bg: #111827;
+  --card-bg: #111827;
+  --nav-bg: rgba(13, 19, 32, 0.85);
+  --border-color: #1f2937;
+  --text-headline: #e6edf3;
+  --text-body: #9aa7b8;
+  --text-muted: #7d8794;
+
+  --primary-color: #3b82f6;
+  --analogous-blue: #60a5fa;
+  --analogous-purple: #2563eb;
+  --triadic-purple: #2563eb;
+  --triadic-red: #3b82f6;
+  --complementary-color: #3b82f6;
+  --accent-teal: #3b82f6;
+  --accent-dark: #e6edf3;
+  --button-primary: #2563eb;
+  --button-secondary: #3b82f6;
 }
 
 /* Base Styles */
@@ -60,8 +84,23 @@ body {
   background-color: var(--secondary-bg);
 }
 
+/* Page-wide blueprint grid (primary background + faint graph lines) */
+.page-grid {
+  background-color: var(--primary-bg);
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+[data-theme="dark"] .page-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+}
+
 .bg-accent-dark {
-  background: linear-gradient(135deg, #072f6b, var(--analogous-blue));
+  background: #0f172a;
   color: white;
 }
 
@@ -112,25 +151,25 @@ body {
 
 /* Component Styles */
 .gradient-bg {
-  background: linear-gradient(135deg, var(--primary-color), var(--analogous-blue));
+  background: #1e3a8a;
 }
 
 .card-white {
   background-color: var(--card-bg);
-  border: 1px solid var(--secondary-bg);
+  border: 1px solid var(--border-color);
 }
 
 .card-secondary {
   background-color: var(--secondary-bg);
-  border: 1px solid #D1D5DB;
+  border: 1px solid var(--border-color);
 }
 
 .paper-container {
   background: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(9, 62, 143, 0.1), 0 2px 4px -1px rgba(9, 62, 143, 0.06);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px -12px rgba(15, 23, 42, 0.12);
   position: relative;
-  border: 1px solid rgba(9, 62, 143, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .paper-container::before {
@@ -140,8 +179,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(145deg, rgba(9, 62, 143, 0.05), rgba(9, 129, 143, 0.03));
-  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.015), transparent);
+  border-radius: 12px;
   pointer-events: none;
 }
 
@@ -155,8 +194,16 @@ body {
 }
 
 .nav-item:hover {
-  background-color: rgba(9, 62, 143, 0.1);
-  color: var(--primary-color);
+  background-color: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* Sticky nav: translucent frosted bar */
+.site-nav {
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  -webkit-backdrop-filter: saturate(150%) blur(10px);
+  backdrop-filter: saturate(150%) blur(10px);
 }
 
 .button-download {
@@ -167,13 +214,13 @@ body {
   text-decoration: none;
   transition: all 0.2s ease;
   font-weight: 500;
-  box-shadow: 0 2px 4px rgba(9, 62, 143, 0.2);
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.30);
 }
 
 .button-download:hover {
-  background-color: var(--analogous-purple);
+  background-color: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(9, 62, 143, 0.3);
+  box-shadow: 0 6px 16px -4px rgba(37, 99, 235, 0.45);
 }
 
 /* Theme Toggle */
@@ -183,19 +230,19 @@ body {
   right: 1rem;
   z-index: 50;
   background-color: var(--card-bg);
-  border: 1px solid var(--secondary-bg);
+  border: 1px solid var(--border-color);
   border-radius: 50%;
   padding: 0.75rem;
   color: var(--text-body);
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(9, 62, 143, 0.1);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
 }
 
 .theme-toggle:hover {
-  background-color: var(--button-primary);
+  background-color: var(--accent);
   color: white;
   transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(9, 62, 143, 0.2);
+  box-shadow: 0 6px 16px -4px rgba(37, 99, 235, 0.35);
 }
 
 /* Contact Info */
@@ -226,8 +273,8 @@ body {
 /* Dark Mode Overrides */
 [data-theme="dark"] .paper-container {
   background-color: var(--card-bg);
-  border: 1px solid #475569;
-  box-shadow: 0 4px 6px -1px rgba(9, 129, 143, 0.2), 0 2px 4px -1px rgba(9, 129, 143, 0.1);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 12px 32px -16px rgba(0, 0, 0, 0.6);
 }
 
 [data-theme="dark"] .paper-container p,
@@ -246,12 +293,12 @@ body {
 }
 
 [data-theme="dark"] .paper-container::before {
-  background: linear-gradient(145deg, rgba(9, 129, 143, 0.1), rgba(9, 62, 143, 0.05));
+  background: linear-gradient(145deg, rgba(148, 163, 184, 0.04), transparent);
 }
 
 [data-theme="dark"] .gradient-bg {
-  background: var(--secondary-bg);
-  border-bottom: 1px solid #475569;
+  background: #0e1626;
+  border-bottom: 1px solid var(--border-color);
 }
 
 [data-theme="dark"] .pdf-page-indicator {
@@ -266,7 +313,7 @@ body {
 
 [data-theme="dark"] .card-white {
   background-color: var(--card-bg);
-  border-color: #334155;
+  border-color: var(--border-color);
 }
 
 [data-theme="dark"] .card-white .text-headline {
@@ -274,12 +321,13 @@ body {
 }
 
 [data-theme="dark"] .nav-item:hover {
-  background-color: rgba(9, 129, 143, 0.2);
-  color: var(--analogous-blue);
+  background-color: var(--accent-soft);
+  color: var(--accent-hover);
 }
 
 [data-theme="dark"] .bg-accent-dark {
-  background: linear-gradient(135deg, #0F172A, #1E293B);
+  background: #090d14;
+  border-top: 1px solid var(--border-color);
   color: white;
 }
 
@@ -322,8 +370,8 @@ body {
 }
 
 .workflow-row:hover {
-  background-color: rgba(9, 62, 143, 0.05);
-  border-color: var(--primary-color);
+  background-color: var(--accent-soft);
+  border-color: var(--accent);
 }
 
 [data-theme="dark"] .workflow-header {
@@ -369,7 +417,7 @@ body {
 }
 
 [data-theme="dark"] .workflow-row:hover {
-  background-color: rgba(9, 129, 143, 0.1);
+  background-color: var(--accent-soft);
 }
 
 /* CRITICAL ICON FIXES - Must override all other styles */
@@ -462,4 +510,413 @@ svg.h-12,
 /* Additional specificity for heroicons */
 [data-slot="icon"] {
   flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Resume Document (on-page resume, single source of truth for the PDF)
+   ========================================================================== */
+
+/* Low-chrome label used for tech, setup and skills lists */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.5rem;
+  background-color: var(--secondary-bg);
+  color: var(--text-body);
+  border: 1px solid var(--border-color);
+}
+
+/* Variant for tags that sit on the secondary (gray) band */
+.tag-light {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+.strength-pill {
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-ring);
+}
+
+/* The plain-text header is only for printing; hidden on screen. */
+.resume-print-header {
+  display: none;
+}
+
+[data-theme="dark"] .resume-document .text-headline,
+[data-theme="dark"] .resume-document h2,
+[data-theme="dark"] .resume-document h3 {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .resume-document .text-body,
+[data-theme="dark"] .resume-document li,
+[data-theme="dark"] .resume-document p {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="dark"] .tag {
+  background-color: rgba(148, 163, 184, 0.10);
+  color: #cbd5e1;
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .tag-light {
+  background-color: rgba(148, 163, 184, 0.10);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+[data-theme="dark"] .strength-pill {
+  background-color: var(--accent-soft);
+  color: #93c5fd !important;
+  border-color: var(--accent-ring);
+}
+
+[data-theme="dark"] .resume-rule {
+  border-color: #475569 !important;
+}
+
+/* ==========================================================================
+   Projects section (engineering "blueprint" canvas + project cards)
+   ========================================================================== */
+
+.projects-section {
+  position: relative;
+}
+
+.section-intro {
+  text-align: center;
+  max-width: 44rem;
+  margin: 0 auto 3rem;
+}
+
+.section-eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--analogous-blue);
+  font-weight: 500;
+}
+
+.section-heading {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--text-headline);
+  margin-top: 0.5rem;
+}
+
+.section-lede {
+  color: var(--text-body);
+  margin-top: 0.85rem;
+  line-height: 1.65;
+}
+
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-ring);
+  box-shadow: 0 20px 44px -20px rgba(37, 99, 235, 0.30);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--analogous-blue));
+}
+
+.project-index {
+  position: absolute;
+  top: 0.5rem;
+  right: 1.25rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 3.25rem;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(15, 23, 42, 0.05);
+  pointer-events: none;
+  user-select: none;
+}
+
+.project-head {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding-right: 2.5rem;
+}
+
+.project-icon {
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.85rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-ring);
+}
+
+.project-icon svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.project-eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--analogous-blue);
+  font-weight: 500;
+}
+
+.project-title {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-headline);
+  margin-top: 0.15rem;
+}
+
+.project-subtitle {
+  color: var(--text-body);
+  font-size: 0.95rem;
+  margin-top: 0.1rem;
+}
+
+.project-summary {
+  color: var(--text-body);
+  line-height: 1.65;
+  margin-top: 1.1rem;
+}
+
+.project-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+  margin-top: 1.35rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-value {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text-headline);
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  margin-top: 0.2rem;
+}
+
+.project-highlights {
+  list-style: none;
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0;
+}
+
+.project-highlights li {
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-body);
+}
+
+.project-highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0.1rem;
+  top: 0.5em;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 1px;
+  background: var(--analogous-blue);
+  transform: rotate(45deg);
+}
+
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.35rem;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Projects dark mode */
+[data-theme="dark"] .project-card {
+  border-color: rgba(148, 163, 184, 0.14);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .project-card:hover {
+  border-color: var(--accent-ring);
+  box-shadow: 0 20px 44px -20px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .project-index {
+  color: rgba(148, 163, 184, 0.08);
+}
+
+[data-theme="dark"] .project-icon {
+  background: var(--accent-soft);
+  border-color: var(--accent-ring);
+  color: var(--accent-hover);
+}
+
+[data-theme="dark"] .project-metrics {
+  border-color: rgba(148, 163, 184, 0.14);
+}
+
+/* ==========================================================================
+   Print / PDF (ATS-friendly). Hides all site chrome and the photo, leaving a
+   clean text document that renders from the same data as the page.
+   ========================================================================== */
+
+@media print {
+  @page {
+    margin: 0.5in;
+  }
+
+  /* Hide everything that isn't the resume */
+  .theme-toggle,
+  .site-hero,
+  .site-nav,
+  .section-intro,
+  .projects-section,
+  .site-extra,
+  .site-footer {
+    display: none !important;
+  }
+
+  /* Show the plain-text resume header */
+  .resume-print-header {
+    display: block !important;
+  }
+
+  /* Force light, high-contrast output regardless of theme */
+  body,
+  .bg-primary,
+  .page-grid {
+    background: #ffffff !important;
+  }
+
+  .page-grid {
+    background-image: none !important;
+  }
+
+  .resume-document,
+  .resume-document * {
+    color: #000000 !important;
+  }
+
+  /* Strip the "paper" styling so it prints as a plain document */
+  .resume-document.paper-container {
+    box-shadow: none !important;
+    border: none !important;
+    background: #ffffff !important;
+    padding: 0 !important;
+  }
+
+  .paper-container::before {
+    display: none !important;
+  }
+
+  .resume-rule {
+    border-color: #999999 !important;
+  }
+
+  .resume-section svg {
+    color: #000000 !important;
+  }
+
+  /* Flatten chips/pills to plain text for clean parsing */
+  .tag,
+  .strength-pill {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 0.5rem 0 0 !important;
+    text-align: left !important;
+  }
+
+  .resume-document a {
+    text-decoration: none !important;
+  }
+
+  /* Tighten spacing and avoid awkward page breaks */
+  .resume-section {
+    margin-bottom: 0.9rem !important;
+  }
+
+  .resume-entry {
+    margin-bottom: 0.75rem !important;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
+  }
 }

@@ -1,36 +1,65 @@
-import { ArrowDownTrayIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline'
-import PDFViewer from '../components/PDFViewer'
+import Image from 'next/image'
+import { EnvelopeIcon, MapPinIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline'
+import ResumeDocument from '../components/resume/ResumeDocument'
+import ProjectsSection from '../components/projects/ProjectsSection'
 import ThemeToggle from '../components/ThemeToggle'
+import { resumeData } from '../lib/resume-data'
+
+const RESUME_PDF = '/resume/bruno_marcuche_resume.pdf'
+const RESUME_PDF_NAME = 'Bruno Marcuche SRE Resume.pdf'
 
 export default function Home() {
+  const { name, tagline, contact } = resumeData
+
   return (
-    <main className="min-h-screen bg-primary">
+    <main className="min-h-screen page-grid">
       <ThemeToggle />
-      
-      {/* Header Section */}
-      <header className="gradient-bg py-11">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-4 text-white">Bruno Marcuche</h1>
-          <p className="text-xl mb-2 text-white font-medium">Site Reliability Engineer | Linux | Cloud</p>
-          <div className="flex justify-center items-center space-x-6 text-sm contact-info">
-            <div className="flex items-center space-x-1">
-              <EnvelopeIcon className="h-4 w-4" />
-              <span>bruno.marcuche@gmail.com</span>
+
+      {/* Header / Hero */}
+      <header className="site-hero gradient-bg py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center text-center gap-4">
+            <Image
+              src="/images/profile.png"
+              alt={name}
+              width={112}
+              height={112}
+              priority
+              className="rounded-full border-4 border-white/30 shadow-lg object-cover h-28 w-28"
+            />
+            <div>
+              <h1 className="text-4xl sm:text-5xl font-bold text-white">{name}</h1>
+              <p className="text-lg sm:text-xl mt-2 text-white font-medium">{tagline}</p>
             </div>
-            <div className="flex items-center space-x-1">
-              <MapPinIcon className="h-4 w-4" />
-              <span>Remote / Global</span>
+            <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm contact-info">
+              <div className="flex items-center space-x-1">
+                <EnvelopeIcon className="h-4 w-4" />
+                <span>{contact.email}</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <MapPinIcon className="h-4 w-4" />
+                <span>{contact.location}</span>
+              </div>
+              <a href={contact.linkedin.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                LinkedIn
+              </a>
+              <a href={contact.github.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                GitHub
+              </a>
             </div>
           </div>
         </div>
       </header>
 
       {/* Navigation */}
-      <nav className="card-white shadow-sm border-b" style={{ backgroundColor: 'var(--nav-bg)' }}>
+      <nav className="site-nav sticky top-0 z-40 card-white shadow-sm border-b" style={{ backgroundColor: 'var(--nav-bg)' }}>
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center flex-wrap gap-4 py-4 text-sm sm:text-base">
             <a href="#resume" className="nav-item">
-              Introduction
+              Resume
+            </a>
+            <a href="#projects" className="nav-item">
+              Projects
             </a>
             <a href="/workflows" className="nav-item">
               Site Architecture
@@ -39,8 +68,8 @@ export default function Home() {
               Technologies
             </a>
             <a
-              href="/resume/bruno_marcuche_resume.pdf"
-              download
+              href={RESUME_PDF}
+              download={RESUME_PDF_NAME}
               className="button-download flex items-center space-x-2"
             >
               <ArrowDownTrayIcon className="h-4 w-4" />
@@ -50,104 +79,86 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Introduction Section */}
-      <section id="resume" className="py-8 bg-primary">
+      {/* Resume */}
+      <section id="resume" className="py-12">
         <div className="container mx-auto px-4">
-
-          {/* Introduction Text in Paper Container */}
-          <div className="flex justify-center mb-6">
-            <div className="w-full max-w-4xl mx-auto" style={{ maxWidth: Math.min(800, typeof window !== 'undefined' ? window.innerWidth - 40 : 800) }}>
-              <div className="paper-container p-8">
-                <div className="text-left relative z-10">
-                  <p className="text-body text-base leading-relaxed mb-6">
-                    Welcome! I build and run systems people rely on - leading SRE teams, scaling infrastructure, and keeping environments secure and resilient.
-                  </p>
-                  <p className="text-body text-base leading-relaxed">
-                    I&apos;m passionate about Linux, open source, and using automation and AI to streamline operations and solve real-world problems. I enjoy mentoring engineers, improving infrastructure through thoughtful design, and always learning to stay sharp for the next technical challenge.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* PDF Viewer */}
+          {/* On-page resume (single source of truth for the PDF) */}
           <div className="flex justify-center">
-            <PDFViewer file="/resume/bruno_marcuche_resume.pdf" />
+            <div className="w-full max-w-4xl">
+              <ResumeDocument />
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Projects */}
+      <ProjectsSection />
+
       {/* Skills Highlight */}
-      <section id="technologies" className="card-white py-6">
+      <section id="technologies" className="site-extra py-6">
         <div className="container mx-auto px-4">
-          <h3 className="text-2xl font-bold text-center text-headline mb-8">Core Technologies</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
+          <h3 className="text-xl font-bold text-center text-headline mb-6">Core Technologies</h3>
+          <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
             {[
               'GCP', 'Terraform', 'Ansible', 'Puppet', 'Docker', 'LaunchDarkly',
               'App Engine', 'IAM', 'Amazon Q', 'ChatGPT', 'Claude', 'MCP',
               'GitHub Actions', 'Prometheus', 'OpenTelemetry', 'RHEL', 'Ubuntu', 'Python'
             ].map((tech) => (
-              <div 
-                key={tech}
-                className="card-secondary rounded-lg px-3 py-2 text-center text-sm font-medium text-accent-dark transition-colors"
-              >
+              <span key={tech} className="tag">
                 {tech}
-              </div>
+              </span>
             ))}
           </div>
         </div>
       </section>
 
       {/* Current Setup */}
-      <section id="setup" className="bg-secondary py-6">
+      <section id="setup" className="site-extra py-6">
         <div className="container mx-auto px-4">
-          <h3 className="text-2xl font-bold text-center text-headline mb-8">Current Setup</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <h3 className="text-xl font-bold text-center text-headline mb-6">Current Setup</h3>
+          <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
             {[
               'Alacritty',
               'tmux (custom keybinds)',
               'Pop! OS',
               'NeoVIM',
-              'Amazon Q CLI',
-              'Claude CLI Access',
-              'Starship Prompt',
+              'Amazon Kiro CLI',
+              'Claude Code',
+              'ADO',
               'Azure CLI'
             ].map((tool) => (
-              <div 
-                key={tool}
-                className="card-white rounded-lg px-3 py-2 text-center text-sm font-medium text-accent-dark hover-teal transition-colors"
-              >
+              <span key={tool} className="tag tag-light">
                 {tool}
-              </div>
+              </span>
             ))}
           </div>
-          <p className="text-center text-body mt-6 text-sm">
+          <p className="text-center text-body mt-5 text-sm">
             My daily development environment and tools
           </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-accent-dark text-white py-8">
+      <footer className="site-footer bg-accent-dark text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-300">
-            © 2025 Bruno Marcuche. Built with Next.js and deployed on Google Cloud Platform.
+            © 2026 Bruno Marcuche. Built with Next.js and deployed on Google Cloud Platform.
           </p>
-          <div className="mt-4 space-x-4">
-            <a 
-              href="mailto:bruno.marcuche@gmail.com"
+          <div className="mt-4 flex justify-center items-center gap-4">
+            <a
+              href={`mailto:${contact.email}`}
               className="text-gray-300 hover:text-accent-teal transition-colors"
             >
               Contact
             </a>
-            <a 
-              href="/resume/bruno_marcuche_resume.pdf"
-              download
+            <a
+              href={RESUME_PDF}
+              download={RESUME_PDF_NAME}
               className="text-gray-300 hover:text-accent-teal transition-colors"
             >
               Download Resume
             </a>
-            <a 
+            <a
               href="https://github.com/bmarcuche/resume-cloudrun"
               target="_blank"
               rel="noopener noreferrer"

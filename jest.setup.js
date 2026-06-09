@@ -26,6 +26,18 @@ jest.mock('next/router', () => ({
 // Mock environment variables
 process.env.NODE_ENV = 'test'
 
+// Mock IntersectionObserver used by scroll-reveal components
+if (!window.IntersectionObserver) {
+  window.IntersectionObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+    takeRecords() {
+      return []
+    }
+  }
+}
+
 // Mock matchMedia used in components
 if (!window.matchMedia) {
   window.matchMedia = function matchMedia() {

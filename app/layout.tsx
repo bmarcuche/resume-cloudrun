@@ -3,15 +3,15 @@ import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Bruno Marcuche - Site Reliability Engineer | Linux | Cloud',
-  description: 'Resume and portfolio of Bruno Marcuche, experienced Site Reliability Engineer specializing in Linux systems, cloud infrastructure, and automation.',
-  keywords: 'Site Reliability Engineer, SRE, Linux, Cloud, DevOps, Bruno Marcuche, Infrastructure, Automation',
+  title: 'Bruno Marcuche · SRE and AIOPs',
+  description: 'Resume of Bruno Marcuche, Site Reliability Engineer and technical leader focused on AIOPs. Architected an internal AI agent platform handling 10,000+ ops tasks and cutting change lead time by ~89%.',
+  keywords: 'Site Reliability Engineer, SRE, AI agents, LLM, Model Context Protocol, MCP, DevOps, Cloud, Linux, Automation, Observability, Bruno Marcuche',
   authors: [{ name: 'Bruno Marcuche' }],
   robots: 'index, follow',
   openGraph: {
-    title: 'Bruno Marcuche - Site Reliability Engineer | Linux | Cloud',
-    description: 'Resume and portfolio of Bruno Marcuche, Site Reliability Engineer',
-    url: 'https://mindtunnel.org',
+    title: 'Bruno Marcuche · SRE and AIOPs',
+    description: 'SRE and technical leader focused on AIOPs. Architected an internal agent platform handling 10,000+ ops tasks and cutting change lead time by ~89%.',
+    url: 'https://resume.mindtunnel.org',
     siteName: 'MindTunnel',
     type: 'website',
   },
@@ -30,6 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Reveal-on-scroll fallback when JavaScript is disabled */}
+        <noscript>
+          <style>{`.reveal{opacity:1 !important;transform:none !important;}`}</style>
+        </noscript>
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-W71716NXX8"
