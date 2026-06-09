@@ -106,7 +106,7 @@ export default function WorkflowsPage() {
   ]
 
   return (
-    <main className="min-h-screen page-grid pb-20 md:pb-0">
+    <main className="min-h-screen page-grid pb-24 md:pb-0">
       <SiteNav />
 
       <div className="container mx-auto px-4 py-10 pt-16 md:pt-10 max-w-6xl">

@@ -13,7 +13,7 @@ export default function Home() {
   const { name, tagline, contact } = resumeData
 
   return (
-    <main className="min-h-screen page-grid pb-20 md:pb-0">
+    <main className="min-h-screen page-grid pb-24 md:pb-0">
       {/* Navigation */}
       <SiteNav />
 

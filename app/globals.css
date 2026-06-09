@@ -19,7 +19,7 @@
   --surface: #f8fafc;
   --secondary-bg: #f1f5f9;
   --card-bg: #ffffff;
-  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-bg: rgba(255, 255, 255, 0.80);
   --border-color: #e2e8f0;
   --text-headline: #0f172a;
   --text-body: #475569;
@@ -50,7 +50,7 @@
   --surface: #111827;
   --secondary-bg: #111827;
   --card-bg: #111827;
-  --nav-bg: rgba(13, 19, 32, 0.95);
+  --nav-bg: rgba(13, 19, 32, 0.85);
   --border-color: #1f2937;
   --text-headline: #e6edf3;
   --text-body: #9aa7b8;
@@ -291,55 +291,30 @@ section[id] {
   color: #ffffff;
 }
 
-/* Mobile: native app-bar feel */
+/* Mobile: simple, robust app bar (sticky like desktop; brand reveals on scroll) */
 @media (max-width: 767px) {
   .site-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     height: 3rem;
   }
 
-  /* Main nav: static, scrolls away with the page */
-  .site-nav:not(.is-scrolled) {
-    position: relative;
-  }
-
-  /* Mini nav: fixed at top once hero passes */
-  .site-nav.is-scrolled {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  /* Main nav layout: actions grouped on the right */
-  .site-nav:not(.is-scrolled) .site-nav-inner {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .site-nav:not(.is-scrolled) .site-nav-left,
-  .site-nav:not(.is-scrolled) .site-nav-center {
+  /* Section links live in the bottom tab bar */
+  .site-nav-center {
     display: none;
   }
 
-  /* Mini nav layout: pic+title left, download+toggle right */
-  .site-nav.is-scrolled .site-nav-inner {
-    grid-template-columns: 1fr auto;
+  .site-nav-left {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
-  .site-nav.is-scrolled .site-nav-center {
-    display: none;
-  }
-
-  .site-nav.is-scrolled .nav-brand {
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-  }
-
-  /* Compact download button on mobile */
-  .button-download {
+  /* Compact download so it fits beside the brand + toggle */
+  .site-nav-right .button-download {
     font-size: 0.78rem;
-    padding: 0.3rem 0.6rem;
+    padding: 0.3rem 0.55rem;
+    gap: 0.35rem;
   }
 }
 
@@ -405,18 +380,18 @@ section[id] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  padding: 0.5rem 0.25rem;
+  gap: 4px;
+  padding: 0.8rem 0.25rem 0.7rem;
   color: var(--text-muted);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .bottom-nav-item svg {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 .bottom-nav-item.is-active,

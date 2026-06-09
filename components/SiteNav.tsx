@@ -16,15 +16,15 @@ import ThemeToggle from './ThemeToggle'
 const NAV_LINKS = [
   { href: '/#resume', label: 'Resume' },
   { href: '/#projects', label: 'Projects' },
-  { href: '/workflows', label: 'Site Architecture' },
   { href: '/#technologies', label: 'Technologies' },
+  { href: '/workflows', label: 'Deployment' },
 ]
 
 const TABS = [
   { href: '/#resume', label: 'Resume', id: 'resume', Icon: DocumentTextIcon },
   { href: '/#projects', label: 'Projects', id: 'projects', Icon: RectangleStackIcon },
-  { href: '/workflows', label: 'Architecture', id: '', Icon: ServerStackIcon },
   { href: '/#technologies', label: 'Tech', id: 'technologies', Icon: CpuChipIcon },
+  { href: '/workflows', label: 'Deployment', id: '', Icon: ServerStackIcon },
 ]
 
 const RESUME_PDF = '/resume/bruno_marcuche_resume.pdf'
@@ -110,7 +110,7 @@ export default function SiteNav() {
               ))}
             </div>
 
-            {/* Right: actions */}
+            {/* Right: actions (Download + theme toggle, both breakpoints) */}
             <div className="site-nav-right">
               <a href={RESUME_PDF} download={RESUME_PDF_NAME} className="button-download">
                 <ArrowDownTrayIcon className="h-4 w-4" />

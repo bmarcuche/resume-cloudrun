@@ -105,13 +105,14 @@ const nextConfig = {
           },
         ],
       },
-      // HTML pages: short cache with stale-while-revalidate for fast loads
+      // HTML pages: never cache — the HTML must match the deployed JS, or
+      // a stale cached page hydrates against fresh JS and throws a hydration error.
       {
         source: '/',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=3600, stale-while-revalidate=86400',
+            value: 'no-store',
           },
         ],
       },
@@ -120,7 +121,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=3600, stale-while-revalidate=86400',
+            value: 'no-store',
           },
         ],
       },
