@@ -19,7 +19,7 @@
   --surface: #f8fafc;
   --secondary-bg: #f1f5f9;
   --card-bg: #ffffff;
-  --nav-bg: rgba(255, 255, 255, 0.80);
+  --nav-bg: rgba(255, 255, 255, 0.95);
   --border-color: #e2e8f0;
   --text-headline: #0f172a;
   --text-body: #475569;
@@ -50,7 +50,7 @@
   --surface: #111827;
   --secondary-bg: #111827;
   --card-bg: #111827;
-  --nav-bg: rgba(13, 19, 32, 0.85);
+  --nav-bg: rgba(13, 19, 32, 0.95);
   --border-color: #1f2937;
   --text-headline: #e6edf3;
   --text-body: #9aa7b8;
