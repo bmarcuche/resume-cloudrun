@@ -331,6 +331,12 @@ section[id] {
     display: none;
   }
 
+  .site-nav.is-scrolled .nav-brand {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
   /* Compact download button on mobile */
   .button-download {
     font-size: 0.78rem;
