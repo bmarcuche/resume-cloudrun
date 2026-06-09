@@ -109,7 +109,7 @@ export default function WorkflowsPage() {
     <main className="min-h-screen page-grid pb-20 md:pb-0">
       <SiteNav />
 
-      <div className="container mx-auto px-4 py-10 max-w-6xl">
+      <div className="container mx-auto px-4 py-10 pt-16 md:pt-10 max-w-6xl">
         {/* Page header */}
         <div className="mb-8">
           <p className="section-eyebrow">{'// CONTINUOUS DEPLOYMENT'}</p>
