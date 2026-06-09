@@ -80,11 +80,11 @@ export default function ResumeDocument() {
         </ResumeSection>
 
         <ResumeSection title="Strengths" icon={BoltIcon}>
-          <div className="flex flex-wrap gap-2">
+          <div className="skills-tag-grid">
             {strengths.map((strength) => (
               <span
                 key={strength}
-                className="strength-pill text-sm rounded-full px-3 py-1.5 font-medium"
+                className="tag text-sm"
               >
                 {strength}
               </span>

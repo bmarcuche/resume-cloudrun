@@ -1,8 +1,9 @@
 import Image from 'next/image'
-import { EnvelopeIcon, MapPinIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline'
+import { EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline'
 import ResumeDocument from '../components/resume/ResumeDocument'
 import ProjectsSection from '../components/projects/ProjectsSection'
-import ThemeToggle from '../components/ThemeToggle'
+import Reveal from '../components/projects/Reveal'
+import SiteNav from '../components/SiteNav'
 import { resumeData } from '../lib/resume-data'
 
 const RESUME_PDF = '/resume/bruno_marcuche_resume.pdf'
@@ -12,8 +13,9 @@ export default function Home() {
   const { name, tagline, contact } = resumeData
 
   return (
-    <main className="min-h-screen page-grid">
-      <ThemeToggle />
+    <main className="min-h-screen page-grid pb-20 md:pb-0">
+      {/* Navigation */}
+      <SiteNav />
 
       {/* Header / Hero */}
       <header className="site-hero gradient-bg py-12">
@@ -51,34 +53,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Navigation */}
-      <nav className="site-nav sticky top-0 z-40 card-white shadow-sm border-b" style={{ backgroundColor: 'var(--nav-bg)' }}>
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center items-center flex-wrap gap-4 py-4 text-sm sm:text-base">
-            <a href="#resume" className="nav-item">
-              Resume
-            </a>
-            <a href="#projects" className="nav-item">
-              Projects
-            </a>
-            <a href="/workflows" className="nav-item">
-              Site Architecture
-            </a>
-            <a href="#technologies" className="nav-item hidden md:inline-block">
-              Technologies
-            </a>
-            <a
-              href={RESUME_PDF}
-              download={RESUME_PDF_NAME}
-              className="button-download flex items-center space-x-2"
-            >
-              <ArrowDownTrayIcon className="h-4 w-4" />
-              <span>Download PDF</span>
-            </a>
-          </div>
-        </div>
-      </nav>
-
       {/* Resume */}
       <section id="resume" className="py-12">
         <div className="container mx-auto px-4">
@@ -95,46 +69,62 @@ export default function Home() {
       <ProjectsSection />
 
       {/* Skills Highlight */}
-      <section id="technologies" className="site-extra py-6">
+      <section id="technologies" className="py-16">
         <div className="container mx-auto px-4">
-          <h3 className="text-xl font-bold text-center text-headline mb-6">Core Technologies</h3>
-          <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
-            {[
-              'GCP', 'Terraform', 'Ansible', 'Puppet', 'Docker', 'LaunchDarkly',
-              'App Engine', 'IAM', 'Amazon Q', 'ChatGPT', 'Claude', 'MCP',
-              'GitHub Actions', 'Prometheus', 'OpenTelemetry', 'RHEL', 'Ubuntu', 'Python'
-            ].map((tech) => (
-              <span key={tech} className="tag">
-                {tech}
-              </span>
-            ))}
-          </div>
+          <Reveal className="section-intro">
+            <p className="section-eyebrow">{'// TOOLBOX'}</p>
+            <h2 className="section-heading">Core Technologies</h2>
+            <p className="section-lede">
+              The platforms, languages, and tools I reach for daily.
+            </p>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
+              {[
+                'GCP', 'Azure', 'Terraform', 'Ansible', 'Puppet', 'Docker',
+                'LaunchDarkly', 'App Engine', 'IAM', 'PagerDuty', 'pgvector', 'MCP',
+                'GitHub Actions', 'Prometheus', 'OpenTelemetry', 'Nginx', 'Redis', 'Python',
+                'Amazon Q', 'Claude', 'RHEL', 'Ubuntu'
+              ].map((tech) => (
+                <span key={tech} className="tag">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Current Setup */}
-      <section id="setup" className="site-extra py-6">
+      <section id="setup" className="py-16">
         <div className="container mx-auto px-4">
-          <h3 className="text-xl font-bold text-center text-headline mb-6">Current Setup</h3>
-          <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
-            {[
-              'Alacritty',
-              'tmux (custom keybinds)',
-              'Pop! OS',
-              'NeoVIM',
-              'Amazon Kiro CLI',
-              'Claude Code',
-              'ADO',
-              'Azure CLI'
-            ].map((tool) => (
-              <span key={tool} className="tag tag-light">
-                {tool}
-              </span>
-            ))}
-          </div>
-          <p className="text-center text-body mt-5 text-sm">
-            My daily development environment and tools
-          </p>
+          <Reveal className="section-intro">
+            <p className="section-eyebrow">{'// WORKSTATION'}</p>
+            <h2 className="section-heading">Current Setup</h2>
+            <p className="section-lede">
+              My daily development environment and tools.
+            </p>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
+              {[
+                'Alacritty',
+                'tmux (custom keybinds)',
+                'Pop! OS',
+                'NeoVIM',
+                'Amazon Kiro CLI',
+                'Claude Code',
+                'Azure DevOps',
+                'Azure CLI'
+              ].map((tool) => (
+                <span key={tool} className="tag tag-light">
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 

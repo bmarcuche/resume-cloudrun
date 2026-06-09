@@ -85,6 +85,46 @@ const nextConfig = {
           },
         ],
       },
+      // Immutable static assets (content-hashed by Next.js)
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Images, fonts, and resume PDF
+      {
+        source: '/(images|resume|fonts)/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      // HTML pages: short cache with stale-while-revalidate for fast loads
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      {
+        source: '/workflows',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      // Health endpoints: never cache
       {
         source: '/api/(health|ready)',
         headers: [

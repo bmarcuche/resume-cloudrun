@@ -28,8 +28,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Apply the saved theme before first paint to avoid a light->dark flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light')}catch(e){}})();",
+          }}
+        />
         {/* Reveal-on-scroll fallback when JavaScript is disabled */}
         <noscript>
           <style>{`.reveal{opacity:1 !important;transform:none !important;}`}</style>

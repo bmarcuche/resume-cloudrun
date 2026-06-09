@@ -11,10 +11,10 @@ export default function SkillsGrid({ categories }: SkillsGridProps) {
     <div className="space-y-5">
       {categories.map((category) => (
         <div key={category.name} className="break-inside-avoid">
-          <p className="text-xs font-bold uppercase tracking-wider text-accent-teal mb-2">
+          <p className="text-xs font-bold uppercase tracking-wider text-accent-teal mb-2 text-center md:text-left">
             {category.name}
           </p>
-          <div className="flex flex-wrap gap-2">
+          <div className="skills-tag-grid">
             {category.skills.map((skill) => (
               <span key={skill} className="tag">
                 {skill}

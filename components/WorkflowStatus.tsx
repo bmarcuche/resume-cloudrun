@@ -41,17 +41,17 @@ export const WorkflowStatusBadge = ({ status }: { status: string }) => {
   const getStatusStyles = (status: string) => {
     switch (status) {
       case 'success':
-        return 'bg-green-50 text-green-700 ring-green-600/20'
+        return 'bg-green-500/10 text-green-600 ring-green-500/25'
       case 'failure':
-        return 'bg-red-50 text-red-700 ring-red-600/20'
+        return 'bg-red-500/10 text-red-600 ring-red-500/25'
       case 'in_progress':
-        return 'bg-blue-50 text-blue-700 ring-blue-600/20'
+        return 'bg-blue-500/10 text-blue-600 ring-blue-500/25'
       case 'queued':
-        return 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
+        return 'bg-amber-500/10 text-amber-600 ring-amber-500/25'
       case 'cancelled':
-        return 'bg-gray-50 text-gray-700 ring-gray-600/20'
+        return 'bg-slate-500/10 text-slate-500 ring-slate-500/25'
       default:
-        return 'bg-gray-50 text-gray-600 ring-gray-600/20'
+        return 'bg-slate-500/10 text-slate-500 ring-slate-500/25'
     }
   }
 

@@ -35,14 +35,14 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="theme-toggle"
+      className="nav-icon-btn"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       {isDark ? (
-        <SunIcon className="h-6 w-6" />
+        <SunIcon className="h-5 w-5" />
       ) : (
-        <MoonIcon className="h-6 w-6" />
+        <MoonIcon className="h-5 w-5" />
       )}
     </button>
   )

@@ -97,8 +97,9 @@ export const projects: Project[] = [
     summary:
       'A just-in-time, time-boxed service for privileged access to Oracle databases across the fleet.',
     metrics: [
-      { value: '0', label: 'standing credentials' },
-      { value: 'JIT', label: 'time-boxed access' },
+      { value: '0', label: 'permanent credentials' },
+      { value: '250+', label: 'sessions' },
+      { value: '350+', label: 'Oracle SIDs managed' },
     ],
     highlights: [
       'Requests validated through CAB or Jira unlock accounts and automatically lock again on expiry, with credentials stored in Azure Key Vault and a full audit trail.',
