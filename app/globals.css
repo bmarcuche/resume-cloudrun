@@ -308,7 +308,7 @@ section[id] {
     top: 0;
     left: 0;
     right: 0;
-    animation: nav-slide-in 0.3s ease forwards;
+    animation: nav-slide-in 0.3s ease;
   }
 
   /* Main nav layout: actions grouped on the right */
