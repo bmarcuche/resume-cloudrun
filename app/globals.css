@@ -302,13 +302,12 @@ section[id] {
     position: relative;
   }
 
-  /* Mini nav: fixed at top once hero passes, slides in smoothly */
+  /* Mini nav: fixed at top once hero passes */
   .site-nav.is-scrolled {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    animation: nav-slide-in 0.3s ease;
   }
 
   /* Main nav layout: actions grouped on the right */
@@ -341,17 +340,6 @@ section[id] {
   .button-download {
     font-size: 0.78rem;
     padding: 0.3rem 0.6rem;
-  }
-}
-
-@keyframes nav-slide-in {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
   }
 }
 
