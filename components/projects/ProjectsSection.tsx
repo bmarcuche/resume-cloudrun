@@ -4,7 +4,7 @@ import Reveal from './Reveal'
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="projects-section py-16">
+    <section id="projects" className="projects-section py-12">
       <div className="container mx-auto px-4">
         <Reveal className="section-intro">
           <p className="section-eyebrow">{'// SELECTED WORK'}</p>

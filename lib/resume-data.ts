@@ -158,43 +158,24 @@ export const resumeData: ResumeData = {
     },
   ],
 
-  strengths: [
-    'Leadership',
-    'Incident Management',
-    'Cloud Infrastructure',
-    'Linux Systems Administration',
-    'Automation',
-  ],
+  strengths: ['Leadership', 'Incident Management', 'Cloud Infrastructure', 'Automation'],
 
   skills: [
     {
-      name: 'Cloud & Infrastructure Automation',
-      skills: ['GCP', 'Azure', 'Terraform', 'Ansible', 'Puppet', 'Docker', 'Docker Swarm', 'IAM'],
+      name: 'Cloud & Automation',
+      skills: ['GCP', 'Azure', 'Terraform', 'Ansible', 'Docker', 'IAM'],
     },
     {
-      name: 'Monitoring & Observability',
-      skills: ['OpenTelemetry', 'OpenSearch', 'Graylog', 'Nagios', 'Prometheus', 'PagerDuty', 'Observe', 'Netdata'],
+      name: 'Observability',
+      skills: ['OpenTelemetry', 'Prometheus', 'PagerDuty', 'Observe'],
     },
     {
-      name: 'CI/CD Tooling',
-      skills: ['GitHub Actions', 'CircleCI', 'Jenkins', 'OpenSCAP'],
+      name: 'CI/CD & Systems',
+      skills: ['GitHub Actions', 'Jenkins', 'Linux', 'Python', 'Nginx', 'Redis'],
     },
     {
-      name: 'Systems & Services',
-      skills: ['Linux (various)', 'Windows Server', 'SSL/TLS', 'SQL', 'Apache', 'Nginx', 'Redis', 'Python'],
-    },
-    {
-      name: 'AI & Agent Tooling',
-      skills: ['LLM Agents', 'Model Context Protocol', 'pgvector', 'Sentence-Transformers', 'Claude', 'Amazon Q'],
-    },
-    {
-      name: 'Collaboration & Soft Skills',
-      skills: [
-        'Communication & Collaboration',
-        'Mentorship & Team Leadership',
-        'Incident Response & Problem Solving',
-        'Adaptability & Process Ownership',
-      ],
+      name: 'AI & Agents',
+      skills: ['LLM Agents', 'Model Context Protocol', 'pgvector', 'Claude'],
     },
   ],
 

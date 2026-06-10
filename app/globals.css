@@ -14,17 +14,27 @@
   --accent-soft: rgba(37, 99, 235, 0.08);
   --accent-ring: rgba(37, 99, 235, 0.30);
 
-  /* Surfaces & text (slate) */
-  --primary-bg: #ffffff;
-  --surface: #f8fafc;
-  --secondary-bg: #f1f5f9;
-  --card-bg: #ffffff;
-  --nav-bg: rgba(255, 255, 255, 0.80);
-  --border-color: #e2e8f0;
-  --text-headline: #0f172a;
-  --text-body: #475569;
-  --text-muted: #64748b;
-  --hero-bg: #1e3a8a;
+  /* Secondary accent: blueprint cyan for eyebrows, card top-bars, glows.
+     cyan-700 keeps small mono eyebrow text AA-readable on white. */
+  --accent-2: #0e7490;
+
+  /* Surfaces & text. Winning light pattern: a soft cool-gray canvas with
+     pure-white cards that lift off it via shadow, instead of white-on-white.
+     The page is the "desk", cards are the "paper". */
+  --primary-bg: #eef2f9;       /* soft cool canvas */
+  --surface: #f6f8fc;
+  --secondary-bg: #e7edf7;     /* chip / tag fill on white cards */
+  --card-bg: #ffffff;          /* cards stay white so they stand out */
+  --nav-bg: rgba(238, 242, 249, 0.82);
+  --border-color: #d8e1ee;     /* soft, visible slate border */
+  --text-headline: #101a2b;    /* deep ink for headings */
+  --text-body: #41506a;        /* readable slate for body copy */
+  --text-muted: #65718b;
+  --hero-bg: #1b3a82;          /* deep professional blue header */
+
+  /* Card elevation tokens (white paper floating on the gray desk) */
+  --shadow-sm: 0 1px 2px rgba(16, 26, 43, 0.04);
+  --shadow-card: 0 1px 2px rgba(16, 26, 43, 0.05), 0 10px 26px -14px rgba(16, 26, 43, 0.20);
 
   /* Legacy aliases mapped onto the new palette */
   --primary-color: #2563eb;
@@ -46,6 +56,8 @@
   --accent-soft: rgba(59, 130, 246, 0.14);
   --accent-ring: rgba(59, 130, 246, 0.40);
 
+  --accent-2: #22d3ee;
+
   --primary-bg: #0b0f17;
   --surface: #111827;
   --secondary-bg: #111827;
@@ -57,6 +69,9 @@
   --text-muted: #7d8794;
   --hero-bg: #0e1626;
 
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 30px -16px rgba(0, 0, 0, 0.6);
+
   --primary-color: #3b82f6;
   --analogous-blue: #60a5fa;
   --analogous-purple: #2563eb;
@@ -67,6 +82,38 @@
   --accent-dark: #e6edf3;
   --button-primary: #2563eb;
   --button-secondary: #3b82f6;
+}
+
+/* Winner theme: retro arcade. Unlocked by completing the mobile tech game.
+   Sky-blue canvas, arcade red + coin gold accents, white cards kept readable,
+   plus a drifting yellow-star background applied to .page-grid below. */
+[data-theme="winner"] {
+  --accent: #e11d48;
+  --accent-hover: #be123c;
+  --accent-soft: rgba(225, 29, 72, 0.10);
+  --accent-ring: rgba(225, 29, 72, 0.35);
+  --accent-2: #a16207;
+
+  --primary-bg: #cfe8ff;
+  --surface: #e6f3ff;
+  --secondary-bg: #ffe9a8;
+  --card-bg: #ffffff;
+  --nav-bg: rgba(207, 232, 255, 0.85);
+  --border-color: #a9cdf0;
+  --text-headline: #14304d;
+  --text-body: #2b4a68;
+  --text-muted: #50708f;
+  --hero-bg: #1f6fd0;
+
+  --primary-color: #e11d48;
+  --analogous-blue: #1f6fd0;
+  --accent-teal: #e11d48;
+  --accent-dark: #14304d;
+  --button-primary: #e11d48;
+  --button-secondary: #1f6fd0;
+
+  --shadow-sm: 0 1px 2px rgba(20, 48, 77, 0.06);
+  --shadow-card: 0 1px 2px rgba(20, 48, 77, 0.06), 0 12px 30px -16px rgba(20, 48, 77, 0.28);
 }
 
 /* Base Styles */
@@ -114,6 +161,30 @@ section[id] {
   background-image:
     linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+}
+
+/* Winner theme: replace the grid lines with scattered yellow stars that drift up.
+   The canvas shows through the transparent sections, between the white cards. */
+[data-theme="winner"] .page-grid {
+  background-color: var(--primary-bg);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='132'%20height='132'%3E%3Cg%20fill='%23ffd21e'%3E%3Cpath%20opacity='.85'%20transform='translate(14%2010)%20scale(1.15)'%20d='M12%202l3.09%206.26L22%209.27l-5%204.87L18.18%2021%2012%2017.77%205.82%2021%207%2014.14l-5-4.87%206.91-1.01z'/%3E%3Cpath%20opacity='.5'%20transform='translate(80%2070)%20scale(.75)'%20d='M12%202l3.09%206.26L22%209.27l-5%204.87L18.18%2021%2012%2017.77%205.82%2021%207%2014.14l-5-4.87%206.91-1.01z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 132px 132px;
+  animation: star-drift 38s linear infinite;
+}
+
+@keyframes star-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -528px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="winner"] .page-grid {
+    animation: none;
+  }
 }
 
 .bg-accent-dark {
@@ -172,7 +243,16 @@ section[id] {
 
 /* Component Styles */
 .gradient-bg {
-  background: var(--hero-bg);
+  background-color: var(--hero-bg);
+}
+
+/* Very faint white blueprint grid over the blue header (matches the page grid
+   rhythm). The contiguous nav + hero share it so the lines don't stop midway. */
+.site-hero {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 34px 34px;
 }
 
 .card-white {
@@ -188,7 +268,7 @@ section[id] {
 .paper-container {
   background: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px -12px rgba(15, 23, 42, 0.12);
+  box-shadow: var(--shadow-card);
   position: relative;
   border: 1px solid var(--border-color);
 }
@@ -224,7 +304,11 @@ section[id] {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--hero-bg);
+  background-color: var(--hero-bg);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 34px 34px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -438,6 +522,32 @@ section[id] {
   color: var(--accent);
 }
 
+/* Hero: contact pills */
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+a.hero-pill:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.hero-pill svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+}
+
 /* Contact Info */
 .contact-info {
   color: #D1D5DB !important;
@@ -492,7 +602,7 @@ section[id] {
 }
 
 [data-theme="dark"] .gradient-bg {
-  background: var(--hero-bg);
+  background-color: var(--hero-bg);
 }
 
 [data-theme="dark"] .pdf-page-indicator {
@@ -622,7 +732,7 @@ section[id] {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 1rem;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
@@ -642,7 +752,7 @@ section[id] {
   border: 1px solid var(--border-color);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  box-shadow: var(--shadow-card);
 }
 
 [data-theme="dark"] .dp-card {
@@ -1099,7 +1209,7 @@ svg.h-12,
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.78rem;
   letter-spacing: 0.14em;
-  color: var(--analogous-blue);
+  color: var(--accent-2);
   font-weight: 500;
 }
 
@@ -1133,7 +1243,7 @@ svg.h-12,
   border: 1px solid var(--border-color);
   border-radius: 1rem;
   padding: 1.75rem;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  box-shadow: var(--shadow-card);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
@@ -1150,7 +1260,7 @@ svg.h-12,
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), var(--analogous-blue));
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
 }
 
 .project-index {
@@ -1196,7 +1306,7 @@ svg.h-12,
   font-size: 0.7rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--analogous-blue);
+  color: var(--accent-2);
   font-weight: 500;
 }
 
@@ -1342,7 +1452,7 @@ svg.h-12,
   border: 1px solid var(--border-color);
   border-radius: 0.9rem;
   padding: 1.25rem;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  box-shadow: var(--shadow-card);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -1396,6 +1506,25 @@ svg.h-12,
   gap: 0.4rem;
 }
 
+/* Tag variant with a small brand glyph in front of the name */
+.tag-tech {
+  gap: 0.4rem;
+  justify-content: flex-start;
+  color: var(--text-headline);
+  transition: border-color 0.2s ease;
+}
+
+.tag-tech svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.tech-card:hover .tag-tech {
+  border-color: var(--accent-ring);
+}
+
 /* Mobile icon tiles */
 .tech-tile {
   display: flex;
@@ -1409,24 +1538,20 @@ svg.h-12,
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 0.7rem;
+  box-shadow: var(--shadow-sm);
 }
 
+/* No chip: the icon renders directly on the tile so the glyph + name lead */
 .tech-tile-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.1rem;
-  height: 2.1rem;
-  flex-shrink: 0;
-  border-radius: 0.55rem;
   color: var(--accent);
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-ring);
 }
 
 .tech-tile-icon svg {
-  width: 1.15rem;
-  height: 1.15rem;
+  width: 1.85rem;
+  height: 1.85rem;
 }
 
 .tech-tile-name {
@@ -1435,6 +1560,152 @@ svg.h-12,
   line-height: 1.2;
   color: var(--text-body);
   word-break: break-word;
+}
+
+/* ==========================================================================
+   Tech tile game (mobile "Strands"): tile interaction states + celebration
+   toast + the unlocked theme menu. Base tiles look unchanged until tapped.
+   ========================================================================== */
+
+/* Tiles become buttons in game mode; reset native button chrome. */
+button.tech-tile {
+  position: relative;
+  width: 100%;
+  font: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* In-progress selection */
+.tech-tile.is-selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 2px var(--accent-ring);
+}
+
+/* Solved category: locked in with a star badge */
+.tech-tile.is-solved {
+  border-color: var(--accent-ring);
+  background: var(--accent-soft);
+  cursor: default;
+}
+
+.tech-tile-star {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 0.85rem;
+  height: 0.85rem;
+  color: var(--accent);
+}
+
+/* Celebration toast: floats above the mobile bottom nav, fades out. */
+.tech-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(4.5rem + env(safe-area-inset-bottom, 0));
+  transform: translateX(-50%) translateY(8px);
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: calc(100vw - 2rem);
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text-headline);
+  border: 1px solid var(--accent-ring);
+  box-shadow: var(--shadow-card);
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.34s ease, transform 0.34s ease;
+}
+
+.tech-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tech-toast.is-finale {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+
+.tech-toast-star {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  color: #f2b50a;
+}
+
+/* The game is mobile-only, so the fixed toast never shows on desktop. */
+@media (min-width: 768px) {
+  .tech-toast {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-toast {
+    transition: opacity 0.2s ease;
+    transform: translateX(-50%);
+  }
+  .tech-toast.is-visible {
+    transform: translateX(-50%);
+  }
+}
+
+/* Theme menu popover (shown once the winner theme is unlocked) */
+.theme-menu {
+  position: relative;
+}
+
+.theme-menu-pop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  border-radius: 0.6rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  z-index: 50;
+}
+
+.theme-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-body);
+  text-align: left;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.theme-menu-item:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.theme-menu-item.is-active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.theme-menu-item svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================

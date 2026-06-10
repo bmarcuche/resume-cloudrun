@@ -9,13 +9,13 @@ describe('Home Page', () => {
 
   it('contains resume content', () => {
     render(<Home />)
-    // Add specific tests based on your resume content
-    // Example: expect(screen.getByText('Bruno Marcuche')).toBeInTheDocument()
+    // Two h1s render the name: the hero and the print-only resume header.
+    expect(screen.getAllByRole('heading', { level: 1, name: /bruno marcuche/i }).length).toBeGreaterThan(0)
   })
 
-  it('shows site architecture link', () => {
+  it('shows source code link', () => {
     render(<Home />)
-    expect(screen.getByRole('link', { name: /site architecture/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /view source code/i })).toBeInTheDocument()
   })
 
   it('has proper meta tags', () => {

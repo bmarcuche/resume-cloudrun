@@ -34,7 +34,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light')}catch(e){}})();",
+              "(function(){try{var t=localStorage.getItem('theme');var u=document.cookie.indexOf('winner_unlock=')!==-1;var theme=(t==='winner'&&u)?'winner':(t==='dark'?'dark':'light');document.documentElement.setAttribute('data-theme',theme)}catch(e){}})();",
           }}
         />
         {/* Reveal-on-scroll fallback when JavaScript is disabled */}
