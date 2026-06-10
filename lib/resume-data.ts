@@ -62,7 +62,7 @@ export const resumeData: ResumeData = {
   tagline: 'Site Reliability Engineer, AIOPs',
 
   contact: {
-    location: 'Boulder 80301, CO',
+    location: 'Boulder, CO 80301',
     phone: '561-284-2441',
     email: 'bmarcuche@gmail.com',
     linkedin: { label: 'linkedin.com/in/bruno-marcuche', url: 'https://www.linkedin.com/in/bruno-marcuche/' },
