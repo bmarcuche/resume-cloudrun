@@ -1122,7 +1122,7 @@ svg.h-12,
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 56rem;
+  max-width: 64rem;
   margin: 0 auto;
 }
 
@@ -1331,6 +1331,110 @@ svg.h-12,
 
 [data-theme="dark"] .project-metrics {
   border-color: rgba(148, 163, 184, 0.14);
+}
+
+/* ==========================================================================
+   Technologies (cards on desktop, icon tiles on mobile)
+   ========================================================================== */
+
+.tech-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.9rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-ring);
+  box-shadow: 0 14px 30px -18px rgba(37, 99, 235, 0.3);
+}
+
+[data-theme="dark"] .tech-card {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.tech-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.tech-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 0.55rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-ring);
+}
+
+.tech-card-icon svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.tech-card-title {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-headline);
+}
+
+.tech-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Mobile icon tiles */
+.tech-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4rem;
+  padding: 0.8rem 0.4rem;
+  min-height: 4.75rem;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.7rem;
+}
+
+.tech-tile-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+  border-radius: 0.55rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-ring);
+}
+
+.tech-tile-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.tech-tile-name {
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text-body);
+  word-break: break-word;
 }
 
 /* ==========================================================================

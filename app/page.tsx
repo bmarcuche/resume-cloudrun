@@ -5,9 +5,52 @@ import ProjectsSection from '../components/projects/ProjectsSection'
 import Reveal from '../components/projects/Reveal'
 import SiteNav from '../components/SiteNav'
 import { resumeData } from '../lib/resume-data'
+import { TECH_CATEGORIES, SETUP_CATEGORIES, type TechCategory } from '../lib/tech-data'
 
 const RESUME_PDF = '/resume/bruno_marcuche_resume.pdf'
 const RESUME_PDF_NAME = 'Bruno Marcuche SRE Resume.pdf'
+
+// Renders categorized cards on desktop and an icon-tile grid on mobile.
+function TechShowcase({ categories }: { categories: TechCategory[] }) {
+  return (
+    <Reveal delay={120}>
+      {/* Desktop: categorized cards */}
+      <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+        {categories.map((category) => (
+          <div key={category.label} className="tech-card">
+            <div className="tech-card-head">
+              <span className="tech-card-icon">
+                <category.Icon aria-hidden="true" />
+              </span>
+              <h3 className="tech-card-title">{category.label}</h3>
+            </div>
+            <div className="tech-card-tags">
+              {category.items.map((item) => (
+                <span key={item.name} className="tag">
+                  {item.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Mobile: icon-tile grid */}
+      <div className="grid grid-cols-3 gap-2 max-w-md mx-auto md:hidden">
+        {categories.map((category) =>
+          category.items.map((item) => (
+            <div key={item.name} className="tech-tile">
+              <span className="tech-tile-icon">
+                <item.Icon aria-hidden="true" />
+              </span>
+              <span className="tech-tile-name">{item.name}</span>
+            </div>
+          ))
+        )}
+      </div>
+    </Reveal>
+  )
+}
 
 export default function Home() {
   const { name, tagline, contact } = resumeData
@@ -58,7 +101,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           {/* On-page resume (single source of truth for the PDF) */}
           <div className="flex justify-center">
-            <div className="w-full max-w-4xl">
+            <div className="w-full max-w-5xl">
               <ResumeDocument />
             </div>
           </div>
@@ -79,20 +122,7 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <Reveal delay={120}>
-            <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
-              {[
-                'GCP', 'Azure', 'Terraform', 'Ansible', 'Puppet', 'Docker',
-                'LaunchDarkly', 'App Engine', 'IAM', 'PagerDuty', 'pgvector', 'MCP',
-                'GitHub Actions', 'Prometheus', 'OpenTelemetry', 'Nginx', 'Redis', 'Python',
-                'Amazon Q', 'Claude', 'RHEL', 'Ubuntu'
-              ].map((tech) => (
-                <span key={tech} className="tag">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </Reveal>
+          <TechShowcase categories={TECH_CATEGORIES} />
         </div>
       </section>
 
@@ -107,24 +137,7 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <Reveal delay={120}>
-            <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
-              {[
-                'Alacritty',
-                'tmux (custom keybinds)',
-                'Pop! OS',
-                'NeoVIM',
-                'Amazon Kiro CLI',
-                'Claude Code',
-                'Azure DevOps',
-                'Azure CLI'
-              ].map((tool) => (
-                <span key={tool} className="tag tag-light">
-                  {tool}
-                </span>
-              ))}
-            </div>
-          </Reveal>
+          <TechShowcase categories={SETUP_CATEGORIES} />
         </div>
       </section>
 
