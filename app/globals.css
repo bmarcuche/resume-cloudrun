@@ -1158,6 +1158,12 @@ svg.h-12,
   display: none;
 }
 
+/* Strengths and Key Skills live in their own on-screen sections, but stay in the
+   resume doc for print/PDF only (kept out of the on-screen card). */
+.resume-print-only {
+  display: none;
+}
+
 [data-theme="dark"] .resume-document .text-headline,
 [data-theme="dark"] .resume-document h2,
 [data-theme="dark"] .resume-document h3 {
@@ -1226,6 +1232,63 @@ svg.h-12,
   color: var(--text-body);
   margin-top: 0.85rem;
   line-height: 1.65;
+}
+
+/* Strengths highlight band (own on-screen section) */
+.strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .strengths-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+}
+
+.strength-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  text-align: center;
+  padding: 1.6rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.strength-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-ring);
+}
+
+/* No chip: the glyph renders large and borderless so the icon + label own the card */
+.strength-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.strength-card-icon svg {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.strength-card-label {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-headline);
 }
 
 .projects-grid {
@@ -1398,23 +1461,30 @@ svg.h-12,
   margin-top: 1.35rem;
 }
 
-/* Scroll reveal */
+/* Scroll reveal.
+   Content is visible by default, so nothing ever waits on JavaScript to appear.
+   Where scroll-driven animations are supported, the entrance is a compositor-only
+   progressive enhancement that plays as the element scrolls into view. */
 .reveal {
-  opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.reveal.is-visible {
   opacity: 1;
-  transform: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+
+@keyframes reveal-rise {
+  to {
     opacity: 1;
     transform: none;
-    transition: none;
   }
 }
 
@@ -1731,6 +1801,11 @@ button.tech-tile {
 
   /* Show the plain-text resume header */
   .resume-print-header {
+    display: block !important;
+  }
+
+  /* Restore Strengths + Key Skills into the printed resume */
+  .resume-print-only {
     display: block !important;
   }
 

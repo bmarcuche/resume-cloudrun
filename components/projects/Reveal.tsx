@@ -1,42 +1,15 @@
-'use client'
-
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 interface RevealProps {
   children: ReactNode
+  /** Accepted for call-site compatibility; the cascade is now scroll-driven. */
   delay?: number
   className?: string
 }
 
-// Fades + slides its children in the first time they scroll into view.
-// Respects prefers-reduced-motion via the CSS in globals.css.
-export default function Reveal({ children, delay = 0, className = '' }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.15 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${visible ? 'is-visible' : ''} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  )
+// Scroll-reveal wrapper. The entrance animation is pure CSS (scroll-driven via
+// animation-timeline where supported), so content is visible immediately and is
+// never gated on JavaScript hydration. No client runtime, no IntersectionObserver.
+export default function Reveal({ children, className = '' }: RevealProps) {
+  return <div className={`reveal ${className}`}>{children}</div>
 }

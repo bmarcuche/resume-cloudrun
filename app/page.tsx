@@ -3,6 +3,7 @@ import { EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline'
 import { siGithub } from 'simple-icons'
 import { fromBrand, LinkedInIcon } from '../components/icons/BrandIcon'
 import ResumeDocument from '../components/resume/ResumeDocument'
+import StrengthsHighlight from '../components/resume/StrengthsHighlight'
 import ProjectsSection from '../components/projects/ProjectsSection'
 import Reveal from '../components/projects/Reveal'
 import SiteNav from '../components/SiteNav'
@@ -121,6 +122,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Strengths highlight (own section; print copy lives in the resume doc) */}
+      <StrengthsHighlight />
+
       {/* Projects */}
       <ProjectsSection />
 
@@ -128,10 +132,10 @@ export default function Home() {
       <section id="technologies" className="site-extra py-12">
         <div className="container mx-auto px-4">
           <Reveal className="section-intro">
-            <p className="section-eyebrow">{'// TOOLBOX'}</p>
+            <p className="section-eyebrow">{'// SKILLS & TOOLBOX'}</p>
             <h2 className="section-heading">Core Technologies</h2>
             <p className="section-lede">
-              The platforms, languages, and tools I reach for daily.
+              My core skill set: the platforms, languages, and tools I work with day to day.
             </p>
           </Reveal>
 

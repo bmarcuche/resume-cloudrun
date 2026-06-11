@@ -3,15 +3,16 @@ import {
   CloudIcon,
   CloudArrowUpIcon,
   RocketLaunchIcon,
-  KeyIcon,
+  BoltIcon,
   Cog6ToothIcon,
   ArrowPathRoundedSquareIcon,
-  FlagIcon,
   ChartBarIcon,
   CpuChipIcon,
+  CircleStackIcon,
   SparklesIcon,
   ComputerDesktopIcon,
   CommandLineIcon,
+  ServerStackIcon,
 } from '@heroicons/react/24/outline'
 import {
   siGooglecloud,
@@ -20,6 +21,8 @@ import {
   siPuppet,
   siDocker,
   siGithubactions,
+  siGit,
+  siGithub,
   siPrometheus,
   siOpentelemetry,
   siPagerduty,
@@ -27,7 +30,6 @@ import {
   siPostgresql,
   siModelcontextprotocol,
   siHuggingface,
-  siPytorch,
   siClaude,
   siPython,
   siNginx,
@@ -37,6 +39,7 @@ import {
   siAlacritty,
   siTmux,
   siNeovim,
+  siZsh,
 } from 'simple-icons'
 import { fromBrand } from '../components/icons/BrandIcon'
 
@@ -53,35 +56,36 @@ export interface TechCategory {
   items: TechItem[]
 }
 
-// Items use real brand marks (simple-icons) where the brand allows it;
-// the rest keep generic heroicon glyphs. Category headers stay generic.
+// Items use real brand marks (simple-icons) where the brand allows it; the rest
+// keep generic heroicon glyphs. Categories are kept coherent and each holds 3+ items
+// so the mobile tile game has fair, inferable groups (no tiny giveaway categories).
 export const TECH_CATEGORIES: TechCategory[] = [
   {
-    label: 'Cloud & Platform',
+    label: 'Cloud Platforms',
     Icon: CloudIcon,
     items: [
       { name: 'GCP', Icon: fromBrand(siGooglecloud) },
-      { name: 'Azure', Icon: CloudArrowUpIcon },
+      { name: 'Azure Cloud', Icon: CloudArrowUpIcon },
+      { name: 'Cloud Run', Icon: BoltIcon },
       { name: 'App Engine', Icon: RocketLaunchIcon },
-      { name: 'IAM', Icon: KeyIcon },
     ],
   },
   {
-    label: 'Infra & Automation',
+    label: 'Infra & Config',
     Icon: Cog6ToothIcon,
     items: [
       { name: 'Terraform', Icon: fromBrand(siTerraform) },
       { name: 'Ansible', Icon: fromBrand(siAnsible) },
       { name: 'Puppet', Icon: fromBrand(siPuppet) },
-      { name: 'Docker', Icon: fromBrand(siDocker) },
     ],
   },
   {
-    label: 'CI/CD & Delivery',
+    label: 'CI/CD & Containers',
     Icon: ArrowPathRoundedSquareIcon,
     items: [
       { name: 'GitHub Actions', Icon: fromBrand(siGithubactions) },
-      { name: 'LaunchDarkly', Icon: FlagIcon },
+      { name: 'Azure DevOps', Icon: ArrowPathRoundedSquareIcon },
+      { name: 'Docker', Icon: fromBrand(siDocker) },
     ],
   },
   {
@@ -94,26 +98,32 @@ export const TECH_CATEGORIES: TechCategory[] = [
     ],
   },
   {
-    label: 'Data & AI',
+    label: 'AI & Agents',
     Icon: CpuChipIcon,
     items: [
-      { name: 'Redis', Icon: fromBrand(siRedis) },
-      { name: 'pgvector', Icon: fromBrand(siPostgresql) },
       { name: 'MCP', Icon: fromBrand(siModelcontextprotocol) },
       { name: 'Hugging Face', Icon: fromBrand(siHuggingface) },
-      { name: 'PyTorch', Icon: fromBrand(siPytorch) },
-      { name: 'Amazon Kiro', Icon: SparklesIcon },
+      { name: 'pgvector', Icon: CircleStackIcon },
       { name: 'Claude', Icon: fromBrand(siClaude) },
+      { name: 'Amazon Kiro', Icon: SparklesIcon },
     ],
   },
   {
-    label: 'Languages & Systems',
+    label: 'Development & Data',
     Icon: CommandLineIcon,
     items: [
       { name: 'Python', Icon: fromBrand(siPython) },
-      { name: 'Nginx', Icon: fromBrand(siNginx) },
+      { name: 'Redis', Icon: fromBrand(siRedis) },
+      { name: 'Postgres', Icon: fromBrand(siPostgresql) },
+    ],
+  },
+  {
+    label: 'Systems & Serving',
+    Icon: ServerStackIcon,
+    items: [
       { name: 'RHEL', Icon: fromBrand(siRedhat) },
       { name: 'Ubuntu', Icon: fromBrand(siUbuntu) },
+      { name: 'Nginx', Icon: fromBrand(siNginx) },
     ],
   },
 ]
@@ -127,6 +137,8 @@ export const SETUP_CATEGORIES: TechCategory[] = [
       { name: 'Alacritty', Icon: fromBrand(siAlacritty) },
       { name: 'tmux (custom keybinds)', Icon: fromBrand(siTmux) },
       { name: 'NeoVIM', Icon: fromBrand(siNeovim) },
+      { name: 'Git', Icon: fromBrand(siGit) },
+      { name: 'Zsh', Icon: fromBrand(siZsh) },
     ],
   },
   {
@@ -143,6 +155,8 @@ export const SETUP_CATEGORIES: TechCategory[] = [
     items: [
       { name: 'Azure DevOps', Icon: ArrowPathRoundedSquareIcon },
       { name: 'Azure CLI', Icon: CloudArrowUpIcon },
+      { name: 'gcloud CLI', Icon: fromBrand(siGooglecloud) },
+      { name: 'GitHub CLI', Icon: fromBrand(siGithub) },
     ],
   },
 ]

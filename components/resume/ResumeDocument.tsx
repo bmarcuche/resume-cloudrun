@@ -79,22 +79,27 @@ export default function ResumeDocument() {
           ))}
         </ResumeSection>
 
-        <ResumeSection title="Strengths" icon={BoltIcon}>
-          <div className="skills-tag-grid">
-            {strengths.map((strength) => (
-              <span
-                key={strength}
-                className="tag text-sm"
-              >
-                {strength}
-              </span>
-            ))}
-          </div>
-        </ResumeSection>
+        {/*
+          Strengths and Key Skills are shown on screen as their own sections
+          (the standalone Strengths highlight and the Core Technologies showcase),
+          so here they are print-only: hidden on screen, kept in the PDF/print
+          output so the resume stays complete and ATS-parseable.
+        */}
+        <div className="resume-print-only">
+          <ResumeSection title="Strengths" icon={BoltIcon}>
+            <div className="skills-tag-grid">
+              {strengths.map((strength) => (
+                <span key={strength} className="tag text-sm">
+                  {strength}
+                </span>
+              ))}
+            </div>
+          </ResumeSection>
 
-        <ResumeSection title="Key Skills" icon={WrenchScrewdriverIcon}>
-          <SkillsGrid categories={skills} />
-        </ResumeSection>
+          <ResumeSection title="Key Skills" icon={WrenchScrewdriverIcon}>
+            <SkillsGrid categories={skills} />
+          </ResumeSection>
+        </div>
 
         <ResumeSection title="Hobbies" icon={SparklesIcon}>
           <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm text-body">

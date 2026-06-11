@@ -158,26 +158,35 @@ export const resumeData: ResumeData = {
     },
   ],
 
-  strengths: ['Leadership', 'Incident Management', 'Cloud Infrastructure', 'Automation'],
+  strengths: ['Leadership', 'AI-Led Ops', 'Cloud Infrastructure', 'Automation'],
 
   skills: [
     {
       name: 'Cloud & Automation',
-      skills: ['GCP', 'Azure', 'Terraform', 'Ansible', 'Docker', 'IAM'],
+      skills: ['GCP', 'Azure Cloud', 'Cloud Run', 'Terraform', 'Ansible', 'Docker'],
+    },
+    {
+      name: 'CI/CD & Delivery',
+      skills: ['GitHub Actions', 'Azure DevOps', 'Jenkins'],
     },
     {
       name: 'Observability',
       skills: ['OpenTelemetry', 'Prometheus', 'PagerDuty', 'Observe'],
     },
     {
-      name: 'CI/CD & Systems',
-      skills: ['GitHub Actions', 'Jenkins', 'Linux', 'Python', 'Nginx', 'Redis'],
+      name: 'AI & Agents',
+      skills: ['LLM Agents', 'Model Context Protocol', 'pgvector', 'Hugging Face', 'Claude'],
     },
     {
-      name: 'AI & Agents',
-      skills: ['LLM Agents', 'Model Context Protocol', 'pgvector', 'Claude'],
+      name: 'Development & Data',
+      skills: ['Python', 'Redis', 'Postgres'],
+    },
+    {
+      name: 'Systems & Serving',
+      skills: ['Linux', 'Nginx'],
     },
   ],
+
 
   hobbies: [
     'Exploring AI tooling (LLMs, MCP)',
