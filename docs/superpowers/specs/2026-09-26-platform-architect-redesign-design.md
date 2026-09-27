@@ -66,7 +66,12 @@ names in a skills list (Python, PostgreSQL, Ansible, Azure), and architecture
 patterns.
 
 Banned substrings for the test: `350`, `150+`, `government`, `FA-EAM`, `FA/EAM`,
-`Oracle SID`, `WinRM`, `Zendesk`, `DigiCert`, `Bastion`, `CAB or Jira`, `32 servers`.
+`Oracle SID`, `WinRM`, `Zendesk`, `DigiCert`, `Bastion`, `CAB or Jira`, `32 servers`,
+`561-284`, `Open to`.
+
+**Also never publish:** a phone number (email and LinkedIn are the contact
+channels) and "open to roles" availability statements. Both were removed from
+`main` on 2026-09-26.
 
 ## Information architecture
 
@@ -122,8 +127,7 @@ in print. It is the PDF source and keeps its ATS-friendly structure.
 
 > I design and run the control plane for a multi-tenant hosted platform: an AI agent
 > layer that routes ops work, fleet discovery, just-in-time access, and incident
-> pipelines that find root cause before a customer calls. Boulder, CO. Open to
-> platform, SRE leadership and senior IC roles.
+> pipelines that find root cause before a customer calls. Boulder, CO.
 
 ### Systems
 
