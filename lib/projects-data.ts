@@ -52,7 +52,6 @@ export const projects: Project[] = [
       'Kiro CLI',
       'MCP',
       'systemd',
-      'WinRM',
       'Azure DevOps',
       'Ansible',
     ],
@@ -64,7 +63,7 @@ export const projects: Project[] = [
     subtitle: 'Fleet system of record (HEN)',
     role: 'Architect & Developer',
     summary:
-      'A system of record for a Windows server estate running FA/EAM, with continuous discovery across the fleet.',
+      'A system of record for the hosted environment, with continuous discovery across the fleet.',
     metrics: [
       { value: '20', label: 'blueprints' },
       { value: '224', label: 'routes' },
@@ -72,8 +71,8 @@ export const projects: Project[] = [
       { value: '245', label: 'tests' },
     ],
     highlights: [
-      'WinRM auto-discovery continuously inventories every install (version, config, services, IIS, databases, certificates) into a JSONB Postgres store, surfaced through a searchable dashboard.',
-      'Integrates Zendesk, Azure DevOps, GitHub, DigiCert, and Azure Bastion, with Celery workers refreshing fleet state on a rolling schedule.',
+      'Agentless auto-discovery continuously inventories every install (version, config, services, databases, certificates) into a JSONB Postgres store, surfaced through a searchable dashboard.',
+      'Integrates ticketing, source control, certificate, and bastion services, with Celery workers refreshing fleet state on a rolling schedule.',
       'Secured with bcrypt RBAC, API tokens, CSRF and rate limiting, and audit logging.',
     ],
     stack: [
@@ -84,7 +83,6 @@ export const projects: Project[] = [
       'PostgreSQL (JSONB)',
       'Redis',
       'Celery',
-      'WinRM',
       'Ansible',
       'Azure',
     ],
@@ -96,17 +94,17 @@ export const projects: Project[] = [
     subtitle: 'Just-in-time privileged access (HAM)',
     role: 'Architect & Developer',
     summary:
-      'A just-in-time, time-boxed service for privileged access to Oracle databases across the fleet.',
+      'A just-in-time, time-boxed service for privileged database access across the fleet.',
     metrics: [
       { value: '0', label: 'permanent credentials' },
       { value: '250+', label: 'sessions' },
-      { value: '350+', label: 'Oracle SIDs managed' },
+      { value: '100%', label: 'of the database estate' },
     ],
     highlights: [
-      'Requests validated through CAB or Jira unlock accounts and automatically lock again on expiry, with credentials stored in Azure Key Vault and a full audit trail.',
-      'Self-service onboarding registers servers automatically after a token check and SSH verification, with a single console to navigate every server and SID.',
+      'Approved change requests unlock accounts that automatically lock again on expiry, with credentials stored in Azure Key Vault and a full audit trail.',
+      'Self-service onboarding registers servers automatically after identity and host verification, with a single console to navigate every server and database.',
       'A scheduler continuously reconciles state, locking expired sessions and orphaned accounts.',
-      'Replaced standing credentials and manual DBA grants across the Oracle fleet.',
+      'Replaced standing credentials and manual DBA grants across the database fleet.',
     ],
     stack: [
       'Python 3.12',

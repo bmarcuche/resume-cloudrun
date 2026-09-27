@@ -1865,6 +1865,12 @@ button.tech-tile {
 
   .resume-entry {
     margin-bottom: 0.75rem !important;
+    /* Long entries may span pages; only keep headings with their first lines. */
+    break-inside: auto !important;
+  }
+
+  .resume-entry li {
+    break-inside: avoid;
   }
 
   h2,

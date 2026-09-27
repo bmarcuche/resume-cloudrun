@@ -88,9 +88,9 @@ export const resumeData: ResumeData = {
       company: 'AssetWorks',
       bullets: [
         'Architected and built an internal AI agent platform on the Model Context Protocol: 16 specialized LLM agents coordinated by a custom semantic router (fine-tuned sentence-transformer embeddings with pgvector knowledge retrieval). It handled 10,000+ routed ops and engineering tasks in its first 12 weeks across deployment, cloud, CI/CD, and incident response.',
-        'Cut FA-EAM change lead time by ~89% after launch. Customer upgrades dropped from ~27 days to under 3 days, and provisioning of new environments from ~12 days to ~1.5 days, declining every month after going live (DORA lead time for changes).',
-        'Delivered 235 Ansible and CI/CD pipelines built by the agents and automated 213 customer upgrade deployments, eliminating ~426 hours of manual deploy work, across a fleet of 350+ servers serving 150+ government clients at 99.99% uptime.',
-        'Designed multi-agent incident workflows that investigate and remediate across the fleet in a single session. They caught a bug that was deleting configuration on 32 servers and identified the root cause of a Windows Update and API regression that would otherwise take hours of manual log correlation.',
+        'Cut change lead time by ~89% after launch. Customer upgrades dropped from ~27 days to under 3 days, and provisioning of new environments from ~12 days to ~1.5 days, declining every month after going live (DORA lead time for changes).',
+        'Delivered 235 Ansible and CI/CD pipelines built by the agents and automated 213 customer upgrade deployments, eliminating ~426 hours of manual deploy work, at 99.99% platform uptime.',
+        'Designed multi-agent incident workflows that investigate and remediate across the fleet in a single session. They caught a bug that was deleting configuration fleet-wide and identified the root cause of an OS update and API regression that would otherwise take hours of manual log correlation.',
         'Lead a team of five; drove an observability rollout (OpenTelemetry and Observe) to reduce MTTR and mentor engineers through 1:1s, training, and knowledge sharing.',
       ],
     },
