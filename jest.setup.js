@@ -55,11 +55,7 @@ if (typeof window !== 'undefined' && !window.matchMedia) {
 }
 
 // next/font/google fetches font files at build time; stub it for tests
-jest.mock('next/font/google', () => ({
-  Archivo: () => ({ variable: '--font-display', className: 'font-display' }),
-  IBM_Plex_Sans: () => ({ variable: '--font-body', className: 'font-body' }),
-  IBM_Plex_Mono: () => ({ variable: '--font-mono', className: 'font-mono' }),
-}))
+jest.mock('next/font/local', () => () => ({ variable: '--font-local', className: 'font-local' }))
 
 // jsdom ships no fetch. Default to a rejecting stub so client components take
 // their offline fallback; individual tests spy on global.fetch to override.

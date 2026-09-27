@@ -1,24 +1,29 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
-import { Archivo, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 
-const display = Archivo({
-  subsets: ['latin'],
-  weight: 'variable',
-  axes: ['wdth'],
+// Fonts are vendored under app/fonts so the build never reaches Google Fonts
+// (the CI runner cannot). Latin subsets from Google Fonts, OFL licensed.
+const display = localFont({
+  src: [{ path: './fonts/Archivo-Variable.woff2', weight: '100 900', style: 'normal' }],
   variable: '--font-display',
   display: 'swap',
 })
-const body = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
+const body = localFont({
+  src: [
+    { path: './fonts/IBMPlexSans-400.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/IBMPlexSans-500.woff2', weight: '500', style: 'normal' },
+    { path: './fonts/IBMPlexSans-600.woff2', weight: '600', style: 'normal' },
+  ],
   variable: '--font-body',
   display: 'swap',
 })
-const mono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
+const mono = localFont({
+  src: [
+    { path: './fonts/IBMPlexMono-400.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/IBMPlexMono-500.woff2', weight: '500', style: 'normal' },
+  ],
   variable: '--font-mono',
   display: 'swap',
 })
