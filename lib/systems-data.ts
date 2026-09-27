@@ -90,7 +90,6 @@ export const systems: System[] = [
     metrics: [
       { value: '0.81', label: 'top-1 routing accuracy' },
       { value: '<5%', label: 'LLM fallback, from 22%' },
-      { value: '268', label: 'scoped tools' },
     ],
     diagram: 'router',
   },

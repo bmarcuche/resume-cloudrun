@@ -31,6 +31,7 @@ describe('disclosure policy', () => {
     // The orchestrator is described as multi-agent, never by a count that drifts.
     expect(text).not.toMatch(/\b\d+\s+(specialist|specialized)\s+(LLM\s+)?agents/)
     expect(text).not.toMatch(/agent 19/)
+    expect(text).not.toMatch(/\d+ scoped tools/)
     // Headcount is checked on positioning copy only (practice, SITE, systems); the
     // resume bullet "Lead a team of five" is factual resume content the user keeps.
   })

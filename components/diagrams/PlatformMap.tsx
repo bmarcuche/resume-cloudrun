@@ -47,7 +47,6 @@ export default function PlatformMap() {
         <text x="408" y="80" className="tiny">deploy  cloud  CI/CD</text>
         <text x="408" y="94" className="tiny">access  data  monitor</text>
         <text x="408" y="108" className="tiny">incident  os  network</text>
-        <text x="408" y="126" className="tiny">268 scoped tools</text>
         <rect x="12" y="186" width="536" height="126" rx="10" className="band" />
         <text x="24" y="206" className="tiny">hosted platform, multi-tenant, 99.99% uptime</text>
         <path d="M472 140 V182" className="edge hot" markerEnd="url(#mw-hot)" />
@@ -91,7 +90,6 @@ export default function PlatformMap() {
         <text x="44" y="190" className="lbl">specialist agents</text>
         <text x="44" y="208" className="tiny">deploy  cloud  pipelines  access  database</text>
         <text x="44" y="222" className="tiny">monitoring  incident  windows  linux</text>
-        <text x="44" y="238" className="tiny">268 scoped tools</text>
         <path d="M180 244 V270" className="edge hot" markerEnd="url(#mt-hot)" />
         <text x="188" y="262" className="tiny">act</text>
         <rect x="12" y="272" width="336" height="284" rx="10" className="band" />
