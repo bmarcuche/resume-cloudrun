@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-26
 **Branch:** `platform-architect`
-**Status:** Approved direction (mockup), spec pending user review
+**Status:** Approved by user on 2026-09-26 ("continue with both mobile and web"); implementation may begin
 **Desktop mockup:** https://claude.ai/artifact/89372n3Z9My4QSkRdsF4kr
 **Mobile mockup:** https://claude.ai/artifact/Nz5zAsp9ncwoB4ne8aLo5j (playable game)
 
@@ -43,12 +43,13 @@ commit `77e2961` and must not return in the redesign.
 | Decision | Choice |
 | --- | --- |
 | Headline role | "Platform Architect" |
-| AssetWorks title on the timeline | "Operations Team Lead, Platform Architect" (user to confirm) |
+| AssetWorks title on the timeline | "Operations Team Lead, Platform Architect" |
 | Hero photo | Removed from hero. Stays in the nav brand, 30px. |
 | Systems shown | AI agent platform, GhostWatch, Hosted Environment Navigator, Hosted Access Manager |
 | Themes | Light and dark, both fully designed. Light must not be flat white. |
 | Disclosure | No fleet size, client count, client sector, product names, DB vendor, discovery mechanism, or named third-party integrations |
 | Fonts | Archivo (display), IBM Plex Sans (body), IBM Plex Mono (identifiers). Self-host via `next/font/google`. |
+| Brand icons | Kept everywhere the current site has them. Every technology name with a simple-icons glyph renders it through the existing `fromBrand` helper; heroicons outline glyph otherwise. Applies to stack tags, Toolbox lists, tile game tiles, hero contact links, and footer links. Monochrome via `currentColor`, never brand hex. |
 | Review gate | Local `npm run dev` review by user before merge. No push to `main` until approved. |
 
 ## Disclosure policy
@@ -100,8 +101,10 @@ Single page at `/`, in this order. Anchor ids in parentheses.
 7. **Experience** (`#experience`). Timeline with one `<details>` per role; the current
    role open by default. One-line summary in the `<summary>`, bullets inside.
    Education and volunteering are the last entry.
-8. **Toolbox** (`#toolbox`). Six grouped tag lists. Replaces "Core Technologies" on
-   desktop. On mobile the existing tile game renders here (unchanged behavior).
+8. **Toolbox** (`#toolbox`). Six grouped tag lists, each entry with its brand icon
+   (same `TechItem` shape as `lib/tech-data.ts`: `{ name, Icon }`). Replaces "Core
+   Technologies" on desktop. On mobile the existing tile game renders here with
+   the same icons on the tiles (unchanged behavior).
 9. **Deploys** (`#deploys`). Six-step pipeline with green dots, latest run line,
    link to `/workflows`.
 10. **Footer.** Name and year, source link, LinkedIn, email in mono.
@@ -162,7 +165,7 @@ interface System {
   status: { label: string; tone: 'ok' | 'warn' | 'info' }[]
   description: string
   outcomes: string[]
-  stack: string[]
+  stack: TechItem[]            // { name, Icon }, icons via fromBrand or heroicons
   metrics: { value: string; label: string }[]
   diagram: 'router' | 'ghostwatch' | 'discovery' | 'access'
 }
