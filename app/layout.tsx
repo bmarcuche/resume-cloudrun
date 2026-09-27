@@ -1,16 +1,41 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
+import { Archivo, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 
+const display = Archivo({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  axes: ['wdth'],
+  variable: '--font-display',
+  display: 'swap',
+})
+const body = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-body',
+  display: 'swap',
+})
+const mono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+const DESCRIPTION =
+  'Platform Architect. Designs and runs the control plane for a multi-tenant hosted platform: an AI agent layer that routes ops work, fleet discovery, just-in-time access, and incident pipelines.'
+
 export const metadata: Metadata = {
-  title: 'Bruno Marcuche · SRE and AIOPs',
-  description: 'Resume of Bruno Marcuche, Site Reliability Engineer and technical leader focused on AIOPs. Architected an internal AI agent platform handling 10,000+ ops tasks and cutting change lead time by ~89%.',
-  keywords: 'Site Reliability Engineer, SRE, AI agents, LLM, Model Context Protocol, MCP, DevOps, Cloud, Linux, Automation, Observability, Bruno Marcuche',
+  title: 'Bruno Marcuche, Platform Architect',
+  description: DESCRIPTION,
+  keywords:
+    'Platform Architect, Platform Engineering, SRE, AI agents, LLM, Model Context Protocol, MCP, DevOps, Cloud, Azure, GCP, Linux, Automation, Observability, Bruno Marcuche',
   authors: [{ name: 'Bruno Marcuche' }],
   robots: 'index, follow',
   openGraph: {
-    title: 'Bruno Marcuche · SRE and AIOPs',
-    description: 'SRE and technical leader focused on AIOPs. Architected an internal agent platform handling 10,000+ ops tasks and cutting change lead time by ~89%.',
+    title: 'Bruno Marcuche, Platform Architect',
+    description: DESCRIPTION,
     url: 'https://resume.mindtunnel.org',
     siteName: 'MindTunnel',
     type: 'website',
@@ -22,13 +47,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+    >
       <head>
         {/* Apply the saved theme before first paint to avoid a light->dark flash */}
         <script
@@ -37,10 +62,6 @@ export default function RootLayout({
               "(function(){try{var t=localStorage.getItem('theme');var u=document.cookie.indexOf('winner_unlock=')!==-1;var theme=(t==='winner'&&u)?'winner':(t==='dark'?'dark':'light');document.documentElement.setAttribute('data-theme',theme)}catch(e){}})();",
           }}
         />
-        {/* Reveal-on-scroll fallback when JavaScript is disabled */}
-        <noscript>
-          <style>{`.reveal{opacity:1 !important;transform:none !important;}`}</style>
-        </noscript>
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-W71716NXX8"
@@ -55,9 +76,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="antialiased">
-        {children}
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   )
 }
