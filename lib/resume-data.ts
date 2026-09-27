@@ -4,7 +4,6 @@
 
 export interface ContactInfo {
   location: string
-  phone: string
   email: string
   linkedin: { label: string; url: string }
   website: { label: string; url: string }
@@ -63,7 +62,6 @@ export const resumeData: ResumeData = {
 
   contact: {
     location: 'Boulder, CO 80301',
-    phone: '561-284-2441',
     email: 'bmarcuche@gmail.com',
     linkedin: { label: 'linkedin.com/in/bruno-marcuche', url: 'https://www.linkedin.com/in/bruno-marcuche/' },
     website: { label: 'resume.mindtunnel.org', url: 'https://resume.mindtunnel.org/' },
@@ -76,8 +74,7 @@ export const resumeData: ResumeData = {
     'for thousands of Linux and Windows instances. Most recently I architected an internal AI agent platform, ' +
     'a custom semantic router orchestrating 16 specialized LLM agents, that has handled 10,000+ ops and ' +
     'engineering tasks and cut change lead time by ~89%. I lead ops and SRE teams, drive observability with ' +
-    'OpenTelemetry and PagerDuty, and turn slow, manual operations into fast, repeatable automation. ' +
-    'Open to both leadership and senior IC roles.',
+    'OpenTelemetry and PagerDuty, and turn slow, manual operations into fast, repeatable automation.',
 
   experience: [
     {

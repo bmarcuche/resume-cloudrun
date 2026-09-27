@@ -40,7 +40,7 @@ export default function ResumeDocument() {
           <h1 className="text-2xl font-bold text-headline">{resumeData.name}</h1>
           <p className="text-sm font-semibold">{resumeData.tagline}</p>
           <p className="text-xs mt-1">
-            {contact.location} · {contact.phone} · {contact.email} · {contact.linkedin.label} ·{' '}
+            {contact.location} · {contact.email} · {contact.linkedin.label} ·{' '}
             {contact.website.label} · {contact.github.label}
           </p>
         </header>
