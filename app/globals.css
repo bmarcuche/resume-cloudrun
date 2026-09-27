@@ -2058,6 +2058,9 @@ button.tech-tile {
     display: none !important;
   }
 
+  /* The on-screen page hides the resume; print shows it */
+  .resume-screen-hidden { display: block !important; }
+
   /* Show the plain-text resume header */
   .resume-print-header {
     display: block !important;
