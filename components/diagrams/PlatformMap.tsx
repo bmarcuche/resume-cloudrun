@@ -43,7 +43,7 @@ export default function PlatformMap() {
         <text x="222" y="121" className="tiny">MCP tool gateway</text>
         <path d="M384 91 H394" className="edge hot" markerEnd="url(#mw-hot)" />
         <rect x="396" y="40" width="152" height="100" rx="8" className="node hot" />
-        <text x="408" y="62" className="lbl">19 specialist agents</text>
+        <text x="408" y="62" className="lbl">specialist agents</text>
         <text x="408" y="80" className="tiny">deploy  cloud  CI/CD</text>
         <text x="408" y="94" className="tiny">access  data  monitor</text>
         <text x="408" y="108" className="tiny">incident  os  network</text>
@@ -88,7 +88,7 @@ export default function PlatformMap() {
         <text x="44" y="136" className="tiny">&lt;100 ms, MCP tool gateway</text>
         <path d="M180 150 V166" className="edge hot" markerEnd="url(#mt-hot)" />
         <rect x="30" y="168" width="300" height="76" rx="8" className="node hot" />
-        <text x="44" y="190" className="lbl">19 specialist agents</text>
+        <text x="44" y="190" className="lbl">specialist agents</text>
         <text x="44" y="208" className="tiny">deploy  cloud  pipelines  access  database</text>
         <text x="44" y="222" className="tiny">monitoring  incident  windows  linux</text>
         <text x="44" y="238" className="tiny">268 scoped tools</text>

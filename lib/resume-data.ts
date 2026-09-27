@@ -72,7 +72,7 @@ export const resumeData: ResumeData = {
     'Platform Architect and technical leader who builds the systems other teams run on. ' +
     "I've scaled infrastructure across on-prem, hybrid, and cloud, and automated deployment and operations " +
     'for thousands of Linux and Windows instances. Most recently I architected an internal AI agent platform, ' +
-    'a custom semantic router orchestrating 16 specialized LLM agents, that has handled 10,000+ ops and ' +
+    'a custom semantic router orchestrating specialized LLM agents, that has handled 10,000+ ops and ' +
     'engineering tasks and cut change lead time by ~89%. I lead ops and SRE teams, drive observability with ' +
     'OpenTelemetry and PagerDuty, and turn slow, manual operations into fast, repeatable automation.',
 
@@ -84,7 +84,7 @@ export const resumeData: ResumeData = {
       title: 'Operations Team Lead',
       company: 'AssetWorks',
       bullets: [
-        'Architected and built an internal AI agent platform on the Model Context Protocol: 16 specialized LLM agents coordinated by a custom semantic router (fine-tuned sentence-transformer embeddings with pgvector knowledge retrieval). It handled 10,000+ routed ops and engineering tasks in its first 12 weeks across deployment, cloud, CI/CD, and incident response.',
+        'Architected and built an internal AI agent platform on the Model Context Protocol: specialized LLM agents coordinated by a custom semantic router (fine-tuned sentence-transformer embeddings with pgvector knowledge retrieval). It handled 10,000+ routed ops and engineering tasks in its first 12 weeks across deployment, cloud, CI/CD, and incident response.',
         'Cut change lead time by ~89% after launch. Customer upgrades dropped from ~27 days to under 3 days, and provisioning of new environments from ~12 days to ~1.5 days, declining every month after going live (DORA lead time for changes).',
         'Delivered 235 Ansible and CI/CD pipelines built by the agents and automated 213 customer upgrade deployments, eliminating ~426 hours of manual deploy work, at 99.99% platform uptime.',
         'Designed multi-agent incident workflows that investigate and remediate across the fleet in a single session. They caught a bug that was deleting configuration fleet-wide and identified the root cause of an OS update and API regression that would otherwise take hours of manual log correlation.',

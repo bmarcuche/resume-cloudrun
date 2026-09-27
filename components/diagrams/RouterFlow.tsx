@@ -23,7 +23,7 @@ export default function RouterFlow() {
         <rect x="372" y="30" width="100" height="26" rx="5" className="node" />
         <text x="382" y="47" className="tiny">agent 1</text>
         <rect x="372" y="62" width="100" height="26" rx="5" className="node" />
-        <text x="382" y="79" className="tiny">agent 19</text>
+        <text x="382" y="79" className="tiny">agent n</text>
         <rect x="372" y="94" width="100" height="26" rx="5" className="node" />
         <text x="382" y="111" className="tiny">LLM fallback</text>
         <path d="M422 120 V142 H161 V131" className="edge" strokeDasharray="3 3" />
@@ -45,7 +45,7 @@ export default function RouterFlow() {
         <rect x="10" y="204" width="100" height="30" rx="5" className="node" />
         <text x="22" y="223" className="tiny">agent 1</text>
         <rect x="130" y="204" width="100" height="30" rx="5" className="node" />
-        <text x="142" y="223" className="tiny">agent 19</text>
+        <text x="142" y="223" className="tiny">agent n</text>
         <rect x="250" y="204" width="100" height="30" rx="5" className="node" />
         <text x="262" y="223" className="tiny">LLM fallback</text>
         <path d="M300 234 V268 H352 V90 H340" className="edge" strokeDasharray="3 3" />

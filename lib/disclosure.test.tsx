@@ -28,6 +28,9 @@ describe('disclosure policy', () => {
     const { container } = render(createElement(Home))
     const text = container.textContent ?? ''
     expect(findViolations([text])).toEqual([])
+    // The orchestrator is described as multi-agent, never by a count that drifts.
+    expect(text).not.toMatch(/\b\d+\s+(specialist|specialized)\s+(LLM\s+)?agents/)
+    expect(text).not.toMatch(/agent 19/)
     // Headcount is checked on positioning copy only (practice, SITE, systems); the
     // resume bullet "Lead a team of five" is factual resume content the user keeps.
   })

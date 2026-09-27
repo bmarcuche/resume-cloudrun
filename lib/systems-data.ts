@@ -65,7 +65,7 @@ export const systems: System[] = [
   {
     id: 'agent-platform',
     title: 'Internal AI agent platform',
-    subtitle: 'Semantic router and MCP gateway in front of 19 specialist agents',
+    subtitle: 'Semantic router and MCP gateway in front of a fleet of specialist agents',
     status: [
       { label: 'In production', tone: 'ok' },
       { label: 'Since 12/2024', tone: 'info' },
