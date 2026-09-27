@@ -3,7 +3,8 @@
 **Date:** 2026-09-26
 **Branch:** `platform-architect`
 **Status:** Approved direction (mockup), spec pending user review
-**Mockup:** https://claude.ai/artifact/89372n3Z9My4QSkRdsF4kr
+**Desktop mockup:** https://claude.ai/artifact/89372n3Z9My4QSkRdsF4kr
+**Mobile mockup:** https://claude.ai/artifact/Nz5zAsp9ncwoB4ne8aLo5j (playable game)
 
 ## Problem
 
@@ -104,6 +105,22 @@ Single page at `/`, in this order. Anchor ids in parentheses.
 9. **Deploys** (`#deploys`). Six-step pipeline with green dots, latest run line,
    link to `/workflows`.
 10. **Footer.** Name and year, source link, LinkedIn, email in mono.
+
+### Mobile rules (from the mobile mockup)
+
+- Top bar keeps brand, PDF button and theme toggle. Section links live only in the
+  bottom tab bar: Systems, Outcomes, Experience, Deploys, with scroll-spy.
+- Hero stacks. The platform map sits below the thesis inside a horizontal scroll
+  container at its desktop width, with a "scroll to see all" caption. Diagrams in
+  system rows do the same (min-width 440px inside `overflow-x: auto`). Nothing
+  shrinks below readable size and the page never scrolls sideways.
+- Status strip is a two-column grid. Outcomes are a two-column grid.
+- The Toolbox section renders `TechTileGame` on phones, replacing the tag lists,
+  with a progress counter ("n / 7"), a hint line, and a row of solved-group chips.
+  Rules, toast queue, 24-hour unlock cookie, and the theme toggle popover are
+  unchanged from the 2026-06-10 game spec. The winner palette is mapped onto the
+  new token names (canvas `#CFE8FF`, band `#FFE9A8`, accent `#E11D48`, hero
+  `#1F6FD0`) and keeps the drifting star background.
 
 "Current Setup" is removed from the home page. Its data (`SETUP_CATEGORIES`) stays
 in `lib/tech-data.ts` for the game; it is no longer rendered.
