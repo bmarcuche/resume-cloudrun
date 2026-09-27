@@ -1955,7 +1955,7 @@ button.tech-tile {
 .fig-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 10px; }
 .metric-tile { padding: 10px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; min-width: 0; }
 .metric-value { display: block; font-family: var(--font-display), 'Archivo', system-ui, sans-serif; font-stretch: 112%; font-weight: 700; font-size: 1.25rem; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums; }
-.metric-label { font-size: 0.76rem; color: var(--muted); display: block; margin-top: 4px; }
+.metric-label { font-size: 0.76rem; color: var(--muted); display: block; margin-top: 4px; text-transform: none; letter-spacing: 0; font-family: var(--font-body), system-ui, sans-serif; }
 @media (max-width: 860px) {
   .sys { grid-template-columns: 1fr; }
   .sys-flip .sys-text { order: 0; }
