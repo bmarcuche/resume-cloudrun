@@ -2,23 +2,20 @@ import type { ReactNode } from 'react'
 import { resumeData } from '../../lib/resume-data'
 import { SITE } from '../../lib/site'
 
-// One-line summaries shown in the collapsed row. Keyed by company so the
-// resume bullets stay the single source of truth for detail.
+// One-line summaries shown in the collapsed row, keyed by role so two roles at
+// the same company stay distinct. Resume bullets remain the source of detail.
 const ONE_LINERS: Record<string, string> = {
-  AssetWorks: 'Architected the AI agent platform, HEN, HAM and GhostWatch.',
-  EdventureTrek:
+  'AssetWorks|Platform Architect':
+    'Architect of the hosting platform: agentic automation, fleet tooling, environment inventory, incident root cause.',
+  'AssetWorks|Operations Team Lead': 'Built the AI agent platform, HEN, HAM and GhostWatch. Led the operations team.',
+  'EdventureTrek|Backend Developer, Founder':
     'Educational exploration game. Python/FastAPI backend, custom taxonomy GPTs, CI/CD on GCP.',
-  AnswerRocket: 'Led a remote SRE team on AWS. Supported SOC 2 with automated environment validation.',
-  'OfficeSpace Software':
+  'AnswerRocket|Site Reliability Engineering Manager':
+    'Led a remote SRE team on AWS. Supported SOC 2 with automated environment validation.',
+  'OfficeSpace Software|Site Reliability Architect':
     'Owned production on GCP. Rackspace to GCP migration, CI pipeline, Slackbot deploys under 10 minutes.',
-  'Hewlett Packard':
+  'Hewlett Packard|Sr. Technical Consultant / Team Lead':
     'Tier 3 for HP Server Automation. Python automation on the HPSA API. Ranked first for customer satisfaction.',
-}
-
-// The current role reads as Platform Architect on the timeline; the PDF keeps
-// the employer's title from resume-data.
-const TITLE_OVERRIDES: Record<string, string> = {
-  AssetWorks: 'Operations Team Lead, Platform Architect',
 }
 
 function Entry({
@@ -76,8 +73,8 @@ export default function Timeline() {
               key={`${job.company}-${job.start}`}
               when={`${job.start} to ${job.end}`}
               who={job.company}
-              role={TITLE_OVERRIDES[job.company] ?? job.title}
-              one={`${ONE_LINERS[job.company] ?? ''} ${job.location}.`.trim()}
+              role={job.title}
+              one={`${ONE_LINERS[`${job.company}|${job.title}`] ?? ''} ${job.location}.`.trim()}
               open={i === 0}
             >
               <ul>
