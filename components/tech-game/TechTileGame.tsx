@@ -53,6 +53,9 @@ export default function TechTileGame() {
   }, [baseTiles])
 
   const [state, setState] = useState<GameState>(initGame)
+  const [hint, setHint] = useState(
+    'A wrong tap clears your current picks. Solved groups stay locked. Solve them all for a surprise.',
+  )
 
   // Toast queue: each solved category shows briefly, then fades, then the next plays.
   const [toast, setToast] = useState({ text: '', finale: false, visible: false })
@@ -84,10 +87,12 @@ export default function TechTileGame() {
   const onTap = (tile: Tile) => {
     const result = tapTile(state, { name: tile.name, category: tile.category }, total, (c) => sizes[c])
     setState(result.state)
+    if (result.event.kind === 'reset') setHint('Not the same group. Picks cleared; solved groups stay.')
     if (result.event.kind === 'solved') {
       enqueue(result.event.category)
     } else if (result.event.kind === 'won') {
       enqueue('New theme unlocked!', true)
+      setHint('All groups solved. Winner theme unlocked for 24 hours and added to the theme toggle.')
       setUnlocked()
       try {
         localStorage.setItem('theme', 'winner')
@@ -101,7 +106,14 @@ export default function TechTileGame() {
 
   return (
     <div className="md:hidden">
-      <div className="grid grid-cols-3 gap-2 max-w-md mx-auto">
+      <div className="game-head">
+        <p className="pa-lede" style={{ marginTop: 0 }}>
+          {total} hidden groups. Tap tiles that belong together.
+        </p>
+        <span className="game-prog">{`${state.solved.length} / ${total}`}</span>
+      </div>
+      <p className="game-hint">{hint}</p>
+      <div className="grid grid-cols-3 gap-2 max-w-md mx-auto mt-4">
         {tiles.map((tile) => {
           const selected = state.streak.includes(tile.name)
           const solved = state.solved.includes(tile.category)
@@ -121,6 +133,11 @@ export default function TechTileGame() {
             </button>
           )
         })}
+      </div>
+      <div className="game-solved" aria-label="Solved groups" aria-live="polite">
+        {state.solved.map((c) => (
+          <span key={c}>{c}</span>
+        ))}
       </div>
       <CelebrationToast text={toast.text} visible={toast.visible} finale={toast.finale} />
     </div>
