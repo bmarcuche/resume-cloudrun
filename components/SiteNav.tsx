@@ -11,6 +11,7 @@ import {
   CpuChipIcon,
 } from '@heroicons/react/24/outline'
 import { resumeData } from '../lib/resume-data'
+import { SITE } from '../lib/site'
 import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = [
@@ -27,9 +28,9 @@ const TABS = [
   { href: '/workflows', label: 'Deployment', id: '', Icon: ServerStackIcon },
 ]
 
-const RESUME_PDF = '/resume/bruno_marcuche_resume.pdf'
-const RESUME_PDF_NAME = 'Bruno Marcuche SRE Resume.pdf'
-const NAV_TITLE = 'SRE · AIOPs'
+const RESUME_PDF = SITE.pdfPath
+const RESUME_PDF_NAME = SITE.pdfName
+const NAV_TITLE = SITE.navCaption
 
 export default function SiteNav() {
   const { name } = resumeData
