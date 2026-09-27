@@ -112,10 +112,10 @@ export default function WorkflowsPage() {
       <div className="container mx-auto px-4 py-10 pt-16 md:pt-10 max-w-6xl">
         {/* Page header */}
         <div className="mb-8">
-          <p className="section-eyebrow">{'// CONTINUOUS DEPLOYMENT'}</p>
+          <p className="section-eyebrow">{'// DEPLOYS'}</p>
           <div className="flex flex-wrap items-end justify-between gap-4 mt-2">
             <div>
-              <h1 className="section-heading">Deployment Pipeline</h1>
+              <h1 className="section-heading">Deploy history</h1>
               <p className="section-lede mt-2 max-w-2xl">
                 Every push to <span className="run-mono text-accent-teal">main</span> ships this site to
                 Cloud Run automatically. Live GitHub Actions runs below.

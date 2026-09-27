@@ -13,6 +13,7 @@ import {
   ComputerDesktopIcon,
   CommandLineIcon,
   ServerStackIcon,
+  EyeIcon,
 } from '@heroicons/react/24/outline'
 import {
   siGooglecloud,
@@ -95,6 +96,7 @@ export const TECH_CATEGORIES: TechCategory[] = [
       { name: 'Prometheus', Icon: fromBrand(siPrometheus) },
       { name: 'OpenTelemetry', Icon: fromBrand(siOpentelemetry) },
       { name: 'PagerDuty', Icon: fromBrand(siPagerduty) },
+      { name: 'Observe', Icon: EyeIcon },
     ],
   },
   {
@@ -106,6 +108,8 @@ export const TECH_CATEGORIES: TechCategory[] = [
       { name: 'pgvector', Icon: CircleStackIcon },
       { name: 'Claude', Icon: fromBrand(siClaude) },
       { name: 'Amazon Kiro', Icon: SparklesIcon },
+      { name: 'Microsoft Foundry', Icon: SparklesIcon },
+      { name: 'Azure SRE Agent', Icon: EyeIcon },
     ],
   },
   {

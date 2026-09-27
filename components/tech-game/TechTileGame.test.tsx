@@ -43,3 +43,12 @@ describe('TechTileGame integration', () => {
     expect(document.documentElement.getAttribute('data-theme')).not.toBe('winner')
   })
 })
+
+describe('TechTileGame progress UI', () => {
+  it('shows progress, a hint, and solved chips', () => {
+    render(<TechTileGame />)
+    expect(screen.getByText(`0 / ${TECH_CATEGORIES.length}`)).toBeInTheDocument()
+    expect(screen.getByText(/A wrong tap clears/)).toBeInTheDocument()
+    expect(screen.getByLabelText('Solved groups')).toBeEmptyDOMElement()
+  })
+})

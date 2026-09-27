@@ -27,7 +27,7 @@ jest.mock('next/router', () => ({
 process.env.NODE_ENV = 'test'
 
 // Mock IntersectionObserver used by scroll-reveal components
-if (!window.IntersectionObserver) {
+if (typeof window !== 'undefined' && !window.IntersectionObserver) {
   window.IntersectionObserver = class {
     observe() {}
     unobserve() {}
@@ -39,7 +39,7 @@ if (!window.IntersectionObserver) {
 }
 
 // Mock matchMedia used in components
-if (!window.matchMedia) {
+if (typeof window !== 'undefined' && !window.matchMedia) {
   window.matchMedia = function matchMedia() {
     return {
       matches: false,
@@ -52,4 +52,17 @@ if (!window.matchMedia) {
       dispatchEvent: jest.fn(),
     }
   }
+}
+
+// next/font/google fetches font files at build time; stub it for tests
+jest.mock('next/font/google', () => ({
+  Archivo: () => ({ variable: '--font-display', className: 'font-display' }),
+  IBM_Plex_Sans: () => ({ variable: '--font-body', className: 'font-body' }),
+  IBM_Plex_Mono: () => ({ variable: '--font-mono', className: 'font-mono' }),
+}))
+
+// jsdom ships no fetch. Default to a rejecting stub so client components take
+// their offline fallback; individual tests spy on global.fetch to override.
+if (typeof global.fetch === 'undefined') {
+  global.fetch = () => Promise.reject(new Error('fetch is not available in tests'))
 }

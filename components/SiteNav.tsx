@@ -5,31 +5,34 @@ import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import {
   ArrowDownTrayIcon,
-  DocumentTextIcon,
   RectangleStackIcon,
+  ChartBarIcon,
+  BriefcaseIcon,
   ServerStackIcon,
-  CpuChipIcon,
 } from '@heroicons/react/24/outline'
 import { resumeData } from '../lib/resume-data'
+import { SITE } from '../lib/site'
 import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = [
-  { href: '/#resume', label: 'Resume' },
-  { href: '/#projects', label: 'Projects' },
-  { href: '/#technologies', label: 'Technologies' },
-  { href: '/workflows', label: 'Deployment' },
+  { href: '/#systems', label: 'Systems' },
+  { href: '/#outcomes', label: 'Outcomes' },
+  { href: '/#practice', label: 'How I work' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#toolbox', label: 'Toolbox' },
+  { href: '/#deploys', label: 'Deploys' },
 ]
 
 const TABS = [
-  { href: '/#resume', label: 'Resume', id: 'resume', Icon: DocumentTextIcon },
-  { href: '/#projects', label: 'Projects', id: 'projects', Icon: RectangleStackIcon },
-  { href: '/#technologies', label: 'Tech', id: 'technologies', Icon: CpuChipIcon },
-  { href: '/workflows', label: 'Deployment', id: '', Icon: ServerStackIcon },
+  { href: '/#systems', label: 'Systems', id: 'systems', Icon: RectangleStackIcon },
+  { href: '/#outcomes', label: 'Outcomes', id: 'outcomes', Icon: ChartBarIcon },
+  { href: '/#experience', label: 'Experience', id: 'experience', Icon: BriefcaseIcon },
+  { href: '/#deploys', label: 'Deploys', id: 'deploys', Icon: ServerStackIcon },
 ]
 
-const RESUME_PDF = '/resume/bruno_marcuche_resume.pdf'
-const RESUME_PDF_NAME = 'Bruno Marcuche SRE Resume.pdf'
-const NAV_TITLE = 'SRE · AIOPs'
+const RESUME_PDF = SITE.pdfPath
+const RESUME_PDF_NAME = SITE.pdfName
+const NAV_TITLE = SITE.navCaption
 
 export default function SiteNav() {
   const { name } = resumeData
@@ -55,7 +58,7 @@ export default function SiteNav() {
 
   // Scroll-spy: highlight the bottom tab for the section currently in view.
   useEffect(() => {
-    const ids = ['resume', 'projects', 'technologies']
+    const ids = ['systems', 'outcomes', 'experience', 'deploys']
     const sections = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
@@ -114,7 +117,7 @@ export default function SiteNav() {
             <div className="site-nav-right">
               <a href={RESUME_PDF} download={RESUME_PDF_NAME} className="button-download">
                 <ArrowDownTrayIcon className="h-4 w-4" />
-                <span>Download PDF</span>
+                <span>Resume PDF</span>
               </a>
               <ThemeToggle />
             </div>
@@ -125,10 +128,7 @@ export default function SiteNav() {
       {/* Mobile bottom tab bar */}
       <nav className="bottom-nav md:hidden" aria-label="Sections">
         {TABS.map((tab) => {
-          const isActive =
-            pathname === '/workflows'
-              ? tab.href === '/workflows'
-              : tab.id !== '' && active === tab.id
+          const isActive = pathname !== '/workflows' && active === tab.id
           const Icon = tab.Icon
           return (
             <a
