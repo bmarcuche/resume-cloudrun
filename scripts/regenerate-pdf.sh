@@ -20,9 +20,17 @@ TEXT=$(pdftotext "$TMP" -)
 echo "$TEXT" | grep -q "Professional Experience" || { echo "PDF missing resume content; not replacing"; exit 1; }
 echo "$TEXT" | grep -q "Key Skills" || { echo "PDF missing Key Skills; not replacing"; exit 1; }
 if echo "$TEXT" | grep -qE "Systems I own|How I work|Toolbox|platform too"; then echo "Screen section leaked into PDF"; exit 1; fi
-if echo "$TEXT" | grep -E "350|150\+|government|FA-EAM|Oracle SID|WinRM|561-284|Open to"; then
+# Word integrity: the text layer must keep whole words (kerning/ligature splits break ATS parsing).
+for WORD in "Platform Architect" "Terraform" "PagerDuty" "engineering"; do
+  echo "$TEXT" | grep -q "$WORD" || { echo "PDF text layer lost the word '$WORD'; not replacing"; exit 1; }
+done
+# Disclosure: the banned list lives in lib/disclosure.ts; read it from there.
+BANNED_FILE=$(mktemp)
+node -e "const s=require('fs').readFileSync('lib/disclosure.ts','utf8');const m=s.match(/BANNED = \[([\s\S]*?)\]/)[1];console.log(m.match(/'([^']+)'/g).map(x=>x.slice(1,-1)).join('\n'))" > "$BANNED_FILE"
+if echo "$TEXT" | grep -F -f "$BANNED_FILE"; then
   echo "Disclosure violation in PDF"; exit 1
 fi
+rm -f "$BANNED_FILE"
 mv "$TMP" public/resume/bruno_marcuche_resume.pdf
 pdfinfo public/resume/bruno_marcuche_resume.pdf | grep Pages
 echo "PDF regenerated"

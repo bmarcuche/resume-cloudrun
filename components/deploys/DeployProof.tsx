@@ -27,7 +27,9 @@ export default function DeployProof() {
     let cancelled = false
     fetch('/api/workflows')
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((data: { workflow_runs?: Run[] }) => {
+      .then((data: { source?: string; workflow_runs?: Run[] }) => {
+        // The API answers 200 with canned runs when GitHub is unavailable; only live data counts.
+        if (data.source !== 'github') return
         const first = data.workflow_runs?.[0]
         if (!cancelled && first && typeof first.run_number === 'number') setRun(first)
       })

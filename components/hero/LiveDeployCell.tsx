@@ -11,7 +11,9 @@ export default function LiveDeployCell() {
     let cancelled = false
     fetch('/api/workflows')
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((data: { workflow_runs?: { run_number?: number }[] }) => {
+      .then((data: { source?: string; workflow_runs?: { run_number?: number }[] }) => {
+        // The API answers 200 with canned runs when GitHub is unavailable; only live data counts.
+        if (data.source !== 'github') return
         const n = data.workflow_runs?.[0]?.run_number
         if (!cancelled && typeof n === 'number') setRun(n)
       })

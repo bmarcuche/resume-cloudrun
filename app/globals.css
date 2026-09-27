@@ -2090,9 +2090,15 @@ button.tech-tile {
     background-image: none !important;
   }
 
+  /* A plain system sans without kerning or ligatures: Plex + Chromium's print
+     path split words at f/g in the PDF text layer, which breaks ATS parsing. */
   .resume-document,
   .resume-document * {
     color: #000000 !important;
+    font-family: Roboto, Arial, Helvetica, system-ui, sans-serif !important;
+    font-kerning: none;
+    font-variant-ligatures: none;
+    text-rendering: optimizeSpeed;
   }
 
   /* Strip the "paper" styling so it prints as a plain document */

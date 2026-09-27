@@ -1,4 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, render, screen, waitFor } from '@testing-library/react'
+
+const flush = () => act(() => new Promise<void>((r) => setTimeout(r, 0)))
 import Hero from './Hero'
 import StatusStrip from './StatusStrip'
 import LiveDeployCell from './LiveDeployCell'
@@ -27,7 +29,7 @@ describe('StatusStrip', () => {
 describe('LiveDeployCell', () => {
   afterEach(() => jest.restoreAllMocks())
   it('shows the latest run number', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({ ok: true, json: async () => ({ workflow_runs: [{ run_number: 101 }] }) } as Response)
+    jest.spyOn(global, 'fetch').mockResolvedValue({ ok: true, json: async () => ({ source: 'github', workflow_runs: [{ run_number: 101 }] }) } as Response)
     render(<LiveDeployCell />)
     await waitFor(() => expect(screen.getByText('v101')).toBeInTheDocument())
   })
@@ -37,6 +39,14 @@ describe('LiveDeployCell', () => {
     expect(screen.getByText('live')).toBeInTheDocument()
     await waitFor(() => expect(screen.getByText('this site, deployed by CI')).toBeInTheDocument())
     expect(screen.queryByText(/undefined/)).toBeNull()
+  })
+  it('ignores the API fallback payload and keeps the static label', async () => {
+    jest.spyOn(global, 'fetch').mockResolvedValue({ ok: true, json: async () => ({ source: 'fallback', workflow_runs: [{ run_number: 27 }] }) } as Response)
+    render(<LiveDeployCell />)
+    await flush()
+    await flush()
+    expect(screen.getByText('live')).toBeInTheDocument()
+    expect(screen.queryByText('v27')).toBeNull()
   })
   it('falls back on an empty run list', async () => {
     jest.spyOn(global, 'fetch').mockResolvedValue({ ok: true, json: async () => ({ workflow_runs: [] }) } as Response)

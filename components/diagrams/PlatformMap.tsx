@@ -33,25 +33,25 @@ export default function PlatformMap() {
         <rect x="12" y="76" width="118" height="30" rx="6" className="node" />
         <text x="22" y="95" className="lbl">CI / pipelines</text>
         <rect x="12" y="118" width="118" height="30" rx="6" className="node" />
-        <text x="22" y="137" className="lbl">incident signals</text>
+        <text x="22" y="137" className="lbl">incidents</text>
         <path d="M130 49 H172 V91 M130 91 H172 M130 133 H172 V91" className="edge" />
         <path d="M172 91 H206" className="edge hot" markerEnd="url(#mw-hot)" />
-        <rect x="208" y="52" width="140" height="78" rx="8" className="node hot" />
+        <rect x="208" y="52" width="176" height="78" rx="8" className="node hot" />
         <text x="222" y="76" className="lbl">semantic router</text>
         <text x="222" y="93" className="tiny">bi-encoder + cross-encoder</text>
-        <text x="222" y="107" className="tiny">pgvector retrieval, &lt;100 ms</text>
+        <text x="222" y="107" className="tiny">pgvector retrieval, &lt;100ms</text>
         <text x="222" y="121" className="tiny">MCP tool gateway</text>
-        <path d="M348 91 H386" className="edge hot" markerEnd="url(#mw-hot)" />
-        <rect x="388" y="40" width="160" height="100" rx="8" className="node hot" />
-        <text x="402" y="62" className="lbl">19 specialist agents</text>
-        <text x="402" y="80" className="tiny">deploy   cloud   pipelines</text>
-        <text x="402" y="94" className="tiny">access   database   monitoring</text>
-        <text x="402" y="108" className="tiny">incident   windows   linux</text>
-        <text x="402" y="126" className="tiny">268 scoped tools</text>
+        <path d="M384 91 H394" className="edge hot" markerEnd="url(#mw-hot)" />
+        <rect x="396" y="40" width="152" height="100" rx="8" className="node hot" />
+        <text x="408" y="62" className="lbl">19 specialist agents</text>
+        <text x="408" y="80" className="tiny">deploy  cloud  CI/CD</text>
+        <text x="408" y="94" className="tiny">access  data  monitor</text>
+        <text x="408" y="108" className="tiny">incident  os  network</text>
+        <text x="408" y="126" className="tiny">268 scoped tools</text>
         <rect x="12" y="186" width="536" height="126" rx="10" className="band" />
         <text x="24" y="206" className="tiny">hosted platform, multi-tenant, 99.99% uptime</text>
-        <path d="M468 140 V182" className="edge hot" markerEnd="url(#mw-hot)" />
-        <text x="476" y="166" className="tiny">act</text>
+        <path d="M472 140 V182" className="edge hot" markerEnd="url(#mw-hot)" />
+        <text x="480" y="166" className="tiny">act</text>
         <rect x="24" y="220" width="150" height="72" rx="8" className="node" />
         <text x="36" y="242" className="lbl">HEN</text>
         <text x="36" y="258" className="tiny">fleet system of record</text>
@@ -61,9 +61,10 @@ export default function PlatformMap() {
         <text x="208" y="258" className="tiny">just-in-time access</text>
         <text x="208" y="272" className="tiny">0 standing credentials</text>
         <rect x="368" y="220" width="168" height="72" rx="8" className="node ok" />
-        <text x="380" y="242" className="lbl">GhostWatch</text>
-        <text x="380" y="258" className="tiny">detect, plan, build, investigate</text>
-        <text x="380" y="272" className="tiny">Foundry + Azure SRE Agent</text>
+        <text x="380" y="240" className="lbl">GhostWatch</text>
+        <text x="380" y="256" className="tiny">detect, plan, build,</text>
+        <text x="380" y="270" className="tiny">investigate</text>
+        <text x="380" y="284" className="tiny">Foundry + Azure SRE Agent</text>
         <path d="M452 220 V172 H100 V150" className="edge ok" markerEnd="url(#mw-ok)" />
         <text x="250" y="168" className="tiny">incidents feed back in</text>
         <path d="M174 256 H190 V120 H206" className="edge" markerEnd="url(#mw-dim)" />
@@ -76,9 +77,9 @@ export default function PlatformMap() {
         <rect x="12" y="22" width="108" height="30" rx="6" className="node" />
         <text x="22" y="41" className="lbl">engineers</text>
         <rect x="126" y="22" width="108" height="30" rx="6" className="node" />
-        <text x="136" y="41" className="lbl">CI / pipelines</text>
+        <text x="136" y="41" className="lbl">CI pipelines</text>
         <rect x="240" y="22" width="108" height="30" rx="6" className="node" />
-        <text x="248" y="41" className="lbl">incident signals</text>
+        <text x="250" y="41" className="lbl">incidents</text>
         <path d="M66 52 V64 H294 V52 M180 52 V64" className="edge" />
         <path d="M180 64 V78" className="edge hot" markerEnd="url(#mt-hot)" />
         <rect x="30" y="80" width="300" height="70" rx="8" className="node hot" />

@@ -1,6 +1,11 @@
 import { BANNED, collectStrings, findViolations } from './disclosure'
 import { resumeData } from './resume-data'
 import { metadata } from '../app/layout'
+import { practice } from './practice-data'
+import { SITE } from './site'
+import { render } from '@testing-library/react'
+import { createElement } from 'react'
+import Home from '../app/page'
 
 describe('disclosure policy', () => {
   it('collects nested strings', () => {
@@ -14,6 +19,17 @@ describe('disclosure policy', () => {
   })
   it('page metadata is clean', () => {
     expect(findViolations(collectStrings(metadata))).toEqual([])
+  })
+  it('practice data and site constants are clean', () => {
+    expect(findViolations(collectStrings(practice))).toEqual([])
+    expect(findViolations(collectStrings(SITE))).toEqual([])
+  })
+  it('the rendered home page is clean', () => {
+    const { container } = render(createElement(Home))
+    const text = container.textContent ?? ''
+    expect(findViolations([text])).toEqual([])
+    // Headcount is checked on positioning copy only (practice, SITE, systems); the
+    // resume bullet "Lead a team of five" is factual resume content the user keeps.
   })
   it('banned list is the one from the spec', () => {
     expect(BANNED).toEqual(['350', '150+', 'government', 'FA-EAM', 'FA/EAM', 'Oracle SID', 'WinRM', 'Zendesk', 'DigiCert', 'Bastion', 'CAB or Jira', '32 servers', '561-284', 'Open to'])
