@@ -110,10 +110,14 @@ Single page at `/`, in this order. Anchor ids in parentheses.
 
 - Top bar keeps brand, PDF button and theme toggle. Section links live only in the
   bottom tab bar: Systems, Outcomes, Experience, Deploys, with scroll-spy.
-- Hero stacks. The platform map sits below the thesis inside a horizontal scroll
-  container at its desktop width, with a "scroll to see all" caption. Diagrams in
-  system rows do the same (min-width 440px inside `overflow-x: auto`). Nothing
-  shrinks below readable size and the page never scrolls sideways.
+- **No horizontal scrolling on phones, ever.** No element may show a horizontal
+  scrollbar at any width below 700px, including inside a panel. `overflow-x: auto`
+  is not an acceptable fallback for anything on the mobile layout.
+- Hero stacks. Every diagram has two SVG variants: a wide one for desktop and a
+  tall (vertical flow) one for phones, both drawn from the same tokens. The tall
+  variant is at most 360px wide and renders below 700px; the wide one renders
+  above. `PlatformMap`, `RouterFlow`, `GhostWatchFlow`, `DiscoveryFlow` and
+  `AccessFlow` each export both. Labels are sized so nothing touches a box edge.
 - Status strip is a two-column grid. Outcomes are a two-column grid.
 - The Toolbox section renders `TechTileGame` on phones, replacing the tag lists,
   with a progress counter ("n / 7"), a hint line, and a row of solved-group chips.
@@ -272,7 +276,7 @@ components/hero/Hero.tsx             name, role, thesis, CTAs, contact, Platform
 components/hero/StatusStrip.tsx      six cells; client component for the live deploy cell
 components/systems/SystemsSection.tsx
 components/systems/SystemRow.tsx     one row; picks the diagram by key
-components/diagrams/*.tsx            five SVG components
+components/diagrams/*.tsx            five SVG components, each with wide and tall variants
 components/outcomes/OutcomesSection.tsx
 components/practice/PracticeSection.tsx
 components/experience/Timeline.tsx   details/summary per role, from resumeData
