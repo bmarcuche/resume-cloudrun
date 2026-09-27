@@ -2134,6 +2134,25 @@ button.tech-tile {
     text-decoration: none !important;
   }
 
+  /* Key Skills: inline wrapped list instead of the on-screen grid, so the
+     section takes a few lines rather than most of a page. */
+  .skills-tag-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 0.9rem;
+    justify-content: flex-start;
+  }
+  .skills-tag-grid .tag {
+    font-size: 0.8rem;
+  }
+  .resume-print-only .text-center {
+    text-align: left !important;
+  }
+  .skills-tag-grid + *,
+  .resume-print-only .space-y-5 > * {
+    margin-top: 0.35rem !important;
+  }
+
   /* Tighten spacing and avoid awkward page breaks */
   .resume-section {
     margin-bottom: 0.9rem !important;

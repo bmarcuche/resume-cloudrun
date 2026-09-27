@@ -9,7 +9,13 @@ CHROME="${CHROME:-$(ls -d ~/.cache/ms-playwright/chromium_headless_shell-*/chrom
 if fuser "$PORT/tcp" >/dev/null 2>&1; then echo "Port $PORT busy"; exit 1; fi
 PORT=$PORT npx next start -p "$PORT" >/tmp/regen-pdf.log 2>&1 &
 SERVER=$!
-trap 'pkill -P $SERVER 2>/dev/null; kill $SERVER 2>/dev/null' EXIT
+# next start runs under npx; kill the listener on the port, not just the wrapper.
+cleanup() {
+  LISTENER=$(ss -ltnp 2>/dev/null | grep -E ":$PORT\s" | grep -oE "pid=[0-9]+" | head -1 | cut -d= -f2)
+  [ -n "$LISTENER" ] && kill "$LISTENER" 2>/dev/null
+  kill "$SERVER" 2>/dev/null || true
+}
+trap cleanup EXIT
 for _ in $(seq 1 40); do curl -sf "http://localhost:$PORT/api/health" >/dev/null && break; sleep 1; done
 TMP=$(mktemp --suffix=.pdf)
 "$CHROME" --headless --no-sandbox --disable-gpu --no-pdf-header-footer \
@@ -31,6 +37,8 @@ if echo "$TEXT" | grep -F -f "$BANNED_FILE"; then
   echo "Disclosure violation in PDF"; exit 1
 fi
 rm -f "$BANNED_FILE"
+PAGES=$(pdfinfo "$TMP" | awk '/^Pages:/{print $2}')
+[ "$PAGES" -le 3 ] || { echo "PDF is $PAGES pages; the resume must fit in 3. Trim lib/resume-data.ts."; exit 1; }
 mv "$TMP" public/resume/bruno_marcuche_resume.pdf
 pdfinfo public/resume/bruno_marcuche_resume.pdf | grep Pages
 echo "PDF regenerated"
