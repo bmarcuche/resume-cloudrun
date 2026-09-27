@@ -19,3 +19,8 @@ it('print renders the resume in a font whose text layer extracts cleanly', () =>
   expect(print).toMatch(/\.resume-document[^{]*\{[^}]*font-kerning: none/)
   expect(doc.length).toBeGreaterThan(0)
 })
+
+it('print lays the key skills out inline so the resume fits three pages', () => {
+  expect(print).toMatch(/\.skills-tag-grid\s*\{[^}]*display: flex/)
+  expect(print).toMatch(/\.skills-tag-grid\s*\{[^}]*flex-wrap: wrap/)
+})

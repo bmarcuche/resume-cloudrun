@@ -99,11 +99,11 @@ export const resumeData: ResumeData = {
       title: 'Operations Team Lead',
       company: 'AssetWorks',
       bullets: [
-        'Architected and built an internal AI agent platform on the Model Context Protocol: specialized LLM agents coordinated by a custom semantic router (fine-tuned sentence-transformer embeddings with pgvector knowledge retrieval). It handled 10,000+ routed ops and engineering tasks in its first 12 weeks across deployment, cloud, CI/CD, and incident response.',
-        'Cut change lead time by ~89% after launch. Customer upgrades dropped from ~27 days to under 3 days, and provisioning of new environments from ~12 days to ~1.5 days, declining every month after going live (DORA lead time for changes).',
-        'Delivered 235 Ansible and CI/CD pipelines built by the agents and automated 213 customer upgrade deployments, eliminating ~426 hours of manual deploy work, at 99.99% platform uptime.',
-        'Designed multi-agent incident workflows that investigate and remediate across the fleet in a single session. They caught a bug that was deleting configuration fleet-wide and identified the root cause of an OS update and API regression that would otherwise take hours of manual log correlation.',
-        'Lead a team of five; drove an observability rollout (OpenTelemetry and Observe) to reduce MTTR and mentor engineers through 1:1s, training, and knowledge sharing.',
+        'Built an internal AI agent platform on the Model Context Protocol: specialized LLM agents behind a custom semantic router (fine-tuned sentence-transformer embeddings, pgvector retrieval). 10,000+ routed ops and engineering tasks in its first 12 weeks.',
+        'Cut change lead time ~89% (DORA): customer upgrades from ~27 days to under 3, new environments from ~12 days to ~1.5.',
+        'Delivered 235 agent-built Ansible and CI/CD pipelines and automated 213 upgrade deployments, removing ~426 hours of manual deploy work at 99.99% platform uptime.',
+        'Designed multi-agent incident workflows that caught a fleet-wide config-deletion bug and root-caused an OS update and API regression in a single session.',
+        'Led a team of five; rolled out OpenTelemetry and Observe to cut MTTR; mentored through 1:1s and training.',
       ],
     },
     {
@@ -113,10 +113,8 @@ export const resumeData: ResumeData = {
       title: 'Backend Developer, Founder',
       company: 'EdventureTrek',
       bullets: [
-        'Founded and led development of an educational game focused on outdoor exploration and biodiversity.',
-        'Designed custom taxonomy GPTs for plant and animal classification.',
-        'Built Python/FastAPI backend with MySQL and event logging.',
-        'Managed CI/CD on GCP with GitHub Actions and internal tooling.',
+        'Founded an educational exploration game; designed custom taxonomy GPTs for plant and animal classification.',
+        'Built the Python/FastAPI backend with MySQL and event logging; ran CI/CD on GCP with GitHub Actions.',
       ],
     },
     {
@@ -126,9 +124,8 @@ export const resumeData: ResumeData = {
       title: 'Site Reliability Engineering Manager',
       company: 'AnswerRocket',
       bullets: [
-        'Led remote SRE team (4 reports); ran weekly syncs and architecture reviews.',
-        'Expanded Ansible coverage across AWS, cutting manual deploy time by 15%.',
-        'Supported SOC 2 audit by automating cloud environment validation.',
+        'Led a remote SRE team of four; ran weekly syncs and architecture reviews.',
+        'Expanded Ansible coverage across AWS (15% less manual deploy time) and automated SOC 2 environment validation.',
       ],
     },
     {
@@ -138,11 +135,9 @@ export const resumeData: ResumeData = {
       title: 'Site Reliability Architect',
       company: 'OfficeSpace Software',
       bullets: [
-        'Led SRE hiring, onboarding and 1:1s for a 3-person team.',
-        'Built Slackbot enabling teams to deploy customer instances in under 10 minutes.',
-        'Reduced deploy times over 60% via CI pipeline (CircleCI, Puppet, Docker, Terraform).',
-        'Migrated infrastructure from Rackspace to GCP, saving $60K annually.',
-        'Owned production and staging infrastructure on GCP; managed OS patching, config management, release packaging, and automation with Puppet and Python.',
+        'Owned production and staging on GCP: patching, config management, release packaging, and automation with Puppet and Python.',
+        'Migrated from Rackspace to GCP, saving $60K annually; cut deploy times over 60% with a CircleCI, Puppet, Docker and Terraform pipeline.',
+        'Built a Slackbot that deploys customer instances in under 10 minutes; hired, onboarded and led a three-person SRE team.',
       ],
     },
     {
@@ -152,9 +147,8 @@ export const resumeData: ResumeData = {
       title: 'Sr. Technical Consultant / Team Lead',
       company: 'Hewlett Packard',
       bullets: [
-        'Delivered Tier 3 support for HP Server Automation; mentored junior engineers.',
-        'Automated workflows by developing Python scripts utilizing the HPSA API.',
-        'Ranked #1 in team for customer satisfaction.',
+        'Tier 3 support for HP Server Automation; automated workflows with Python against the HPSA API.',
+        'Mentored junior engineers; ranked #1 in the team for customer satisfaction.',
       ],
     },
   ],
