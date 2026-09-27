@@ -60,3 +60,9 @@ jest.mock('next/font/google', () => ({
   IBM_Plex_Sans: () => ({ variable: '--font-body', className: 'font-body' }),
   IBM_Plex_Mono: () => ({ variable: '--font-mono', className: 'font-mono' }),
 }))
+
+// jsdom ships no fetch. Default to a rejecting stub so client components take
+// their offline fallback; individual tests spy on global.fetch to override.
+if (typeof global.fetch === 'undefined') {
+  global.fetch = () => Promise.reject(new Error('fetch is not available in tests'))
+}
