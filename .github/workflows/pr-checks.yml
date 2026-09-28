@@ -1,0 +1,61 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [ main ]
+
+# A newer push to the same PR cancels the older, now stale run
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Lint, type-check and test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: npm
+
+    - name: Install dependencies
+      run: npm ci --no-audit --no-fund
+
+    - name: Lint
+      run: npm run lint
+
+    - name: Type-check
+      run: npm run type-check
+
+    - name: Test
+      run: npm run test:ci
+
+  docker:
+    name: Docker build
+    runs-on: ubuntu-latest
+
+    # Builds the production image exactly as the deploy does, without pushing,
+    # so a broken Dockerfile or next build fails here instead of on main.
+    # Reads the deploy's layer cache so unchanged dependencies are not reinstalled.
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: false
+        cache-from: type=gha
