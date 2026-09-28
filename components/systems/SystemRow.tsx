@@ -1,9 +1,11 @@
+import type { ReactNode } from 'react'
 import type { System } from '../../lib/systems-data'
 import { DIAGRAMS } from '../diagrams'
 
 // One system: text on one side, diagram and metric tiles on the other. `flip`
-// puts the figure on the left so consecutive rows alternate.
-export default function SystemRow({ system, flip }: { system: System; flip: boolean }) {
+// puts the figure on the left so consecutive rows alternate. `after` renders
+// full width below both columns.
+export default function SystemRow({ system, flip, after }: { system: System; flip: boolean; after?: ReactNode }) {
   const Diagram = DIAGRAMS[system.diagram]
   return (
     <article className={`sys ${flip ? 'sys-flip' : ''}`} id={`system-${system.id}`}>
@@ -48,6 +50,7 @@ export default function SystemRow({ system, flip }: { system: System; flip: bool
           ))}
         </div>
       </div>
+      {after && <div className="sys-after">{after}</div>}
     </article>
   )
 }

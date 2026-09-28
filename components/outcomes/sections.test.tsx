@@ -1,22 +1,34 @@
 import { render, screen } from '@testing-library/react'
-import OutcomesSection from './OutcomesSection'
+import ImpactStrip from './ImpactStrip'
+import SystemsSection from '../systems/SystemsSection'
 import PracticeSection from '../practice/PracticeSection'
 
-describe('OutcomesSection', () => {
+describe('ImpactStrip', () => {
   it('shows before/after lead times with to-scale bars', () => {
-    const { container } = render(<OutcomesSection />)
+    const { container } = render(<ImpactStrip />)
     expect(screen.getByText(/was ~27 days/)).toBeInTheDocument()
     const bars = container.querySelectorAll('.out-bar')
     expect(bars.length).toBe(2)
     const [before, after] = Array.from(bars[0].querySelectorAll('i')).map((i) => parseFloat((i as HTMLElement).style.width))
     expect(after / before).toBeCloseTo(3 / 27, 1)
   })
-  it('names the agent platform and links back to its card', () => {
-    render(<OutcomesSection />)
-    expect(screen.getByRole('heading', { level: 2, name: 'What changed after the agent platform went live' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'internal AI agent platform' })).toHaveAttribute('href', '#system-agent-platform')
-    // Only the two lead-time cards are DORA lead time; the lede must not claim all four are
+  it('scopes DORA lead time to the two bar cards only', () => {
+    render(<ImpactStrip />)
+    expect(screen.getByRole('heading', { name: 'What changed after launch' })).toBeInTheDocument()
     expect(screen.getByText(/two lead-time cards/)).toBeInTheDocument()
+  })
+  it('lives inside the agent platform card and nowhere else', () => {
+    const { container } = render(<SystemsSection />)
+    const strips = container.querySelectorAll('#outcomes')
+    expect(strips.length).toBe(1)
+    expect(strips[0].closest('article')!.id).toBe('system-agent-platform')
+    // Spans the full card width below the text and the figure
+    expect(strips[0].closest('.sys-after')).not.toBeNull()
+  })
+  it('the agent card does not repeat the pipelines and hours stat from the strip', () => {
+    const { container } = render(<SystemsSection />)
+    const bullets = container.querySelector('#system-agent-platform .sys-outcomes')!.textContent!
+    expect(bullets).not.toMatch(/426 hours/)
   })
 })
 

@@ -88,7 +88,6 @@ export const systems: System[] = [
     outcomes: [
       '95%+ of requests route with no LLM reasoning; classification in under 100 ms on CPU.',
       'Closed-loop retraining from routing outcomes and human corrections cut LLM fallback from 22% to under 5% in five iterations.',
-      'Agents built 235 Ansible and CI/CD pipelines and ran 213 upgrades, removing about 426 hours of manual deploy work.',
     ],
     stack: [
       t('Python', Python),
