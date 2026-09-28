@@ -16,13 +16,19 @@ describe('GET /api/workflows', () => {
     jest.spyOn(console, 'warn').mockImplementation(() => {})
   })
 
-  it('transforms GitHub runs and uses the commit title as the name', async () => {
-    jest.spyOn(global, 'fetch').mockImplementation(async (url) =>
-      String(url).includes('/commits/')
-        ? json({ sha: run.head_sha, commit: { message: 'feat: thing\n\nbody', author: { name: 'b', email: 'e' } } })
-        : json({ workflow_runs: [run, { ...run, id: 2, conclusion: null }], total_count: 2 }),
+  it('transforms GitHub runs and uses the commit title as the name, in one request', async () => {
+    const fetchMock = jest.spyOn(global, 'fetch').mockResolvedValue(
+      json({
+        workflow_runs: [
+          { ...run, head_commit: { message: 'feat: thing\n\nbody', author: { name: 'b', email: 'e' } } },
+          { ...run, id: 2, conclusion: null },
+        ],
+        total_count: 2,
+      }),
     )
     const body = await (await GET()).json()
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect(String(fetchMock.mock.calls[0][0])).toContain('per_page=10')
     expect(body.source).toBe('github')
     expect(body.workflow_runs[0].name).toBe('feat: thing')
     expect(body.workflow_runs[0].head_sha).toBe('abcdef1')
@@ -30,10 +36,8 @@ describe('GET /api/workflows', () => {
     expect(body.workflow_runs[1].duration).toBeUndefined()
   })
 
-  it('falls back to the workflow name when the commit lookup fails', async () => {
-    jest.spyOn(global, 'fetch').mockImplementation(async (url) =>
-      String(url).includes('/commits/') ? json({}, false, 404) : json({ workflow_runs: [run], total_count: 1 }),
-    )
+  it('falls back to the workflow name when the run has no commit message', async () => {
+    jest.spyOn(global, 'fetch').mockResolvedValue(json({ workflow_runs: [run], total_count: 1 }))
     const body = await (await GET()).json()
     expect(body.workflow_runs[0].name).toBe('Production CI/CD Pipeline')
   })

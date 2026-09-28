@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { fetchWorkflowRuns } from '../../lib/workflow-runs'
 
 // Reads the latest GitHub Actions run number through the site's own API.
 // Degrades to a static label when the API is unavailable (no token, rate limit).
@@ -9,9 +10,8 @@ export default function LiveDeployCell() {
 
   useEffect(() => {
     let cancelled = false
-    fetch('/api/workflows')
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((data: { source?: string; workflow_runs?: { run_number?: number }[] }) => {
+    fetchWorkflowRuns<{ source?: string; workflow_runs?: { run_number?: number }[] }>()
+      .then((data) => {
         // The API answers 200 with canned runs when GitHub is unavailable; only live data counts.
         if (data.source !== 'github') return
         const n = data.workflow_runs?.[0]?.run_number

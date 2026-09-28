@@ -2,7 +2,7 @@
 const child_process = require('child_process')
 const webpack = require('webpack')
 
-let repoName = 'repository'
+let repoName = 'resume-cloudrun'
 try {
   const originUrl = child_process
     .execSync('git config --get remote.origin.url')
@@ -105,14 +105,16 @@ const nextConfig = {
           },
         ],
       },
-      // HTML pages: never cache — the HTML must match the deployed JS, or
-      // a stale cached page hydrates against fresh JS and throws a hydration error.
+      // HTML pages: always revalidate. The HTML must match the deployed JS, or a
+      // stale cached page hydrates against fresh JS and throws a hydration error.
+      // no-cache (not no-store) still revalidates every load, but lets the ETag
+      // answer 304 and keeps the page eligible for the back/forward cache.
       {
         source: '/',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store',
+            value: 'no-cache',
           },
         ],
       },
@@ -121,7 +123,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store',
+            value: 'no-cache',
           },
         ],
       },
@@ -141,13 +143,23 @@ const nextConfig = {
   // Compression
   compress: true,
   
-  // Image optimization with Next.js 15 improvements
+  // Images are pre-sized in public/, so the runtime optimizer is off. That keeps
+  // the /_next/image endpoint (and its per-instance encode cost) out of the
+  // server entirely.
   images: {
-    formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 60,
-    // Next.js 15 image optimization improvements
-    dangerouslyAllowSVG: false,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: true,
+  },
+
+  // Build-only packages the file tracer pulls into .next/standalone. None are
+  // loaded at runtime; leaving them out shrinks the image by roughly half.
+  outputFileTracingExcludes: {
+    '*': [
+      'node_modules/@img/**',
+      'node_modules/sharp/**',
+      'node_modules/typescript/**',
+      'node_modules/webpack/**',
+      'node_modules/terser/**',
+    ],
   },
 
   // Enhanced bundling for better performance

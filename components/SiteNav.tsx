@@ -91,7 +91,7 @@ export default function SiteNav() {
                 className={`nav-brand flex items-center gap-2.5 ${scrolled ? 'is-visible' : ''}`}
               >
                 <Image
-                  src="/images/profile.png"
+                  src="/images/profile-72.webp"
                   alt={name}
                   width={36}
                   height={36}

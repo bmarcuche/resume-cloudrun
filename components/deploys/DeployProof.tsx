@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { fetchWorkflowRuns } from '../../lib/workflow-runs'
 
 const STEPS = ['git push', 'GitHub Actions', 'build and test', 'push image', 'Cloud Run', 'live']
 
@@ -25,9 +26,8 @@ export default function DeployProof() {
 
   useEffect(() => {
     let cancelled = false
-    fetch('/api/workflows')
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((data: { source?: string; workflow_runs?: Run[] }) => {
+    fetchWorkflowRuns<{ source?: string; workflow_runs?: Run[] }>()
+      .then((data) => {
         // The API answers 200 with canned runs when GitHub is unavailable; only live data counts.
         if (data.source !== 'github') return
         const first = data.workflow_runs?.[0]
@@ -47,7 +47,8 @@ export default function DeployProof() {
         <h2 className="pa-h2">This site is a platform too</h2>
         <p className="pa-lede">
           Every push to main builds a container, ships it to Cloud Run and serves it at
-          resume.mindtunnel.org. The full run history is on the{' '}
+          resume.mindtunnel.org. It scales to zero between visits, so the first request after a
+          quiet spell cold starts a fresh container. The full run history is on the{' '}
           <a className="pa-link" href="/workflows">
             deployment dashboard
           </a>

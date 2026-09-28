@@ -1,10 +1,26 @@
+# Only what `next build` needs goes into the build context
 Dockerfile
 .dockerignore
 node_modules
 npm-debug.log
-README.md
 .env
+.env.*
+!.env.example
 .git
+.github
 .gitignore
 .next
 .vercel
+.swc
+.claude
+.superpowers
+.secrets
+coverage
+docs
+__tests__
+**/*.test.ts
+**/*.test.tsx
+jest.config.js
+jest.setup.js
+tsconfig.tsbuildinfo
+*.md

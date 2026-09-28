@@ -27,51 +27,20 @@ interface GitHubWorkflowRun {
   }
 }
 
-interface GitHubCommit {
-  sha: string
-  commit: {
-    message: string
-    author: {
-      name: string
-      email: string
-    }
-  }
-}
-
 interface GitHubApiResponse {
   workflow_runs: GitHubWorkflowRun[]
   total_count: number
 }
 
-async function fetchCommitMessage(sha: string): Promise<string> {
-  try {
-    const commitUrl = `https://api.github.com/repos/bmarcuche/resume-cloudrun/commits/${sha}`
-    const response = await fetch(commitUrl, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'resume-cloudrun-app',
-      },
-      next: { revalidate: 300 }
-    })
-
-    if (!response.ok) {
-      console.warn(`Failed to fetch commit ${sha}:`, response.status)
-      return 'Production CI/CD Pipeline' // Fallback to workflow name
-    }
-
-    const commit: GitHubCommit = await response.json()
-    // Return first line of commit message (title)
-    return commit.commit.message.split('\n')[0] || 'Production CI/CD Pipeline'
-  } catch (error) {
-    console.warn(`Error fetching commit message for ${sha}:`, error)
-    return 'Production CI/CD Pipeline'
-  }
-}
+// Serve the route as ISR: the response is cached and rebuilt in the background at
+// most every 5 minutes, so visitors never wait on GitHub and the unauthenticated
+// rate limit (60 requests/hour) is never at risk.
+export const revalidate = 300
 
 export async function GET() {
   try {
     // GitHub API endpoint for workflow runs
-    const githubApiUrl = 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs'
+    const githubApiUrl = 'https://api.github.com/repos/bmarcuche/resume-cloudrun/actions/runs?per_page=10'
     
     // Fetch workflow runs from GitHub API
     const response = await fetch(githubApiUrl, {
@@ -97,35 +66,33 @@ export async function GET() {
 
     const data: GitHubApiResponse = await response.json()
     
-    // Transform GitHub API response and fetch commit messages
-    const transformedRuns = await Promise.all(
-      data.workflow_runs.slice(0, 10).map(async (run) => {
-        const commitMessage = await fetchCommitMessage(run.head_sha)
-        
-        return {
-          id: run.id,
-          name: commitMessage, // Use commit message instead of workflow name
-          status: run.status,
-          conclusion: run.conclusion,
-          created_at: run.created_at,
-          updated_at: run.updated_at,
-          head_branch: run.head_branch,
-          head_sha: run.head_sha.substring(0, 7), // Short SHA
-          actor: {
-            login: run.actor.login,
-            avatar_url: run.actor.avatar_url
-          },
-          event: run.event,
-          workflow_id: run.workflow_id,
-          run_number: run.run_number,
-          html_url: run.html_url,
-          jobs_url: run.jobs_url,
-          // Calculate duration if workflow is completed
-          duration: run.conclusion ? calculateDuration(run.created_at, run.updated_at) : undefined,
-          workflow_name: run.name // Keep original workflow name for reference
-        }
-      })
-    )
+    // Transform GitHub API response; each run already carries its commit message
+    const transformedRuns = data.workflow_runs.slice(0, 10).map((run) => {
+      const commitMessage = run.head_commit?.message.split('\n')[0] || run.name
+
+      return {
+        id: run.id,
+        name: commitMessage, // Use commit message instead of workflow name
+        status: run.status,
+        conclusion: run.conclusion,
+        created_at: run.created_at,
+        updated_at: run.updated_at,
+        head_branch: run.head_branch,
+        head_sha: run.head_sha.substring(0, 7), // Short SHA
+        actor: {
+          login: run.actor.login,
+          avatar_url: run.actor.avatar_url
+        },
+        event: run.event,
+        workflow_id: run.workflow_id,
+        run_number: run.run_number,
+        html_url: run.html_url,
+        jobs_url: run.jobs_url,
+        // Calculate duration if workflow is completed
+        duration: run.conclusion ? calculateDuration(run.created_at, run.updated_at) : undefined,
+        workflow_name: run.name // Keep original workflow name for reference
+      }
+    })
 
     return NextResponse.json({
       workflow_runs: transformedRuns,
