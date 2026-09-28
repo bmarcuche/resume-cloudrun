@@ -20,8 +20,8 @@ export default function Home() {
       <Hero />
       <StatusStrip />
       <SystemsSection />
-      <ProjectsSection />
       <OutcomesSection />
+      <ProjectsSection />
       <PracticeSection />
       <Timeline />
       <Toolbox />

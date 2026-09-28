@@ -15,7 +15,7 @@ describe('Home Page', () => {
   it('renders the sections in order', () => {
     const { container } = render(<Home />)
     const ids = Array.from(container.querySelectorAll('section[id], header[id]')).map((el) => el.id)
-    expect(ids).toEqual(['top', 'systems', 'projects', 'outcomes', 'practice', 'experience', 'toolbox', 'deploys', 'resume'])
+    expect(ids).toEqual(['top', 'systems', 'outcomes', 'projects', 'practice', 'experience', 'toolbox', 'deploys', 'resume'])
   })
 
   it('has no Current Setup or Projects sections', () => {
