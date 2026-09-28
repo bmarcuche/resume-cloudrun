@@ -1,58 +1,19 @@
-interface Outcome {
-  from: string
-  value: string
-  unit: string
-  note: string
-  // Before/after bars share one scale (max) so the two lead-time cards compare visually.
-  bar?: { before: number; after: number; max: number }
-}
+import type { ImpactItem } from '../../lib/systems-data'
 
-const OUTCOMES: Outcome[] = [
-  {
-    from: 'customer upgrade, was ~27 days',
-    value: '<3',
-    unit: 'days',
-    note: '213 upgrade deployments automated. Lead time keeps falling month over month.',
-    bar: { before: 27, after: 3, max: 27 },
-  },
-  {
-    from: 'new environment, was ~12 days',
-    value: '1.5',
-    unit: 'days',
-    note: 'Provisioning runs as agent-built Ansible pipelines instead of tickets.',
-    bar: { before: 12, after: 1.5, max: 27 },
-  },
-  {
-    from: 'manual deploy work removed',
-    value: '426',
-    unit: 'hours',
-    note: '235 pipelines written by agents, reviewed by engineers, across the whole estate.',
-  },
-  {
-    from: 'incidents caught by agents',
-    value: '1',
-    unit: 'session',
-    note: 'A single multi-agent session found a fleet-wide config-deletion bug and root-caused an OS update and API regression.',
-  },
-]
-
-// Results of the agent platform, shown as a full-width strip at the foot of its
-// card in the Systems section (SystemsSection passes it to that row only).
-export default function ImpactStrip() {
+// "What changed" strip at the foot of a system card. Each item reads as effect
+// (value, unit) with its cause in the note. Bars, where present, are to scale.
+export default function ImpactStrip({ id, lede, items }: { id: string; lede: string; items: ImpactItem[] }) {
   return (
-    <div id="outcomes" className="impact">
-      <h4 className="impact-h">What changed after launch</h4>
-      <p className="impact-lede">
-        The two lead-time cards are DORA lead time for changes on the hosted platform, before and
-        after launch. Bars are drawn to scale.
-      </p>
+    <div id={id} className="impact">
+      <h4 className="impact-h">What changed</h4>
+      <p className="impact-lede">{lede}</p>
       <div className="out-grid">
-        {OUTCOMES.map((o) => (
+        {items.map((o) => (
           <div key={o.from} className="out">
             <div className="out-from">{o.from}</div>
             <div className="out-to">
               {o.value}
-              <small>{o.unit}</small>
+              {o.unit && <small>{o.unit}</small>}
             </div>
             {o.bar && (
               <div className="out-bar" aria-hidden="true">

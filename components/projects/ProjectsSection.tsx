@@ -1,4 +1,5 @@
 import { projects } from '../../lib/systems-data'
+import ImpactStrip from '../outcomes/ImpactStrip'
 import SystemRow from '../systems/SystemRow'
 
 export default function ProjectsSection() {
@@ -12,7 +13,12 @@ export default function ProjectsSection() {
         </p>
         <div className="systems-grid">
           {projects.map((p, i) => (
-            <SystemRow key={p.id} system={p} flip={i % 2 === 1} />
+            <SystemRow
+              key={p.id}
+              system={p}
+              flip={i % 2 === 1}
+              after={p.impact ? <ImpactStrip id={`${p.id}-impact`} {...p.impact} /> : undefined}
+            />
           ))}
         </div>
       </div>

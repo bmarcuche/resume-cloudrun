@@ -17,7 +17,7 @@ export default function SystemsSection() {
               key={s.id}
               system={s}
               flip={i % 2 === 1}
-              after={s.id === 'agent-platform' ? <ImpactStrip /> : undefined}
+              after={s.impact ? <ImpactStrip id={`${s.id}-impact`} {...s.impact} /> : undefined}
             />
           ))}
         </div>

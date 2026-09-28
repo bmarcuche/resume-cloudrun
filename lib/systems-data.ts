@@ -17,9 +17,11 @@ import {
   siFastify,
   siGooglecloud,
   siOnnx,
+  siOpentelemetry,
   siSvelte,
   siTypescript,
   siCelery,
+  siClaude,
   siFastapi,
   siFlask,
   siHuggingface,
@@ -27,13 +29,14 @@ import {
   siNginx,
   siPostgresql,
   siPython,
+  siReact,
   siRedis,
   siRust,
 } from 'simple-icons'
 import { fromBrand } from '../components/icons/BrandIcon'
 import type { TechItem } from './tech-data'
 
-export type DiagramKey = 'router' | 'ghostwatch' | 'discovery' | 'access' | 'hypescroll'
+export type DiagramKey = 'router' | 'ghostwatch' | 'sentry' | 'discovery' | 'access' | 'hypescroll'
 export interface SystemStatus {
   label: string
   tone: 'ok' | 'warn' | 'info'
@@ -41,6 +44,15 @@ export interface SystemStatus {
 export interface SystemMetric {
   value: string
   label: string
+}
+// One "what changed" card: `from` sets the scene, value and unit are the effect,
+// `note` is the cause in one short sentence. `bar` draws before and after to scale.
+export interface ImpactItem {
+  from: string
+  value: string
+  unit: string
+  note: string
+  bar?: { before: number; after: number; max: number }
 }
 export interface System {
   id: string
@@ -53,6 +65,7 @@ export interface System {
   metrics: SystemMetric[]
   diagram: DiagramKey
   link?: { href: string; label: string }
+  impact?: { lede: string; items: ImpactItem[] }
 }
 
 const t = (name: string, Icon: TechItem['Icon']): TechItem => ({ name, Icon })
@@ -73,7 +86,14 @@ const Fastify = fromBrand(siFastify)
 const Onnx = fromBrand(siOnnx)
 const Cloudflare = fromBrand(siCloudflare)
 const GoogleCloud = fromBrand(siGooglecloud)
+const Claude = fromBrand(siClaude)
+const OTel = fromBrand(siOpentelemetry)
+const ReactIcon = fromBrand(siReact)
 
+// Figures come only from the Platform Impact Brief, read live from each system on
+// 2026-09-28. Anything it could not verify stays off the site until confirmed.
+// Publish outcomes and rates only: no fleet or customer counts, product names,
+// database vendor or protocols.
 export const systems: System[] = [
   {
     id: 'agent-platform',
@@ -81,13 +101,13 @@ export const systems: System[] = [
     subtitle: 'Semantic router and MCP gateway in front of a fleet of specialist agents',
     status: [
       { label: 'In production', tone: 'ok' },
-      { label: 'Since 12/2024', tone: 'info' },
+      { label: 'Since 03/2026', tone: 'info' },
     ],
     description:
-      'Every prompt hits a two-stage classifier before any LLM sees it. Deterministic patterns take a keyword fast path. Ambiguous ones go through a fine-tuned bi-encoder and cross-encoder over a pgvector store, then land on the right agent with retrieved knowledge and environment context already attached.',
+      'Every request hits a classifier before any LLM sees it. Deterministic patterns take a keyword fast path. Ambiguous ones go through a fine-tuned bi-encoder and cross-encoder over pgvector, then land on the right specialist agent with retrieved knowledge and environment context already attached.',
     outcomes: [
-      '95%+ of requests route with no LLM reasoning; classification in under 100 ms on CPU.',
-      'Closed-loop retraining from routing outcomes and human corrections cut LLM fallback from 22% to under 5% in five iterations.',
+      'Specialist agents cover deploys, cloud, CI/CD, access, databases, monitoring and incidents.',
+      'One MCP gateway fronts the cloud, CI/CD, secrets, ticketing, monitoring and fleet operations tools the agents use.',
     ],
     stack: [
       t('Python', Python),
@@ -95,51 +115,149 @@ export const systems: System[] = [
       t('pgvector', CircleStackIcon),
       t('sentence-transformers', HF),
       t('MCP', MCP),
+      t('Claude Code', Claude),
       t('Kiro CLI', SparklesIcon),
       t('Ansible', Ansible),
       t('Azure DevOps', ArrowPathRoundedSquareIcon),
     ],
     metrics: [
-      { value: '0.81', label: 'top-1 routing accuracy' },
-      { value: '<5%', label: 'LLM fallback, from 22%' },
+      { value: '40k+', label: 'requests routed since 03/2026' },
+      { value: '5k+', label: 'requests in the last 30 days' },
+      { value: '1,500+', label: 'operations journal entries' },
     ],
     diagram: 'router',
+    impact: {
+      lede: 'Measured from the router log and the knowledge store.',
+      items: [
+        {
+          from: 'requests, last 30 days',
+          value: '83%',
+          unit: 'skip the LLM',
+          note: 'The classifier sends them straight to an agent, a tool or a stored answer; 17% need reasoning.',
+        },
+        {
+          from: 'knowledge the agents keep',
+          value: '2,000+',
+          unit: 'live patterns',
+          note: 'Agents write what they learn back to pgvector, so the platform gets better with use.',
+        },
+      ],
+    },
   },
   {
     id: 'ghostwatch',
     title: 'GhostWatch',
-    subtitle: 'AI-assisted incident investigation pipeline',
+    subtitle: 'An incident pipeline that notices, correlates and packages an outage before anyone pages',
     status: [
-      { label: 'Detection live', tone: 'ok' },
-      { label: 'Self-healing in pilot', tone: 'warn' },
+      { label: 'Receiver live', tone: 'ok' },
+      { label: 'SRE hand-off built, gated off', tone: 'warn' },
     ],
     description:
-      'Nine in ten service interruptions we studied warned us first, usually as a backlog signal before the outage. GhostWatch turns that warning into an investigation instead of a page. Started at the Microsoft Global Hackathon 2026 with a cross-company team.',
+      'Started at the Microsoft Global Hackathon 2026 with a cross-company team, now a four-stage Rust platform. A receiver matches every signal to its server and database. A Foreman groups related signals into one labeled incident. A factory deploys the telemetry the case needs, and the Azure SRE Agent investigates the packaged case.',
     outcomes: [
-      'A classifier spots the signal and opens one investigation, not a flood of alerts.',
-      'An LLM on Microsoft Foundry classifies the case and orders the telemetry it needs. Exporters and detectors are generated on demand into App Insights and Azure Data Explorer.',
-      'The Azure SRE Agent takes the case and goes after root cause. Investigation handoff is in progress.',
+      'Signals inside planned outages are marked, never silently dropped.',
+      'Built test-first against a formal correctness bar: provenance, conservation, closure, idempotence and determinism.',
     ],
     stack: [
+      t('Rust', Rust),
+      t('TypeScript', TypeScript),
+      t('Svelte', Svelte),
+      t('PostgreSQL', Postgres),
       t('Microsoft Foundry', SparklesIcon),
       t('Azure SRE Agent', EyeIcon),
       t('App Insights', EyeIcon),
       t('Azure Data Explorer', CircleStackIcon),
-      t('Python', Python),
+      t('OpenTelemetry', OTel),
     ],
     metrics: [
-      { value: '9 of 10', label: 'outages warned first' },
-      { value: '1', label: 'investigation per signal' },
+      { value: '18', label: 'live signal feeds' },
+      { value: '15', label: 'Rust crates' },
+      { value: '1,200+', label: 'Rust tests' },
     ],
     diagram: 'ghostwatch',
+    impact: {
+      lede: 'Measured on live incident bundles: rules against a small LLM for the incident label.',
+      items: [
+        {
+          from: 'correct incident label, LLM 17%',
+          value: '70%',
+          unit: 'with rules',
+          note: 'Rules were 4x more accurate, so they run first and the LLM only sees the unknown tail.',
+          bar: { before: 17, after: 70, max: 100 },
+        },
+        {
+          from: 'LLM pass over every bundle',
+          value: '<1¢',
+          unit: 'total',
+          note: 'Cheap enough to keep as a fallback, not accurate enough to lead.',
+        },
+      ],
+    },
+  },
+  {
+    id: 'sentry',
+    title: 'Sentry',
+    subtitle: 'Unified monitoring for hosted databases, web servers and service interruptions',
+    status: [
+      { label: 'In production', tone: 'ok' },
+      { label: 'Since 08/2026', tone: 'info' },
+    ],
+    description:
+      'One console for database health, live web server status and service interruption analysis. Collectors check every database every 2 to 10 minutes. Raw 5-minute data is kept for 14 days and hourly rollups forever.',
+    outcomes: [
+      '46 database metrics, 8 host metrics and a health snapshot per database: backups, archiving, listeners, replication, recovery area and blocking sessions.',
+      'A nightly scan of report servers counts crashes and manual restarts and separates unexpected reboots from planned ones.',
+    ],
+    stack: [
+      t('Python', Python),
+      t('Flask', Flask),
+      t('Celery', Celery),
+      t('PostgreSQL', Postgres),
+      t('React', ReactIcon),
+      t('OpenTelemetry', OTel),
+      t('Azure Monitor', EyeIcon),
+      t('Azure Data Explorer', CircleStackIcon),
+    ],
+    metrics: [
+      { value: '100M+', label: 'samples in its first 34 days' },
+      { value: '3M+', label: 'samples a day' },
+      { value: '49', label: 'health fields per database' },
+    ],
+    diagram: 'sentry',
+    impact: {
+      lede: 'What the design choices bought, measured in its first weeks.',
+      items: [
+        {
+          from: 'agents on database hosts',
+          value: '0',
+          unit: 'installed',
+          note: 'Collectors query each database remotely, so nothing is deployed or patched on the hosts.',
+        },
+        {
+          from: 'trend history on a chart',
+          value: 'All',
+          unit: 'time',
+          note: 'Hourly rollups are kept forever, so one chart zooms from 3 hours to the full record.',
+        },
+        {
+          from: 'health points streamed to Azure',
+          value: 'None',
+          unit: 'rejected',
+          note: '1.9M+ points reached App Insights and Data Explorer in under 10 days.',
+        },
+      ],
+    },
   },
   {
     id: 'hen',
     title: 'Hosted Environment Navigator',
     subtitle: 'System of record for the hosted environment',
-    status: [{ label: 'In production', tone: 'ok' }],
+    status: [
+      { label: 'In production', tone: 'ok' },
+      { label: 'Since 11/2025', tone: 'info' },
+    ],
     description:
-      'Continuous discovery inventories every install: version, config, services, databases and certificates, into a JSONB Postgres store behind a searchable dashboard. It is the context the agent platform reads before it acts.',
+      'Continuous discovery inventories every install: version, config, services, databases and certificates, into a JSONB Postgres store behind a searchable dashboard.',
     outcomes: [
       'Integrates ticketing, source control, certificate and bastion services, with Celery workers refreshing state on a rolling schedule.',
       'bcrypt RBAC, API tokens, CSRF and rate limiting, audit logging.',
@@ -153,22 +271,47 @@ export const systems: System[] = [
       t('Azure', CloudIcon),
     ],
     metrics: [
-      { value: '20', label: 'blueprints' },
-      { value: '224', label: 'routes' },
-      { value: '245', label: 'tests' },
+      { value: '28', label: 'blueprints' },
+      { value: '500+', label: 'API routes' },
+      { value: '800+', label: 'tests' },
     ],
     diagram: 'discovery',
+    impact: {
+      lede: 'Why the other platform tools trust it.',
+      items: [
+        {
+          from: 'values typed in by people',
+          value: '<1%',
+          unit: 'of the store',
+          note: 'Discovery collects the rest from the servers; people add only contacts and overrides.',
+        },
+        {
+          from: 'tools that read it before acting',
+          value: '4',
+          unit: 'platforms',
+          note: 'The agent platform, Sentry, GhostWatch and the access manager all start from its context.',
+        },
+        {
+          from: 'config files copied into it',
+          value: 'None',
+          unit: '',
+          note: 'Full configs are read live when needed, so stored settings stay small.',
+        },
+      ],
+    },
   },
   {
     id: 'ham',
     title: 'Hosted Access Manager',
     subtitle: 'Just-in-time, time-boxed privileged database access',
-    status: [{ label: 'In production', tone: 'ok' }],
+    status: [
+      { label: 'In production', tone: 'ok' },
+      { label: 'Since 04/2026', tone: 'info' },
+    ],
     description:
-      'An approved change request unlocks an account for a window and locks it again on expiry. Credentials live in a managed vault. A scheduler reconciles state continuously, locking expired sessions and orphaned accounts.',
+      'Engineers request access to a production or test database for a set time. The account unlocks, relocks when the timer ends, and every action is recorded. Credentials live in a managed vault.',
     outcomes: [
-      'Replaced standing credentials and manual DBA grants across the whole database estate.',
-      'Self-service onboarding registers servers after identity and host verification.',
+      'Every request carries a written justification, and every SQL statement run from the UI is logged.',
     ],
     stack: [
       t('FastAPI', FastAPI),
@@ -179,11 +322,29 @@ export const systems: System[] = [
       t('systemd', ServerStackIcon),
     ],
     metrics: [
-      { value: '0', label: 'permanent credentials' },
-      { value: '250+', label: 'sessions' },
-      { value: '100%', label: 'of the database estate' },
+      { value: '1,100+', label: 'time-boxed grants' },
+      { value: '500+', label: 'written justifications' },
+      { value: '2,500+', label: 'audit records' },
     ],
     diagram: 'access',
+    impact: {
+      lede: 'Access that expires on its own gets used less, and handed back sooner.',
+      items: [
+        {
+          from: 'requested access hours',
+          value: '67%',
+          unit: 'actually used',
+          note: 'Grants expire on a timer, so a third of the requested time was never left open.',
+          bar: { before: 100, after: 67, max: 100 },
+        },
+        {
+          from: 'grants closed before the timer',
+          value: '59%',
+          unit: 'locked early',
+          note: 'Engineers hand access back when they finish instead of waiting for expiry.',
+        },
+      ],
+    },
   },
 ]
 
@@ -223,5 +384,24 @@ export const projects: System[] = [
       { value: '≤1 pt', label: 'block-rate rise to ship a model' },
     ],
     diagram: 'hypescroll',
+    impact: {
+      lede: 'Two fixes for a small server, measured before and after. Bars are drawn to scale.',
+      items: [
+        {
+          from: 'cover image, cache miss 1.37 s',
+          value: '0.14',
+          unit: 's on a hit',
+          note: 'An edge cache rule serves covers from Cloudflare instead of the origin.',
+          bar: { before: 1.37, after: 0.14, max: 1.37 },
+        },
+        {
+          from: 'embedding model memory, 187 MB',
+          value: '133',
+          unit: 'MB idle',
+          note: 'The model unloads when idle, which took the server out of swap.',
+          bar: { before: 187, after: 133, max: 187 },
+        },
+      ],
+    },
   },
 ]
