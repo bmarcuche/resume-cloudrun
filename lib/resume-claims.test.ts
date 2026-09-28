@@ -1,8 +1,8 @@
 import { resumeData } from './resume-data'
 import { collectStrings } from './disclosure'
 
-// The resume carries only figures measured from the systems themselves (Platform
-// Impact Brief, 2026-09-28). Unverified claims stay off until confirmed.
+// The resume carries only figures measured from the systems themselves.
+// Unverified claims stay off until confirmed.
 describe('resume figures', () => {
   const all = collectStrings(resumeData).join(' ')
   it('drops figures the brief could not verify', () => {
@@ -13,9 +13,12 @@ describe('resume figures', () => {
     expect(all).toMatch(/83%/)
     expect(all).toMatch(/Sentry/)
     expect(all).toMatch(/GhostWatch/)
-    expect(all).toMatch(/1,100\+ time-boxed grants/)
+    expect(all).toMatch(/self-service in about a minute/)
+    expect(all).toMatch(/from 40 to 11 days/)
   })
   it('does not expose the environment: no fleet, database or customer counts, products or vendor', () => {
-    expect(all).not.toMatch(/1,117|\b555\b|\b236\b|customers across|Oracle|\bFA\b|\bM5\b|\bEAM\b|WinRM|Zendesk/)
+    // Count patterns, not the counts themselves: this file is public too
+    expect(all).not.toMatch(/\d[\d,]*\+?\s+(hosts|servers|databases|customers|tenants)\b/)
+    expect(all).not.toMatch(/Oracle|WinRM|Zendesk/)
   })
 })

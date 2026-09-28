@@ -73,7 +73,7 @@ export const resumeData: ResumeData = {
     "I've scaled infrastructure across on-prem, hybrid, and cloud, and automated deployment and operations " +
     'for thousands of Linux and Windows instances. Most recently I architected an internal AI agent platform, ' +
     'a custom semantic router orchestrating specialized LLM agents, that has routed 40,000+ ops requests, ' +
-    '83% of them without LLM reasoning. I lead ops and SRE teams, drive observability with ' +
+    '83% of them without LLM reasoning, and cut median upgrade lead time from 40 to 11 days. I lead ops and SRE teams, drive observability with ' +
     'OpenTelemetry and PagerDuty, and turn slow, manual operations into fast, repeatable automation.',
 
   experience: [
@@ -87,7 +87,7 @@ export const resumeData: ResumeData = {
         'Architect and operate the hosting platform behind a large fleet of managed customer environments, applying AI-driven engineering to fleet operations at scale.',
         'Own platform architecture spanning Windows server fleets, Azure DevOps pipelines, and multi-tenant upgrade orchestration, plus relational schema design and maintenance.',
         'Built Sentry, unified monitoring for hosted databases and web servers: agentless collectors every 2 to 10 minutes, 100M+ samples in its first 34 days, and database health streamed to Azure with zero rejected points.',
-        'Led GhostWatch, an AI-assisted incident pipeline started at the Microsoft Global Hackathon 2026: a Rust platform (1,200+ tests) that groups 18 live signal feeds into incidents. In a replay of 21 past report-server hangs it warned before 17, about 75 minutes ahead; rules proved 4x more accurate than a small LLM at labeling.',
+        'Led GhostWatch, an AI-assisted incident pipeline started at the Microsoft Global Hackathon 2026: a Rust platform (1,200+ tests) that groups 18 live signal feeds into incidents. In a replay of 21 past report-server hangs it warned before 17, about 75 minutes ahead.',
         'Maintain the environment inventory as the authoritative source of truth: 99% of its values collected automatically, and every other tool on the platform reads it before acting.',
         'Lead capacity and sizing analysis for executive decisions, and root-cause investigation on production incidents spanning application servers, storage, and reporting services.',
       ],
@@ -100,9 +100,9 @@ export const resumeData: ResumeData = {
       company: 'AssetWorks',
       bullets: [
         'Built an internal AI agent platform on the Model Context Protocol: specialized LLM agents behind a custom semantic router (fine-tuned sentence-transformer embeddings, pgvector retrieval). 40,000+ routed requests since 03/2026, 83% handled without the LLM reasoning fallback.',
-        'Agents write what they learn back to a shared store of 2,000+ knowledge patterns, so the platform improves with use.',
+        'Moved customer upgrades onto agent-built pipelines (380+ runs): median upgrade lead time fell from 40 to 11 days.',
         'Built the Hosted Environment Navigator, the system of record for the hosted environment: 99% of its values collected automatically, behind a 500+ route API with 800+ tests.',
-        'Built Hosted Access Manager for just-in-time, auto-expiring database access: 1,100+ time-boxed grants, each justified and audited, and 59% handed back before the timer ran out.',
+        'Built Hosted Access Manager: database access went from a DBA ticket (about a day) to self-service in about a minute.',
         'Led a team of five; rolled out OpenTelemetry and Observe; mentored through 1:1s and training.',
       ],
     },
