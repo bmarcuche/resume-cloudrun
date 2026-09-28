@@ -13,6 +13,12 @@ import {
 } from '@heroicons/react/24/outline'
 import {
   siAnsible,
+  siCloudflare,
+  siFastify,
+  siGooglecloud,
+  siOnnx,
+  siSvelte,
+  siTypescript,
   siCelery,
   siFastapi,
   siFlask,
@@ -27,7 +33,7 @@ import {
 import { fromBrand } from '../components/icons/BrandIcon'
 import type { TechItem } from './tech-data'
 
-export type DiagramKey = 'router' | 'ghostwatch' | 'discovery' | 'access'
+export type DiagramKey = 'router' | 'ghostwatch' | 'discovery' | 'access' | 'hypescroll'
 export interface SystemStatus {
   label: string
   tone: 'ok' | 'warn' | 'info'
@@ -46,6 +52,7 @@ export interface System {
   stack: TechItem[]
   metrics: SystemMetric[]
   diagram: DiagramKey
+  link?: { href: string; label: string }
 }
 
 const t = (name: string, Icon: TechItem['Icon']): TechItem => ({ name, Icon })
@@ -60,6 +67,12 @@ const Celery = fromBrand(siCelery)
 const Redis = fromBrand(siRedis)
 const FastAPI = fromBrand(siFastapi)
 const Nginx = fromBrand(siNginx)
+const TypeScript = fromBrand(siTypescript)
+const Svelte = fromBrand(siSvelte)
+const Fastify = fromBrand(siFastify)
+const Onnx = fromBrand(siOnnx)
+const Cloudflare = fromBrand(siCloudflare)
+const GoogleCloud = fromBrand(siGooglecloud)
 
 export const systems: System[] = [
   {
@@ -172,5 +185,44 @@ export const systems: System[] = [
       { value: '100%', label: 'of the database estate' },
     ],
     diagram: 'access',
+  },
+]
+
+// Built outside work, so it sits in its own section rather than under "Systems I own".
+// Publish the product and the engineering, never the host, ports or tooling details.
+export const projects: System[] = [
+  {
+    id: 'hypescroll',
+    title: 'HypeScroll',
+    subtitle: 'A positive-news reel that filters out doom with small local models',
+    link: { href: 'https://hypescroll.io', label: 'hypescroll.io' },
+    status: [
+      { label: 'Live', tone: 'ok' },
+      { label: 'Side project', tone: 'info' },
+    ],
+    description:
+      'One mobile-first feed of uplifting stories, books, recipes and podcasts. It pulls from RSS feeds, scrapers, Reddit and small independent sites it discovers on its own, scores every story at import, and links back to the source instead of copying it.',
+    outcomes: [
+      'Every story is scored at import by a local MiniLM embedding model with small trained layers for interest, constructiveness and negativity. No LLM sits in the serving path.',
+      'A retrained negativity model only goes live if its block rate on a fixed reference set rises by one point or less.',
+      'I review the discovery queue with Claude Code through a custom MCP server; approved labels feed the next retrain.',
+      'CI tests every service, deploys only what changed, and fails the run unless a live login succeeds afterwards.',
+    ],
+    stack: [
+      t('TypeScript', TypeScript),
+      t('Svelte', Svelte),
+      t('Fastify', Fastify),
+      t('PostgreSQL', Postgres),
+      t('MiniLM on ONNX', Onnx),
+      t('MCP', MCP),
+      t('Cloudflare', Cloudflare),
+      t('Google Cloud', GoogleCloud),
+    ],
+    metrics: [
+      { value: '0', label: 'LLM calls in the feed path' },
+      { value: 'int8', label: 'embeddings on CPU' },
+      { value: '≤1 pt', label: 'block-rate rise to ship a model' },
+    ],
+    diagram: 'hypescroll',
   },
 ]

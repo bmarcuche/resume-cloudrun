@@ -1948,6 +1948,7 @@ button.tech-tile {
 .sys-pills { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .sys-title { font-size: 1.45rem; margin-top: 10px; }
 .sys-sub { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+.sys-link { display: inline-block; font-size: 0.85rem; margin-top: 6px; }
 .sys-desc { margin-top: 16px; max-width: 58ch; }
 .sys-outcomes { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
 .sys-outcomes li { padding-left: 18px; position: relative; font-size: 0.95rem; }
@@ -2054,6 +2055,7 @@ button.tech-tile {
   .status-strip,
   .site-nav,
   #systems,
+  #projects,
   #outcomes,
   #practice,
   #experience,
