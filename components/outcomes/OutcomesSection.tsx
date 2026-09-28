@@ -40,10 +40,14 @@ export default function OutcomesSection() {
   return (
     <section id="outcomes" className="pa-section outcomes-pa">
       <div className="pa-wrap">
-        <h2 className="pa-h2">What changed after the platform went live</h2>
+        <h2 className="pa-h2">What changed after the agent platform went live</h2>
         <p className="pa-lede">
-          DORA lead time for changes on the hosted platform, before and after the agent platform
-          launched in early 2025. Bars are drawn to scale.
+          Results from the{' '}
+          <a className="pa-link" href="#system-agent-platform">
+            internal AI agent platform
+          </a>{' '}
+          on the hosted platform. The two lead-time cards are DORA lead time for changes, before and
+          after launch, with bars drawn to scale.
         </p>
         <div className="out-grid">
           {OUTCOMES.map((o) => (
