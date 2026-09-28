@@ -4,7 +4,7 @@ import LiveDeployCell from './LiveDeployCell'
 // lib/systems-data.ts). Never fleet size, client counts, or client sector.
 const STATS = [
   { value: '40k+', label: 'ops requests routed by agents' },
-  { value: '83%', label: 'handled without LLM reasoning' },
+  { value: '85%', label: 'routed without LLM reasoning' },
   { value: '40→11', label: 'days, median upgrade lead time' },
   { value: '100M+', label: 'health samples in 34 days' },
 ]

@@ -71,9 +71,9 @@ export const resumeData: ResumeData = {
   summary:
     'Platform Architect and technical leader who builds the systems other teams run on. ' +
     "I've scaled infrastructure across on-prem, hybrid, and cloud, and automated deployment and operations " +
-    'for thousands of Linux and Windows instances. Most recently I architected an internal AI agent platform, ' +
-    'a custom semantic router orchestrating specialized LLM agents, that has routed 40,000+ ops requests, ' +
-    '83% of them without LLM reasoning, and cut median upgrade lead time from 40 to 11 days. I lead ops and SRE teams, drive observability with ' +
+    'for thousands of Linux and Windows instances. Most recently I architected an internal AI agent platform: ' +
+    'a local semantic router routes 85% of ops requests without LLM reasoning, ' +
+    'and median upgrade lead time fell from 40 to 11 days. I lead ops and SRE teams, drive observability with ' +
     'OpenTelemetry and PagerDuty, and turn slow, manual operations into fast, repeatable automation.',
 
   experience: [
@@ -85,10 +85,9 @@ export const resumeData: ResumeData = {
       company: 'AssetWorks',
       bullets: [
         'Architect and operate the hosting platform behind a large fleet of managed customer environments, applying AI-driven engineering to fleet operations at scale.',
-        'Own platform architecture spanning Windows server fleets, Azure DevOps pipelines, and multi-tenant upgrade orchestration, plus relational schema design and maintenance.',
-        'Built Sentry, unified monitoring for hosted databases and web servers: agentless collectors every 2 to 10 minutes, 100M+ samples in its first 34 days, and database health streamed to Azure with zero rejected points.',
-        'Led GhostWatch, an AI-assisted incident pipeline started at the Microsoft Global Hackathon 2026: a Rust platform (1,200+ tests) that groups 18 live signal feeds into incidents. In a replay of 21 past report-server hangs it warned before 17, about 75 minutes ahead.',
-        'Maintain the environment inventory as the authoritative source of truth: 99% of its values collected automatically, and every other tool on the platform reads it before acting.',
+        'Built Sentry, agentless monitoring that checks every hosted database every 2 to 10 minutes, so problems surface before they cause an outage: in its first 60 days it flagged 65 databases with archive-log errors and 62 crashed services that would not recover on their own.',
+        'Led GhostWatch, an AI-assisted incident pipeline from the Microsoft Global Hackathon 2026. Its detector reads report-server behavior, not just uptime, so in replay it caught 92% of hangs a median 107 minutes early at a 4% false alarm rate; grouping alerts into incidents cut on-call triage 2.7x.',
+        'Added self-healing on top of the environment inventory, so 354 outages were repaired automatically.',
         'Lead capacity and sizing analysis for executive decisions, and root-cause investigation on production incidents spanning application servers, storage, and reporting services.',
       ],
     },
@@ -99,10 +98,11 @@ export const resumeData: ResumeData = {
       title: 'Operations Team Lead',
       company: 'AssetWorks',
       bullets: [
-        'Built an internal AI agent platform on the Model Context Protocol: specialized LLM agents behind a custom semantic router (fine-tuned sentence-transformer embeddings, pgvector retrieval). 40,000+ routed requests since 03/2026, 83% handled without the LLM reasoning fallback.',
-        'Moved customer upgrades onto agent-built pipelines (380+ runs): median upgrade lead time fell from 40 to 11 days.',
-        'Built the Hosted Environment Navigator, the system of record for the hosted environment: 99% of its values collected automatically, behind a 500+ route API with 800+ tests.',
-        'Built Hosted Access Manager: database access went from a DBA ticket (about a day) to self-service in about a minute.',
+        'Built an internal AI agent platform on the Model Context Protocol with a local semantic router in front of every ops request, so 85% route without the LLM reasoning fallback at zero LLM tokens per routing decision.',
+        'Gave agents typed tools and a shared memory, so 98.6% of routed tasks complete; guardrail hooks stopped 211 destructive deletes and 117 credential exposures before they ran.',
+        'Moved customer upgrades onto agent-built pipelines, so median upgrade lead time fell from 40 to 11 days and operator wait between stages dropped 89%.',
+        'Built the Hosted Environment Navigator: continuous discovery replaced remoting into servers one at a time, so any environment is one search away and 99% of the inventory maintains itself.',
+        'Built Hosted Access Manager: self-service, time-boxed grants replaced DBA tickets, so access takes about a minute instead of a day, privileged accounts stay locked 99.6% of the time, and every grant closes with zero DBA cleanup.',
         'Led a team of five; rolled out OpenTelemetry and Observe; mentored through 1:1s and training.',
       ],
     },

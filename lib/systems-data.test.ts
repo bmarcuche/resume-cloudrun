@@ -46,7 +46,7 @@ describe('systems data', () => {
   })
   it('states the GhostWatch early-warning result as the replay measured it, not as a general outage rate', () => {
     const gw = systems.find((s) => s.id === 'ghostwatch')!
-    expect(gw.impact!.items.map((i) => i.value)).toEqual(['17 of 21'])
+    expect(gw.impact!.items.map((i) => i.value)).toEqual(['92%'])
     expect(gw.impact!.lede).toMatch(/replaying past hangs/)
   })
   it('shows upgrade lead time as measured from tickets: median 40 to 11 days, to scale, labeled request to done', () => {

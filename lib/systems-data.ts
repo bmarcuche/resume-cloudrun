@@ -122,7 +122,7 @@ export const systems: System[] = [
     ],
     metrics: [
       { value: '40k+', label: 'requests routed since 03/2026' },
-      { value: '83%', label: 'no LLM reasoning, last 30 days' },
+      { value: '85%', label: 'routed without LLM reasoning' },
       { value: '2,000+', label: 'knowledge patterns in pgvector' },
     ],
     diagram: 'router',
@@ -172,19 +172,19 @@ export const systems: System[] = [
       t('OpenTelemetry', OTel),
     ],
     metrics: [
-      { value: '18', label: 'live signal feeds' },
+      { value: '17', label: 'live signal feeds' },
       { value: '15', label: 'Rust crates' },
-      { value: '1,200+', label: 'Rust tests' },
+      { value: '1,400+', label: 'Rust tests' },
     ],
     diagram: 'ghostwatch',
     impact: {
-      lede: 'Before GhostWatch, a report-server hang was found when it happened. Measured by replaying past hangs.',
+      lede: 'Before GhostWatch, no monitor recorded report-server hangs. Measured by replaying past hangs.',
       items: [
         {
-          from: 'report-server hangs, was no warning',
-          value: '17 of 21',
-          unit: 'warned first',
-          note: 'Median warning 75 minutes ahead, on past hangs the detector never saw in setup.',
+          from: 'report-server hangs, were unmonitored',
+          value: '92%',
+          unit: 'caught in replay',
+          note: 'A median 107 minutes before the outage was logged, at a 4% false-alarm rate.',
         },
       ],
     },
@@ -216,7 +216,7 @@ export const systems: System[] = [
     metrics: [
       { value: '100M+', label: 'samples in its first 34 days' },
       { value: '3M+', label: 'samples a day' },
-      { value: '49', label: 'health fields per database' },
+      { value: '47', label: 'health fields per database' },
     ],
     diagram: 'sentry',
   },
