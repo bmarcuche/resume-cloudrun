@@ -13,6 +13,7 @@ describe('DeployProof', () => {
     }
     expect(screen.getByRole('link', { name: 'deployment dashboard' })).toHaveAttribute('href', '/workflows')
     expect(screen.getByText(/Every push to main/)).toBeInTheDocument()
+    expect(screen.getByText(/cold starts a fresh container/)).toBeInTheDocument()
   })
   it('shows the latest run when the API answers', async () => {
     jest.spyOn(global, 'fetch').mockResolvedValue({
