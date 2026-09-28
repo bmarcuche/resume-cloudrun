@@ -127,13 +127,19 @@ export const systems: System[] = [
     ],
     diagram: 'router',
     impact: {
-      lede: 'Measured from the router log and the knowledge store.',
+      lede: 'Measured from the router log, the knowledge store and pipeline run history.',
       items: [
         {
           from: 'requests, last 30 days',
           value: '83%',
           unit: 'skip the LLM',
           note: 'The classifier sends them straight to an agent, a tool or a stored answer; 17% need reasoning.',
+        },
+        {
+          from: 'customer upgrade, run as a pipeline',
+          value: '15-27',
+          unit: 'min',
+          note: '132 upgrades ran as pipelines from Feb to Jun 2026; most remaining wall-clock time is operator hand-offs.',
         },
         {
           from: 'knowledge the agents keep',
@@ -176,8 +182,14 @@ export const systems: System[] = [
     ],
     diagram: 'ghostwatch',
     impact: {
-      lede: 'Measured on live incident bundles: rules against a small LLM for the incident label.',
+      lede: 'Measured on replayed and live data: early warning on past hangs, and rules against a small LLM for the incident label.',
       items: [
+        {
+          from: 'past report-server hangs, replayed',
+          value: '17 of 21',
+          unit: 'warned first',
+          note: 'The median warning came 75 minutes before the hang, on hangs the detector never saw in setup.',
+        },
         {
           from: 'correct incident label, LLM 17%',
           value: '70%',

@@ -87,7 +87,7 @@ export const resumeData: ResumeData = {
         'Architect and operate the hosting platform behind a large fleet of managed customer environments, applying AI-driven engineering to fleet operations at scale.',
         'Own platform architecture spanning Windows server fleets, Azure DevOps pipelines, and multi-tenant upgrade orchestration, plus relational schema design and maintenance.',
         'Built Sentry, unified monitoring for hosted databases and web servers: agentless collectors every 2 to 10 minutes, 100M+ samples in its first 34 days, and database health streamed to Azure with zero rejected points.',
-        'Led GhostWatch, an AI-assisted incident pipeline started at the Microsoft Global Hackathon 2026: a Rust platform (1,200+ tests) that groups 18 live signal feeds into incidents. Rules proved 4x more accurate than a small LLM at labeling them, so rules lead and the LLM handles the tail.',
+        'Led GhostWatch, an AI-assisted incident pipeline started at the Microsoft Global Hackathon 2026: a Rust platform (1,200+ tests) that groups 18 live signal feeds into incidents. In a replay of 21 past report-server hangs it warned before 17, about 75 minutes ahead; rules proved 4x more accurate than a small LLM at labeling.',
         'Maintain the environment inventory as the authoritative source of truth: 99% of its values collected automatically, and every other tool on the platform reads it before acting.',
         'Lead capacity and sizing analysis for executive decisions, and root-cause investigation on production incidents spanning application servers, storage, and reporting services.',
       ],

@@ -45,6 +45,12 @@ describe('systems data', () => {
     const all = text(systems).join(' ')
     expect(all).not.toMatch(/95%\+|under 5%|<5%|Since 12\/2024|Self-healing in pilot|\b224\b|250\+ sessions/)
   })
+  it('states the GhostWatch early-warning result as the replay measured it, not as a general outage rate', () => {
+    const gw = systems.find((s) => s.id === 'ghostwatch')!
+    const item = gw.impact!.items.find((i) => i.value === '17 of 21')!
+    expect(item.from).toMatch(/replayed/)
+    expect(item.note).toMatch(/75 minutes/)
+  })
   it('publishes no figure the impact brief could not verify', () => {
     const all = text([...systems]).join(' ')
     expect(all).not.toMatch(/9 of 10|Nine in ten|permanent credentials|whole database estate|0\.81|27 days|12 days|\b426\b|\b235\b|\b213\b|99\.99|lead time/)
