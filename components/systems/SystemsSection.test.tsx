@@ -2,14 +2,14 @@ import { render, screen } from '@testing-library/react'
 import SystemsSection from './SystemsSection'
 
 describe('SystemsSection', () => {
-  it('renders the four systems with status pills and metrics', () => {
+  it('renders the five systems with status pills and metrics', () => {
     render(<SystemsSection />)
     expect(screen.getByRole('heading', { level: 2, name: 'Systems I own' })).toBeInTheDocument()
-    for (const name of ['Internal AI agent platform', 'GhostWatch', 'Hosted Environment Navigator', 'Hosted Access Manager']) {
+    for (const name of ['Internal AI agent platform', 'GhostWatch', 'Sentry', 'Hosted Environment Navigator', 'Hosted Access Manager']) {
       expect(screen.getByRole('heading', { level: 3, name })).toBeInTheDocument()
     }
-    expect(screen.getByText('Self-healing in pilot')).toHaveClass('pill-warn')
-    expect(screen.getByText('0.81')).toBeInTheDocument()
+    expect(screen.getByText('SRE hand-off built, gated off')).toHaveClass('pill-warn')
+    expect(screen.getByText('40k+')).toBeInTheDocument()
   })
   it('renders an icon inside every stack tag and wraps tags', () => {
     const { container } = render(<SystemsSection />)

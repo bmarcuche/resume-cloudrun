@@ -4,6 +4,7 @@ import RouterFlow from './RouterFlow'
 import GhostWatchFlow from './GhostWatchFlow'
 import DiscoveryFlow from './DiscoveryFlow'
 import AccessFlow from './AccessFlow'
+import SentryFlow from './SentryFlow'
 import HypeScrollFlow from './HypeScrollFlow'
 
 export const DIAGRAMS: Record<DiagramKey, ComponentType> = {
@@ -11,5 +12,6 @@ export const DIAGRAMS: Record<DiagramKey, ComponentType> = {
   ghostwatch: GhostWatchFlow,
   discovery: DiscoveryFlow,
   access: AccessFlow,
+  sentry: SentryFlow,
   hypescroll: HypeScrollFlow,
 }

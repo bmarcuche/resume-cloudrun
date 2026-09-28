@@ -48,7 +48,7 @@ export default function PlatformMap() {
         <text x="408" y="94" className="tiny">access  data  monitor</text>
         <text x="408" y="108" className="tiny">incident  os  network</text>
         <rect x="12" y="186" width="536" height="126" rx="10" className="band" />
-        <text x="24" y="206" className="tiny">hosted platform, multi-tenant, 99.99% uptime</text>
+        <text x="24" y="206" className="tiny">hosted platform, multi-tenant</text>
         <path d="M472 140 V182" className="edge hot" markerEnd="url(#mw-hot)" />
         <text x="480" y="166" className="tiny">act</text>
         <rect x="24" y="220" width="150" height="72" rx="8" className="node" />
@@ -93,7 +93,7 @@ export default function PlatformMap() {
         <path d="M180 244 V270" className="edge hot" markerEnd="url(#mt-hot)" />
         <text x="188" y="262" className="tiny">act</text>
         <rect x="12" y="272" width="336" height="284" rx="10" className="band" />
-        <text x="24" y="292" className="tiny">hosted platform, multi-tenant, 99.99% uptime</text>
+        <text x="24" y="292" className="tiny">hosted platform, multi-tenant</text>
         <rect x="30" y="302" width="300" height="52" rx="8" className="node" />
         <text x="44" y="322" className="lbl">HEN</text>
         <text x="44" y="340" className="tiny">fleet system of record, continuous discovery</text>

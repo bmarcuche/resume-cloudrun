@@ -4,31 +4,30 @@ import SystemsSection from '../systems/SystemsSection'
 import PracticeSection from '../practice/PracticeSection'
 
 describe('ImpactStrip', () => {
-  it('shows before/after lead times with to-scale bars', () => {
-    const { container } = render(<ImpactStrip />)
-    expect(screen.getByText(/was ~27 days/)).toBeInTheDocument()
+  const items = [
+    { from: 'requested access hours', value: '67%', unit: 'actually used', note: 'Grants expire on a timer.', bar: { before: 100, after: 67, max: 100 } },
+    { from: 'config files copied', value: 'None', unit: '', note: 'Read live.' },
+  ]
+  it('renders effect, cause and a to-scale bar', () => {
+    const { container } = render(<ImpactStrip id="x-impact" lede="Why." items={items} />)
+    expect(screen.getByRole('heading', { name: 'What changed' })).toBeInTheDocument()
+    expect(screen.getByText('Grants expire on a timer.')).toBeInTheDocument()
     const bars = container.querySelectorAll('.out-bar')
-    expect(bars.length).toBe(2)
+    expect(bars.length).toBe(1)
     const [before, after] = Array.from(bars[0].querySelectorAll('i')).map((i) => parseFloat((i as HTMLElement).style.width))
-    expect(after / before).toBeCloseTo(3 / 27, 1)
+    expect(after / before).toBeCloseTo(0.67, 2)
+    // An empty unit renders no stray <small>
+    expect(container.querySelectorAll('.out-to small').length).toBe(1)
   })
-  it('scopes DORA lead time to the two bar cards only', () => {
-    render(<ImpactStrip />)
-    expect(screen.getByRole('heading', { name: 'What changed after launch' })).toBeInTheDocument()
-    expect(screen.getByText(/two lead-time cards/)).toBeInTheDocument()
-  })
-  it('lives inside the agent platform card and nowhere else', () => {
+  it('every system card carries its own strip, full width inside the card', () => {
     const { container } = render(<SystemsSection />)
-    const strips = container.querySelectorAll('#outcomes')
-    expect(strips.length).toBe(1)
-    expect(strips[0].closest('article')!.id).toBe('system-agent-platform')
-    // Spans the full card width below the text and the figure
-    expect(strips[0].closest('.sys-after')).not.toBeNull()
-  })
-  it('the agent card does not repeat the pipelines and hours stat from the strip', () => {
-    const { container } = render(<SystemsSection />)
-    const bullets = container.querySelector('#system-agent-platform .sys-outcomes')!.textContent!
-    expect(bullets).not.toMatch(/426 hours/)
+    const cards = Array.from(container.querySelectorAll('article.sys'))
+    expect(cards.length).toBe(5)
+    for (const card of cards) {
+      const strip = card.querySelector('.sys-after .impact')!
+      expect(strip).not.toBeNull()
+      expect(strip.id).toBe(`${card.id.replace('system-', '')}-impact`)
+    }
   })
 })
 

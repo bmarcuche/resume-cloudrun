@@ -1,12 +1,12 @@
 import LiveDeployCell from './LiveDeployCell'
 
-// Outcome figures only. Never fleet size, client counts, or client sector.
+// Outcome figures only, and only ones measured from the systems themselves (see
+// lib/systems-data.ts). Never fleet size, client counts, or client sector.
 const STATS = [
-  { value: '99.99%', label: 'platform uptime' },
-  { value: '10,000+', label: 'ops tasks routed by agents' },
-  { value: '89%', label: 'less change lead time' },
-  { value: '235', label: 'pipelines built by agents' },
-  { value: '426', label: 'manual deploy hours removed' },
+  { value: '40k+', label: 'ops requests routed by agents' },
+  { value: '83%', label: 'handled without LLM reasoning' },
+  { value: '100M+', label: 'health samples in 34 days' },
+  { value: '1,100+', label: 'time-boxed access grants' },
 ]
 
 export default function StatusStrip() {
