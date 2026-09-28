@@ -16,6 +16,7 @@ import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = [
   { href: '/#systems', label: 'Systems' },
+  { href: '/#projects', label: 'Projects' },
   { href: '/#outcomes', label: 'Outcomes' },
   { href: '/#practice', label: 'How I work' },
   { href: '/#experience', label: 'Experience' },

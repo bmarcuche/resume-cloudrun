@@ -17,6 +17,11 @@ export default function SystemRow({ system, flip }: { system: System; flip: bool
         </div>
         <h3 className="pa-h3 sys-title">{system.title}</h3>
         <p className="sys-sub">{system.subtitle}</p>
+        {system.link && (
+          <a className="pa-link sys-link pa-mono" href={system.link.href} target="_blank" rel="noopener noreferrer">
+            {system.link.label} ↗
+          </a>
+        )}
         <p className="sys-desc">{system.description}</p>
         <ul className="sys-outcomes">
           {system.outcomes.map((o) => (

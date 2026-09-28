@@ -1,4 +1,4 @@
-import { systems } from './systems-data'
+import { systems, projects } from './systems-data'
 import { collectStrings, findViolations } from './disclosure'
 
 describe('systems data', () => {
@@ -20,6 +20,23 @@ describe('systems data', () => {
   it('is clean under the disclosure policy', () => {
     const strings = collectStrings(systems.map(({ stack, ...rest }) => ({ ...rest, stack: stack.map((i) => i.name) })))
     expect(findViolations(strings)).toEqual([])
+  })
+  it('lists HypeScroll as a live side project with its own diagram and a link', () => {
+    expect(projects.map((p) => p.id)).toEqual(['hypescroll'])
+    const hs = projects[0]
+    expect(hs.diagram).toBe('hypescroll')
+    expect(hs.status.map((s) => s.label)).toEqual(['Live', 'Side project'])
+    expect(hs.link).toEqual({ href: 'https://hypescroll.io', label: 'hypescroll.io' })
+    expect(hs.metrics.length).toBeGreaterThanOrEqual(2)
+  })
+  it('projects are clean under the disclosure policy and publish no infrastructure details', () => {
+    const text = collectStrings(projects.map(({ stack, ...rest }) => ({ ...rest, stack: stack.map((i) => i.name) })))
+    expect(findViolations(text)).toEqual([])
+    const joined = text.join(' ')
+    // No addresses, buckets, ports, credentials or bot-wall tooling
+    expect(joined).not.toMatch(/\d+\.\d+\.\d+\.\d+|gs:\/\/|:\d{4}\b|postgres\/postgres|Puppeteer|stealth/i)
+    // Source and commit counts drift; describe them, never count them
+    expect(joined).not.toMatch(/\d+\s+(sources|feeds|commits)/)
   })
   it('mentions no team headcount', () => {
     expect(collectStrings(systems).join(' ')).not.toMatch(/five-person|team of five/)
