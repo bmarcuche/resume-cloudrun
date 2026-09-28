@@ -6,7 +6,7 @@ import Image from 'next/image'
 import {
   ArrowDownTrayIcon,
   RectangleStackIcon,
-  ChartBarIcon,
+  BeakerIcon,
   BriefcaseIcon,
   ServerStackIcon,
 } from '@heroicons/react/24/outline'
@@ -16,7 +16,6 @@ import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = [
   { href: '/#systems', label: 'Systems' },
-  { href: '/#outcomes', label: 'Outcomes' },
   { href: '/#projects', label: 'Projects' },
   { href: '/#practice', label: 'How I work' },
   { href: '/#experience', label: 'Experience' },
@@ -26,7 +25,7 @@ const NAV_LINKS = [
 
 const TABS = [
   { href: '/#systems', label: 'Systems', id: 'systems', Icon: RectangleStackIcon },
-  { href: '/#outcomes', label: 'Outcomes', id: 'outcomes', Icon: ChartBarIcon },
+  { href: '/#projects', label: 'Projects', id: 'projects', Icon: BeakerIcon },
   { href: '/#experience', label: 'Experience', id: 'experience', Icon: BriefcaseIcon },
   { href: '/#deploys', label: 'Deploys', id: 'deploys', Icon: ServerStackIcon },
 ]
@@ -59,7 +58,7 @@ export default function SiteNav() {
 
   // Scroll-spy: highlight the bottom tab for the section currently in view.
   useEffect(() => {
-    const ids = ['systems', 'outcomes', 'experience', 'deploys']
+    const ids = ['systems', 'projects', 'experience', 'deploys']
     const sections = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)

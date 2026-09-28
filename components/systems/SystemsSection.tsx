@@ -1,5 +1,6 @@
 import { systems } from '../../lib/systems-data'
 import SystemRow from './SystemRow'
+import ImpactStrip from '../outcomes/ImpactStrip'
 
 export default function SystemsSection() {
   return (
@@ -12,7 +13,12 @@ export default function SystemsSection() {
         </p>
         <div className="systems-grid">
           {systems.map((s, i) => (
-            <SystemRow key={s.id} system={s} flip={i % 2 === 1} />
+            <SystemRow
+              key={s.id}
+              system={s}
+              flip={i % 2 === 1}
+              after={s.id === 'agent-platform' ? <ImpactStrip /> : undefined}
+            />
           ))}
         </div>
       </div>

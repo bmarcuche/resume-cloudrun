@@ -4,7 +4,6 @@ import Hero from '../components/hero/Hero'
 import StatusStrip from '../components/hero/StatusStrip'
 import SystemsSection from '../components/systems/SystemsSection'
 import ProjectsSection from '../components/projects/ProjectsSection'
-import OutcomesSection from '../components/outcomes/OutcomesSection'
 import PracticeSection from '../components/practice/PracticeSection'
 import Timeline from '../components/experience/Timeline'
 import Toolbox from '../components/toolbox/Toolbox'
@@ -20,7 +19,6 @@ export default function Home() {
       <Hero />
       <StatusStrip />
       <SystemsSection />
-      <OutcomesSection />
       <ProjectsSection />
       <PracticeSection />
       <Timeline />
