@@ -16,13 +16,12 @@ describe('systems data', () => {
       for (const item of s.stack) expect(['function', 'object']).toContain(typeof item.Icon)
     }
   })
-  it('every system and project has a what-changed strip of two to four cause and effect items', () => {
+  it('what-changed strips hold only measured changes from introducing the tool, each stating its before', () => {
+    const withStrip = [...systems, ...projects].filter((s) => s.impact).map((s) => s.id)
+    expect(withStrip).toEqual(['agent-platform', 'ghostwatch', 'ham'])
     for (const s of [...systems, ...projects]) {
-      expect(s.impact).toBeDefined()
-      expect(s.impact!.items.length).toBeGreaterThanOrEqual(2)
-      expect(s.impact!.items.length).toBeLessThanOrEqual(4)
-      for (const i of s.impact!.items) {
-        // The note carries the cause; keep it to one short sentence
+      for (const i of s.impact?.items ?? []) {
+        expect(i.from).toMatch(/\bwas\b|\bwere\b/)
         expect(i.note.length).toBeLessThanOrEqual(120)
         if (i.bar) expect(i.bar.max).toBeGreaterThanOrEqual(Math.max(i.bar.before, i.bar.after))
       }
@@ -31,10 +30,10 @@ describe('systems data', () => {
   it('a strip never repeats a number already shown in its metric tiles', () => {
     for (const s of [...systems, ...projects]) {
       const tiles = new Set(s.metrics.map((m) => m.value))
-      for (const i of s.impact!.items) expect(tiles.has(i.value)).toBe(false)
+      for (const i of s.impact?.items ?? []) expect(tiles.has(i.value)).toBe(false)
     }
   })
-  it('carries the measured dates and statuses from the impact brief', () => {
+  it('carries the measured dates and statuses', () => {
     const by = (id: string) => systems.find((s) => s.id === id)!
     expect(by('agent-platform').status.map((s) => s.label)).toContain('Since 03/2026')
     expect(by('ghostwatch').status).toEqual([{ label: 'Receiver live', tone: 'ok' }, { label: 'SRE hand-off built, gated off', tone: 'warn' }])
@@ -47,21 +46,32 @@ describe('systems data', () => {
   })
   it('states the GhostWatch early-warning result as the replay measured it, not as a general outage rate', () => {
     const gw = systems.find((s) => s.id === 'ghostwatch')!
-    const item = gw.impact!.items.find((i) => i.value === '17 of 21')!
-    expect(item.from).toMatch(/replayed/)
-    expect(item.note).toMatch(/75 minutes/)
+    expect(gw.impact!.items.map((i) => i.value)).toEqual(['17 of 21'])
+    expect(gw.impact!.lede).toMatch(/replaying past hangs/)
   })
-  it('publishes no figure the impact brief could not verify', () => {
+  it('shows upgrade lead time as measured from tickets: median 40 to 11 days, to scale, labeled request to done', () => {
+    const ap = systems.find((s) => s.id === 'agent-platform')!
+    const lt = ap.impact!.items.find((i) => i.value === '11')!
+    expect(lt.from).toMatch(/request to done, was 40 days/)
+    expect(lt.bar).toEqual({ before: 40.4, after: 11.3, max: 40.4 })
+    expect(lt.note).toMatch(/352 upgrades/)
+  })
+  it('shows database access time as the audit log measured it', () => {
+    const ham = systems.find((s) => s.id === 'ham')!
+    expect(ham.impact!.items.map((i) => i.value)).toEqual(['78'])
+  })
+  it('publishes no unverified figure', () => {
     const all = text([...systems]).join(' ')
-    expect(all).not.toMatch(/9 of 10|Nine in ten|permanent credentials|whole database estate|0\.81|27 days|12 days|\b426\b|\b235\b|\b213\b|99\.99|lead time/)
+    expect(all).not.toMatch(/9 of 10|Nine in ten|permanent credentials|whole database estate|0\.81|27 days|12 days|\b426\b|\b235\b|\b213\b|99\.99|~?89%/)
   })
   it('is clean under the disclosure policy', () => {
     expect(findViolations(text(systems))).toEqual([])
   })
   it('does not expose the company: no fleet or customer counts, products, database vendor or protocols', () => {
     const all = text([...systems, ...projects]).join(' ')
-    expect(all).not.toMatch(/Oracle|\bSIDs?\b|\bFA\b|\bM5\b|\bEAM\b|Crystal|MaxQueue|Zendesk|WinRM|sqlplus|NCPA|AssetWorks/)
-    expect(all).not.toMatch(/1,117|\b555\b|\b236\b|\b342\b|\b364\b|\b341\b|\b319\b|\b129\b|customers/)
+    // Count patterns, not the counts themselves: this file is public too
+    expect(all).not.toMatch(/\d[\d,]*\+?\s+(hosts|servers|databases|customers|tenants|instances)\b/)
+    expect(all).not.toMatch(/Oracle|WinRM|Zendesk|AssetWorks/)
     // Agent counts drift; the platform is described as multi-agent
     expect(all).not.toMatch(/\b19\b|\d+\s+(specialist|specialized)\s+agents/)
   })

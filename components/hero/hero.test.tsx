@@ -21,7 +21,7 @@ describe('StatusStrip', () => {
   it('shows outcome figures and no fleet or client counts', () => {
     render(<StatusStrip />)
     expect(screen.getByText('40k+')).toBeInTheDocument()
-    expect(screen.getByText('1,100+')).toBeInTheDocument()
+    expect(screen.getByText('40→11')).toBeInTheDocument()
     // Unverified figures stay off until confirmed
     expect(screen.queryByText('99.99%')).toBeNull()
     expect(screen.queryByText('89%')).toBeNull()

@@ -90,8 +90,8 @@ const Claude = fromBrand(siClaude)
 const OTel = fromBrand(siOpentelemetry)
 const ReactIcon = fromBrand(siReact)
 
-// Figures come only from the Platform Impact Brief, read live from each system on
-// 2026-09-28. Anything it could not verify stays off the site until confirmed.
+// Figures are measured from the systems themselves; anything unverified stays off
+// the site until confirmed.
 // Publish outcomes and rates only: no fleet or customer counts, product names,
 // database vendor or protocols.
 export const systems: System[] = [
@@ -106,7 +106,7 @@ export const systems: System[] = [
     description:
       'Every request hits a classifier before any LLM sees it. Deterministic patterns take a keyword fast path. Ambiguous ones go through a fine-tuned bi-encoder and cross-encoder over pgvector, then land on the right specialist agent with retrieved knowledge and environment context already attached.',
     outcomes: [
-      'Specialist agents cover deploys, cloud, CI/CD, access, databases, monitoring and incidents.',
+      'Specialist agents cover deploys, cloud, CI/CD, access, databases, monitoring and incidents, and write what they learn back to a shared knowledge store.',
       'One MCP gateway fronts the cloud, CI/CD, secrets, ticketing, monitoring and fleet operations tools the agents use.',
     ],
     stack: [
@@ -122,30 +122,25 @@ export const systems: System[] = [
     ],
     metrics: [
       { value: '40k+', label: 'requests routed since 03/2026' },
-      { value: '5k+', label: 'requests in the last 30 days' },
-      { value: '1,500+', label: 'operations journal entries' },
+      { value: '83%', label: 'no LLM reasoning, last 30 days' },
+      { value: '2,000+', label: 'knowledge patterns in pgvector' },
     ],
     diagram: 'router',
     impact: {
-      lede: 'Measured from the router log, the knowledge store and pipeline run history.',
+      lede: 'Upgrade tickets before and after agent-built pipelines went live in 02/2026. Lead time is request to done, so it includes waiting on the customer; bars are to scale.',
       items: [
         {
-          from: 'requests, last 30 days',
-          value: '83%',
-          unit: 'skip the LLM',
-          note: 'The classifier sends them straight to an agent, a tool or a stored answer; 17% need reasoning.',
+          from: 'upgrade, request to done, was 40 days',
+          value: '11',
+          unit: 'days median',
+          note: 'Across 352 upgrades. It was already falling before the pipelines; since May it is 9 days.',
+          bar: { before: 40.4, after: 11.3, max: 40.4 },
         },
         {
-          from: 'customer upgrade, run as a pipeline',
-          value: '15-27',
-          unit: 'min',
-          note: '132 upgrades ran as pipelines from Feb to Jun 2026; most remaining wall-clock time is operator hand-offs.',
-        },
-        {
-          from: 'knowledge the agents keep',
-          value: '2,000+',
-          unit: 'live patterns',
-          note: 'Agents write what they learn back to pgvector, so the platform gets better with use.',
+          from: 'upgrades, were run by hand',
+          value: '380+',
+          unit: 'automated runs',
+          note: 'Agent-built pipelines now run them, about 20 minutes of machine time each.',
         },
       ],
     },
@@ -161,6 +156,7 @@ export const systems: System[] = [
     description:
       'Started at the Microsoft Global Hackathon 2026 with a cross-company team, now a four-stage Rust platform. A receiver matches every signal to its server and database. A Foreman groups related signals into one labeled incident. A factory deploys the telemetry the case needs, and the Azure SRE Agent investigates the packaged case.',
     outcomes: [
+      'Rules labeled incidents correctly 70% of the time against 17% for a small LLM, so rules lead and the LLM only handles the unknown tail.',
       'Signals inside planned outages are marked, never silently dropped.',
       'Built test-first against a formal correctness bar: provenance, conservation, closure, idempotence and determinism.',
     ],
@@ -182,26 +178,13 @@ export const systems: System[] = [
     ],
     diagram: 'ghostwatch',
     impact: {
-      lede: 'Measured on replayed and live data: early warning on past hangs, and rules against a small LLM for the incident label.',
+      lede: 'Before GhostWatch, a report-server hang was found when it happened. Measured by replaying past hangs.',
       items: [
         {
-          from: 'past report-server hangs, replayed',
+          from: 'report-server hangs, was no warning',
           value: '17 of 21',
           unit: 'warned first',
-          note: 'The median warning came 75 minutes before the hang, on hangs the detector never saw in setup.',
-        },
-        {
-          from: 'correct incident label, LLM 17%',
-          value: '70%',
-          unit: 'with rules',
-          note: 'Rules were 4x more accurate, so they run first and the LLM only sees the unknown tail.',
-          bar: { before: 17, after: 70, max: 100 },
-        },
-        {
-          from: 'LLM pass over every bundle',
-          value: '<1¢',
-          unit: 'total',
-          note: 'Cheap enough to keep as a fallback, not accurate enough to lead.',
+          note: 'Median warning 75 minutes ahead, on past hangs the detector never saw in setup.',
         },
       ],
     },
@@ -236,29 +219,6 @@ export const systems: System[] = [
       { value: '49', label: 'health fields per database' },
     ],
     diagram: 'sentry',
-    impact: {
-      lede: 'What the design choices bought, measured in its first weeks.',
-      items: [
-        {
-          from: 'agents on database hosts',
-          value: '0',
-          unit: 'installed',
-          note: 'Collectors query each database remotely, so nothing is deployed or patched on the hosts.',
-        },
-        {
-          from: 'trend history on a chart',
-          value: 'All',
-          unit: 'time',
-          note: 'Hourly rollups are kept forever, so one chart zooms from 3 hours to the full record.',
-        },
-        {
-          from: 'health points streamed to Azure',
-          value: 'None',
-          unit: 'rejected',
-          note: '1.9M+ points reached App Insights and Data Explorer in under 10 days.',
-        },
-      ],
-    },
   },
   {
     id: 'hen',
@@ -283,34 +243,11 @@ export const systems: System[] = [
       t('Azure', CloudIcon),
     ],
     metrics: [
-      { value: '28', label: 'blueprints' },
+      { value: '99%', label: 'of values collected automatically' },
       { value: '500+', label: 'API routes' },
       { value: '800+', label: 'tests' },
     ],
     diagram: 'discovery',
-    impact: {
-      lede: 'Why the other platform tools trust it.',
-      items: [
-        {
-          from: 'values typed in by people',
-          value: '<1%',
-          unit: 'of the store',
-          note: 'Discovery collects the rest from the servers; people add only contacts and overrides.',
-        },
-        {
-          from: 'tools that read it before acting',
-          value: '4',
-          unit: 'platforms',
-          note: 'The agent platform, Sentry, GhostWatch and the access manager all start from its context.',
-        },
-        {
-          from: 'config files copied into it',
-          value: 'None',
-          unit: '',
-          note: 'Full configs are read live when needed, so stored settings stay small.',
-        },
-      ],
-    },
   },
   {
     id: 'ham',
@@ -340,20 +277,13 @@ export const systems: System[] = [
     ],
     diagram: 'access',
     impact: {
-      lede: 'Access that expires on its own gets used less, and handed back sooner.',
+      lede: 'Before the access manager, getting into a database meant a DBA ticket. Measured from past DBA tickets and the audit log.',
       items: [
         {
-          from: 'requested access hours',
-          value: '67%',
-          unit: 'actually used',
-          note: 'Grants expire on a timer, so a third of the requested time was never left open.',
-          bar: { before: 100, after: 67, max: 100 },
-        },
-        {
-          from: 'grants closed before the timer',
-          value: '59%',
-          unit: 'locked early',
-          note: 'Engineers hand access back when they finish instead of waiting for expiry.',
+          from: 'database access, was a DBA ticket (~1 day)',
+          value: '78',
+          unit: 's median',
+          note: 'Self-service grants replace the ticket, with no DBA involved; 90% connect within 17 minutes.',
         },
       ],
     },
@@ -396,24 +326,5 @@ export const projects: System[] = [
       { value: '≤1 pt', label: 'block-rate rise to ship a model' },
     ],
     diagram: 'hypescroll',
-    impact: {
-      lede: 'Two fixes for a small server, measured before and after. Bars are drawn to scale.',
-      items: [
-        {
-          from: 'cover image, cache miss 1.37 s',
-          value: '0.14',
-          unit: 's on a hit',
-          note: 'An edge cache rule serves covers from Cloudflare instead of the origin.',
-          bar: { before: 1.37, after: 0.14, max: 1.37 },
-        },
-        {
-          from: 'embedding model memory, 187 MB',
-          value: '133',
-          unit: 'MB idle',
-          note: 'The model unloads when idle, which took the server out of swap.',
-          bar: { before: 187, after: 133, max: 187 },
-        },
-      ],
-    },
   },
 ]

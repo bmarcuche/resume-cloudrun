@@ -5,8 +5,8 @@ import LiveDeployCell from './LiveDeployCell'
 const STATS = [
   { value: '40k+', label: 'ops requests routed by agents' },
   { value: '83%', label: 'handled without LLM reasoning' },
+  { value: '40→11', label: 'days, median upgrade lead time' },
   { value: '100M+', label: 'health samples in 34 days' },
-  { value: '1,100+', label: 'time-boxed access grants' },
 ]
 
 export default function StatusStrip() {

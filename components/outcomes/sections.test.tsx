@@ -19,15 +19,12 @@ describe('ImpactStrip', () => {
     // An empty unit renders no stray <small>
     expect(container.querySelectorAll('.out-to small').length).toBe(1)
   })
-  it('every system card carries its own strip, full width inside the card', () => {
+  it('a strip sits full width inside its own card, and only on cards with a measured change', () => {
     const { container } = render(<SystemsSection />)
-    const cards = Array.from(container.querySelectorAll('article.sys'))
-    expect(cards.length).toBe(5)
-    for (const card of cards) {
-      const strip = card.querySelector('.sys-after .impact')!
-      expect(strip).not.toBeNull()
-      expect(strip.id).toBe(`${card.id.replace('system-', '')}-impact`)
-    }
+    const withStrip = Array.from(container.querySelectorAll('article.sys'))
+      .filter((card) => card.querySelector('.sys-after .impact'))
+      .map((card) => card.id)
+    expect(withStrip).toEqual(['system-agent-platform', 'system-ghostwatch', 'system-ham'])
   })
 })
 
